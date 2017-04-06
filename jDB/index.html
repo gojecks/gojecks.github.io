@@ -1,0 +1,758 @@
+<!doctype>
+<html j-Module="eliTest">
+<head>
+<meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications"> <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development"> <meta name="author" content="Joseph Gojecks Kadiri">
+<script src="../../dist/jelijs/jeli.jdb.min.js" type="text/javascript"></script>
+<script src="../../dist/jelijs/webRoute/webroute.min.js" type="text/javascript"></script>
+<script src="../../dist/jelijs/jDateTime/jdatetime.min.js" type="text/javascript"></script>
+<script src="apps.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/styles.min.css" />
+<link rel="icon" href="../css/image/favicon.png">
+<title>jElijs - DataBase</title>
+</head>
+
+<body j-controller="baseCtrl">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+  <div class="navbar-header">
+      <a class="navbar-brand">jEli DB </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+      <li><a class="btn btn-link" j-click="setMode(learn)">Learn</a></li>
+      <li><a class="btn btn-link" j-click="setMode(tryitnow)">Try it</a></li>
+        <li j-if="!activeDb"><a class="btn btn-link">Dis-Connected</a></li>
+        <li j-if="activeDb"><a class="btn btn-link" j-click="$disconnect()">Dis-Connect</a></li>
+      </ul>
+  </div>
+  </div>
+</nav>
+<div class="container-fluid">
+
+<div j-show="getMode(tryitnow)" style="margin-top:40px">
+<div class="row" j-if="!activeDb">
+  <div class="col-xs-4 col-md-4"></div>
+  <div class="col-xs-4 col-md-4">
+      <div class="panel panel-default">
+      <div class="panel-heading">Create / Open Database</div>
+      <div class="panel-body">
+        <div  class="form-group">
+            <input type="text" placeholder="Database Name" j-model="db.name"  class="form-control">
+        </div>
+        <div  class="form-group">
+            <input type="text" placeholder="version" j-model="db.version"  class="form-control">
+        </div>
+        <div class="pull-right"><button j-click="$create()" class="btn btn-primary">Create / Open</button></div>
+      </div>
+      </div>
+  </div>
+  <div class="col-xs-4 col-md-4"></div>
+</div>
+
+<div j-if="activeDb">
+  <h3>DB Name : {%dbName%} - version : {%dbVersion%}</h3>
+  <div class="row">
+    <div class="col-xs-3">
+    <div class="panel panel-default" j-for="(tblName,tbl) in tables">
+    <div class="panel-heading">Search {%tblName%} Table</div>
+    <div class="panel-body">
+      <div  class="form-group">
+      <input type="text" placeholder="Search Table" j-model="queryString"  class="form-control">
+      </div>
+      <div ><button j-click="searchTable(tblName,queryString)" class="btn btn-primary">Search</button></div>
+    </div>
+    </div>
+
+  </div>
+  <div class="col-xs-6">
+   <div class="panel panel-default">
+    <div class="panel-heading">Search Result Displays here</div>
+    <div class="panel-body">
+        <div> {%searchResult | json%} </div>
+      </div>
+    </div>
+
+      <!-- Query Table -->
+   <div class="panel panel-default">
+    <div class="panel-heading">jEli Command Prompt</div>
+    <div class="panel-body">
+    <div class="form-group"> <textarea class="form-control" j-model="queryBuilder"  j-keydown="commandPrompt($event)" rows="6" style="background: #000;color: #fff;"></textarea> </div>
+    <div><kbd>Select</kbd> <kbd>Insert</kbd> <kbd>Update</kbd> <kbd>Delete</kbd> <kbd>Alter</kbd>
+      <kbd>Drop</kbd> <kbd>Create</kbd> <kbd>Truncate</kbd> <kbd>Export</kbd> <kbd>Import</kbd></div>
+    <div class="clearfix">
+      <div class="pull-left"><span>{%queryMessage%}</span> 
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Tables display -->
+    <div class="panel panel-default">
+    <div class="panel-heading clearfix">Current Database Tables <button j-click="syncTable(tblName)" class="btn btn-primary pull-right">Sync </button></div>
+    <div class="panel-body">
+        <!-- <div> 
+          <div class="btn btn-group">
+            <button class="btn btn-primary">User</button>
+            <button class="btn btn-primary">Course</button>
+          </div>
+        </div> -->
+        <ul j-for="(tblName,tbl) in tables" class="list-group">
+          <li class="list-group-item">
+            <div class="clearfix">
+              <div class="pull-right">
+              <div class="btn btn-group">
+                <button j-click="truncateTable(tblName)" class="btn btn-primary">Truncate</button>
+                <button j-click="dropTable(tblName)" class="btn btn-primary">Drop </button>
+                <button j-click="exportTable(tblName)" class="btn btn-primary">Export </button>
+              </div>
+              </div>
+              <h4>{%tblName%}</h4></li>
+          <li class="list-group-item"><table class="table table-bordered">
+            <tr>
+              <td>Records:</td><td>{%tbl.records%}</td>
+            </tr>
+             <tr>
+              <td>AllowedMode:</td><td>{%tbl.allowedMode%}</td>
+            </tr>
+             <tr>
+              <td>Foreign-Key:</td><td>{%tbl.foreignKey%}</td>
+            </tr>
+             <tr>
+              <td>Primary-Key:</td><td>{%tbl.primaryKey%}</td>
+            </tr>
+          </table></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-3">
+  <!-- Add records -->
+    <div class="panel panel-default" j-for="(tblName,tbl) in tables">
+    <div class="panel-heading">Add data to {%tblName%} table</div>
+    <div class="panel-body">
+      <div class="form-group" j-for="(colName,col) in tbl.columns[0]">
+      <input type="text"  placeholder="{%colName%}" j-model="newData[tblName][colName]"  class="form-control">
+      </div>
+      <div class="btn btn-group"><button j-click="addUserTable(tblName,newData)" class="btn btn-primary">Add</button></div>
+      <div> {%addResult%} </div>
+    </div>
+  </div>
+  </div>
+
+  </div>
+  </div>
+</div>
+
+  <div j-show="getMode(learn)">
+    <div class=" hero-unit col-md-12"  >
+        <h1>jEliDB</h1>
+        <p>jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications.</p>
+        <h2>Introduction</h2>
+        <p>JavaScript object literal look a lot like database table records, And wrapping a group of javascript objects up in an array gives you something that looks a lot like a database table.  <p>jDB is created out of Javascript Objects to produce result with a uniform and familiar SQL-like interface.
+        <br>
+        Using jDB in your application help reduces development time, improves performance, simplifies maintenance, and increases quality.</p></p>
+
+        <h2>Why use jDB</h2>
+        <ul>
+          <li>Extremely fast</li>
+          <li>Powerful JavaScript-centric data selection engine</li>
+          <li>SQL inspired features such as insert, update, unique, count, and more</li>
+          <li>Import and export data (JSON,csv and html) format</li>
+          <li>Synchronize and replicate Data on the fly using jSync Algorithm</li>
+          <li>cross browser support</li>
+          <li>Easy to extend with your own functions</li>
+          <li>Compatible with any DOM library</li>
+          <li>Access your DB anywhere in the world</li>
+        </ul>
+      </div>
+    <div class="row">
+        <div class="col-md-3">
+        <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" handle-scroll>
+          <ul class="nav bs-docs-sidenav">
+          <li class="active"><a href="#createDB"><i class="icon-chevron-right"></i> Create a database</a></li>
+          <li><a href="#createTbl"><i class="icon-chevron-right"></i> Create a Table</a></li>
+          <li><a href="#alt_Table"><i class="icon-chevron-right"></i> Alter Table</a></li>
+          <li><a href="#insert"><i class="icon-chevron-right"></i> Insert Records</a></li>
+          <li><a href="#update"><i class="icon-chevron-right"></i> Update Records</a></li>
+           <li><a href="#delete"><i class="icon-chevron-right"></i>Delete Records</a></li>         
+          <li><a href="#select"><i class="icon-chevron-right"></i>Select Records</a></li>
+          <li><a href="#truncate"><i class="icon-chevron-right"></i>Truncate Table</a></li>
+          <li><a href="#drop"><i class="icon-chevron-right"></i>Drop Table / Database</a></li>
+          <li><a href="#imp_exp"><i class="icon-chevron-right"></i> Import / Export</a></li>
+          <li><a href="#sync"><i class="icon-chevron-right"></i> Synchronize</a></li>
+          <li><a href="#users"><i class="icon-chevron-right"></i>Add Users</a></li>
+          <li><a href="#jCMD"><i class="icon-chevron-right"></i>jQL</a></li>
+        </ul>
+        </nav>
+        </div>
+      <div class="col-md-9">
+        <h2>Quick Review</h2>
+        <div class="panel panel-default" id="createDB">
+        <div class="panel-body">
+        <h3>Create a Database</h3>
+          Creating a database with jDB requires 2 parameters, Database Name and Version Number. 
+          <p>On open function accepts DB configuration which can also be used in synchronization, <strong>we prefer the configuration here than in sync method</strong>. for more read <a href="#sync_config"><i class="icon-chevron-right"></i> Configuration</a></p>
+
+          <p class="alert alert-info"><strong>Note : onUpgrade function only initializes when creating the DB for the first time or when the version number of the DB changes. </strong></p>
+<pre>
+var req = new jEli.$jDB(DB_NAME,DB_VERSION)
+.open({
+  serviceHost:'http://localhost:9000/jEliDB/',
+  logService : function(msg)
+  {
+    if(msg)
+    {
+      setMessage(msg);
+    }
+  }
+}),
+DB;
+req
+.onSuccess(function(e){
+  Success Handler goes in here
+  DB = e.result 
+})
+.onError(function(){
+  Error handler goes in here 
+})
+.req.onUpgrade(function(){
+  Upgrade handler goes in here 
+});
+</pre>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="createTbl">
+        <div class="panel-body">
+        <h3>Create a Table</h3>
+          Tables can be created using the createTbl function. This function recieves two parameter TBL_NAME and COLUMNS. 
+
+          <p><strong>Note : TBL_NAME is required while COLUMNS is optional.</strong></p>
+
+<strong>Create table without configuration</strong>
+<pre>
+  DB
+  .createTbl('user')
+  .onSuccess(function(e)
+  {
+    //Directly alter table after it has been created
+    //Add a new column to table
+    var tbl = e.result;
+    tbl
+    .Alter
+    .add()
+    .column('id',{AUTO_INCREMENT:1,type:'number'}) //
+    .column("name",{type:"String"});
+  })
+  .onError(function(e)
+  {
+    // Error handler goes in here
+  });
+</pre>
+<strong>Create table with configuration</strong>
+<pre>
+  DB
+  .createTbl('user',[{id:{AUTO_INCREMENT:1,type:'number'},name:{type:"String"}}])
+  .onSuccess(function(e)
+  {
+    // Success handler goes in here
+  })
+  .onError(function(e)
+  {
+    // Error handler goes in here
+  });
+</pre>
+  </div>
+  </div>
+
+<div class="panel panel-default" id="alt_Table">
+<div class="panel-body">
+<h3>Alter Table</h3>
+          Tables can be altered after creating them by using the table Function. Accepts 1 Parameter "TBL_NAME"
+<pre>
+//Below example our alters our table by adding two new columns
+DB
+.table('user')
+.onSuccess(function(e) //e = event recieved from the success promise
+{
+  var tbl = e.result;
+  tbl
+  .Alter
+  .add()
+  .column('username',{type:'String'}) //username
+  .column("Email",{type:"String"}); //Email
+})
+.onError(function(e)
+{
+  // Error handler goes in here
+});
+</pre>
+</div>
+</div>
+
+        <div class="panel panel-default" id="insert">
+        <div class="panel-body">
+        <h3>Insert Data into Table</h3>
+          Inserting Data into a table requires a transaction to be performed. Transaction FN requires two parameter TBL_NAME (required) , MODE (Optional - "readonly,writeonly or readwrite")
+          <div class="alert alert-info">Insert accepts ARRAY of OBJECTS or ARRAY of ARRAYS. Column name must be defined when using ARRAY of Objects, while for ARRAY of ARRAYS the data must follow according to their column position in the table.</div>
+                <div>In Array of Objects AUTO_INCREMENT field can be omitted, while for ARRAY of Arrays cannot.</div>
+                </p>
+                <p>Inserting Data with Array of Objects</p>
+                <div>[{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}] -members
+                <p><strong>ID field was omitted, because it has a configuration of AUTO_INCREMENT</strong></p>
+                </div>
+
+                <p>Inserting Data with Array of Arrays </p>
+                <div>[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]]
+                <div class="alert alert-info">As said above, the ID field cannot be omitted even if having the auto_incremement configuration when inserting data with ARRAY of ARRAYS. Data in each array will be Mapped to the columns</div>
+                </div>
+          <div class="alert alert-warning"><strong>Note : If "MODE" is undefined transaction is treated as read_only, for insert we re using the writeonly mode.
+          </strong></div>
+<pre>
+//Below example inserts data into our table
+DB
+.transaction(tblName,"writeonly")
+.onSuccess(function(ins)
+{
+    var res = ins.result;
+  res
+  .insert(data)
+  .execute()
+  .onSuccess(function(e)
+  {
+    //e = EVENT Object 
+  })
+  .onError(function(e){ 
+    Handle Failed Insert here
+  });
+})
+.onError(function(){ 
+  //Handle Failed Transaction here
+})
+</pre>
+        </div>
+        </div>
+
+
+        <div class="panel panel-default" id="update">
+        <div class="panel-body">
+        <h3>Update records</h3>
+         Updating a table also requires a transaction to be performed. Mode : 'writeonly'
+                <div class="alert alert-info">Data command accepts only 2 type of data OBJECT and params</div>
+                <ul>
+                  <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
+                  <li>PARAM : fullName ="Foo Boo",email="foo@boo.com"</li>
+                </ul>
+<pre>
+//Below example updates our table
+db
+.transaction(TBL_NAME,'writeonly')
+.onSuccess(function(upd)
+{
+  upd
+  .result
+  .update(DATA,WHERE) // requires two parameter DATA to update and which row to update using WHERE
+  .execute()
+  .onSuccess(function(e)
+  {
+    result = e;
+  })
+  .onError(function(e){
+    //Update Error Handler
+  })
+})
+.onError(function(e){
+  //Transaction Error Handler
+});
+
+</pre>
+        </div>
+        </div>
+
+              <div class="panel panel-default" id="delete">
+        <div class="panel-body">
+        <h3>Delete records</h3>
+         Deleting records also requires a transaction to be performed in 'writeonly' mode
+
+<code><pre>
+db
+.transaction(table,'writeonly')
+.onSuccess(function(del)
+{
+  del
+  .result
+  .delete(condition) // where condition e.g user like:'foo'
+  .execute()
+  .onSuccess(function(e){
+    //success Handler
+  })
+  .onError(function(e){
+    //delete Error Handler
+  })
+})
+.onError(CMDError)
+
+</pre></code>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="select">
+        <div class="panel-body">
+        <h3>Select From Table</h3>
+          Records can be fetched from table using the "SELECT" function, this also requires a transaction to be performed.
+        <ul>
+          <li>* - To select all columns</li>
+          <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
+          <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
+        </ul>
+        <p>Using CLAUSE in Select</p>
+        <ul>
+          <li><strong>WHERE : </strong>
+          <p>eg : <code>where(id === 1)</code></p></li>
+          <li><strong>-LIKE :</strong> -LIKE:expression
+          <p>eg <code>where(fullName LIKE:foo)</code></p></li>
+          <li><strong>Join Clause :</strong> 
+          <h3>List of Join Clause to use</h3>
+          <ul>
+            <li>INNER</li>
+            <li>LEFT</li>
+            <li>RIGHT</li>
+            <li>OUTER</li>
+          </ul>
+          </li>
+          <li><strong>Limit:</strong>
+          <p>eg: <code>limit(0,10)</code></p></li>
+        </ul>
+<pre>
+//Below example selects record from 1 table
+db
+.transaction(TBL_NAME)
+.select('name,email,password,id')
+.execute()
+.onError(errorHandler)
+.onSuccess(function(e)
+{
+  console.log("Success Result:",e.getResult())
+});
+
+//Below example selects record from 2 table using the join CLAUSE
+  db
+  .transaction([TBL_1,TBL_2])
+  .select('TBL_1.COL_NAME,TBL_2.COL_COURSE')
+  .join('inner:TBL_2')
+  .on('TBL_1.course = TBL_2.id')
+  .execute()
+  .onError(errorHandler)
+  .onSuccess(function(e)
+  {
+    console.log("Success Result:",e.getResult())
+  });
+
+  //using WHERE and LIKE CLAUSE
+   db
+  .transaction(TBL_NAME)
+  .select('name,email,password,id')
+  .where("COL_NAME like:foo")
+  .execute()
+  .onError(errorHandler)
+  .onSuccess(function(e)
+  {
+    console.log("Success Result:",e.getResult())
+  });
+
+//using Limit Clause
+db
+  .transaction(TBL_NAME)
+  .select('COL_1,COL_2,COL_3')
+  .where("COL_NAME like:foo")
+  .limit('0,10')
+  .execute()
+  .onError(errorHandler)
+  .onSuccess(function(e)
+  {
+    console.log("Success Result:",e.getResult())
+  });
+</pre>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="truncate">
+        <div class="panel-body">
+        <h3>Truncate Table</h3>
+          Table can be Truncate using the Truncate function. Accepts Parameter Flag : YES or NO.
+          <div class="alert alert-info">NO flag will trigger an error</div> 
+
+<pre>
+//Below example truncate our table
+db
+.table(TBL_NAME)
+.onSuccess(function(trun)
+{
+  var flag = YES;
+  trun.result.truncate(flag);
+});
+
+</pre>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="drop">
+        <div class="panel-body">
+        <h3>Drop Table / Database</h3>
+          Table can be dropped using the Drop function. Accepts Parameter Flag : YES or NO.
+          <p><strong>Note : NO flag will trigger an error</strong></p> 
+
+<pre>
+//Below example drops our table
+  db
+  .table(TBL_NAME)
+  .onSuccess(function(tbl){
+    var flag = YES;
+    tbl.result.drop(flag);
+  })
+  .onError(function(e){
+    result = e;
+  })
+
+</pre>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="imp_exp">
+        <div class="panel-body">
+        <h3>Import / Export</h3>
+          <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.html,.json) </p> 
+        <div class="alert alert-info">if the table doesn't exist it will be created and data will be inserted into the table.</div>
+<pre>
+  db
+  .import(TBL_NAME,{
+    onselect : function(fileName,file)
+    {
+      //Perform an action when file is selected;
+    },
+    onSuccess : //Handle successfull file import,
+    onError : //Handle Error file import
+})
+
+</pre>
+      <h3>Export</h3>
+      <p>Export a table record for referrence, accepted format are (.csv,.html,.json,.pdf)</p>
+          <p>Task List</p>
+          <ul>
+            <li>Download </li>
+            <li>Print </li>
+          </ul>
+<pre>
+  db
+  .export(FORMAT)//type
+  .initialize(TBL_NAME)
+  .download(FILENAME)// download the file
+  .print() //console.log the file
+</pre>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="sync">
+        <div class="panel-body">
+        <h3>Synchronize Database or Table</h3>
+          <p>Synchronize changes on the client to the server, 
+          we created a tool that can compare and check for changes between client and server
+          if the server have the latest changes, the client will be updated with the server records
+          else changes will be pushed to server for update</p> 
+<pre>
+db
+.synchronize()
+.Entity([TBL_1]) // Array of TABLES to sync
+.configSync({}) //Configuration used in sync method
+.processEntity()
+</pre>
+
+        <h3>Options for configuration</h3>
+          <ul id="sync_config">
+            <li><h4>serviceHost</h4>
+            <p>Define the location of your server, by default is null e.g http://localhost:9000/jDB/</p></li>
+            <li><h4>conflictResolver</h4>
+            <p>Define a function that will resolve conflict, this function is only initialized when there is a conflict between server and client tables.
+            <div><strong>Parameter:</strong> serverData, clientData</div></p>
+            <p class="alert alert-warning">Only define a function if you don't want our tool to resolve the conflict.</p>
+            </li>
+            <li><h4>logService</h4>
+            <p>Define a function that can register all logs thrown from the sync method.</p>
+            <div><strong>Parameter:</strong> message </div></p>
+            </li>
+            <li><h4>handler</h4>
+            <ul>
+              <li><h4>onSuccess</h4>
+              <p>Define a function that will perform an action when sync is successfull</p>
+              </li>
+               <li><h4>onError</h4>
+                <p>Define a function that will perform an action when sync fails.</p>
+               </li>
+            </ul>
+            </li>
+          </ul>
+
+              <p class="alert alert-info">This configurations can also be define when creating the database and it's extensible. Please look at <a href="#createDB"><i class="icon-chevron-right"></i> Create a database</a></p>
+        </div>
+        </div>
+
+        <div class="panel panel-default" id="users">
+        <div class="panel-body">
+        <h3>Add / remove Users</h3>
+        <p>Protect your database by adding users and priviledges, this table is created on the fly and cannot be removed but can be modified. It can also be used for login verification.</p>
+        
+<h3>Adding Users</h3>
+<pre>
+  db.
+  _users()
+  .add({username:'',password:''}) //add data required 
+  .onSuccess(function(){}) //handle success
+  .onError(function(){}) //handle error
+</pre>
+
+<h3>removing Users</h3>
+<pre>
+  db.
+  _users()
+  .remove({key:'username'}) //add data required 
+  .onSuccess(function(){}) //handle success
+  .onError(function(){}) //handle error
+</pre>
+        </div>
+        </div>
+
+
+
+        <!-- Using CMD -->
+        <div class="panel panel-default" id="jCMD">
+        <div class="panel-heading"><h3>Using jCMD</h3></div>
+        <div class="panel-body">
+          One of the best feature of jDB is, it's ability to perform query using its own query Syntax.
+          <p><strong>Type -help to see command syntax</strong></p>
+          <br />
+          <div class="well"><strong>Create a table : </strong>
+            Syntax : -CREATE -TABLE_NAME -COLUMNS
+              <p>-CREATE -members -[{ID:{type:"INTERGER",AUTO_INCREMENT:1},email:{type:"VARCHAR"}}]
+              <div class="alert alert-info">COLUMNS command is an ARRAY OF OBJECTS with list of columns with their configuration. A column must contain a type of input to accept. For empty column pass an empty ARRAY : [] </div>
+              </p></div>
+
+            <div class="well"><strong>Alter Table</strong>
+              Syntax : -ALTER -TABLE_NAME</p>
+                <p><strong>Add New Column : </strong></p>
+                <p>-add -new -column -COLUMN_NAME -CONFIGURATION</p>
+                <p><strong>Lets add a new column to our table</strong></p>
+                <p>ALTER -members -add -new -column -fullName -{type:"VARCHAR",defaultValue:"Foo Bar"}</p>
+                <div class="alert alert-info">Configuration must be a javascript Object</div>
+                <br>
+                <p><strong>Adding Primary Key</strong> Syntax :-add -primary -key -column_name</p>
+              </div>
+
+              <div class="well">
+                <strong>Drop a column</strong> Syntax : -drop -column_name
+                <div class="alert alert-info">Column dropped will be removed from table rows.</div>
+              </div>
+
+              <div class="well">
+                <Strong>Insert Data with query :</Strong> Syntax : -insert -data -table_name
+                <div class="alert alert-info"> -data command accepts ARRAY of OBJECTS or ARRAY of ARRAYS. Column name must be defined when using ARRAY of Objects, while for ARRAY of ARRAYS the data must follow according to their column position in the table.</div>
+                <div>In Array of Objects AUTO_INCREMENT field can be omitted, while for ARRAY of Arrays cannot.</div>
+                </p>
+                <p>Inserting Data with Array of Objects into our members table</p>
+                <div>-insert -[{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}] -members
+                <p><strong>ID field was omitted, because it has a configuration of AUTO_INCREMENT</strong></p>
+                </div>
+
+                <p>Inserting Data with Array of Arrays into our members table</p>
+                <div>-insert -[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]] -members
+                <div class="alert alert-info">As said above, the ID field cannot be omitted even if having the auto_incremement configuration when inserting data with ARRAY of ARRAYS. Data in each array will be Mapped to the columns</div>
+                </div>
+              </div>
+
+              <div class="well">
+                <strong>Select From Table </strong> Syntax : -select -columns -table_name
+                <p>-columns command accepts different parameter</p>
+                <ul>
+                  <li>* - To select all columns</li>
+                  <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
+                  <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
+                </ul>
+                <p>Using CLAUSE in Select</p>
+                <ul>
+                  <li><strong>WHERE : </strong> -Where -expression
+                  <p><strong>eg : -select -* -members -where -(id === 1)</strong></p></li>
+                  <li><strong>-LIKE :</strong> -LIKE:expression
+                  <p><strong>eg : -select -* -members -where -fullName -LIKE:foo</strong></p></li>
+                  <li><strong>Join Clause :</strong> -join -CLAUSENAME:tableName -on -expression
+                  <strong>List of Join Clause to use</strong>
+                  <ul>
+                    <li>INNER</li>
+                    <li>LEFT</li>
+                    <li>RIGHT</li>
+                    <li>OUTER</li>
+                  </ul>
+                  <p><strong>eg : -select -members.fullName,info.address -members -join -inner:info -on -memebers.ID === info.PID</strong></p>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="well">
+                <strong>Updating records : </strong> Syntax : -update -tableName -data -WHERE -expression
+                <div class="alert alert-info">Data command accepts only 2 type of data OBJECT and params</div>
+                <ul>
+                  <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
+                  <li>PARAM : fullName ="Foo Boo",email="foo@boo.com"</li>
+                </ul>
+                <p><strong>eg : -update -members -fullName="Foo Boo" -where -(ID === 1 || fullName ==="Foo Bar")</strong></p>
+              </div>
+
+              <div class="well">
+                <strong>Deleting records :</strong> Syntax : -delete -tableName -WHERE -expression
+                <p>eg : -delete -memebers -where -(ID === 1 || fullName ==="Foo Bar")</p>
+              </div>
+
+              <div class="well">
+                <strong>Truncate a table : </strong> -truncate -tableName -flag(yes or no)
+                <p>eg: -truncate -members -yes</p>
+                <div class="alert alert-info">Truncating a table deletes every record in the table, flag must be set to yes before task is performed, else an error will be thrown.</div>
+              </div>
+
+              <div class="well">
+                <strong>Dropping a table</strong> Syntax : -drop -table -tableName -flag(yes or no)
+                <p>eg: -drop -table -members -yes</p>
+                <div class="alert alert-info">Dropping a table removes the table from the Database, flag must be set to yes before task is performed, else an error will be thrown.</div>
+              </div>
+
+              <div class="well">
+                <strong>Importing records : </strong> Syntax : -import -tableName
+                <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.html,.json) </p>
+                <div class="alert alert-info">if the table doesn't exist it will be created and data will be inserted into the table.</div>
+              </div>
+
+              <div class="well">
+              <strong>Exporting records :</strong> Syntax : -export -tableName -format -task
+              <p>Task List</p>
+              <ul>
+                <li>Download : -d -fileName</li>
+                <li>Print : -p to console</li>
+              </ul>
+
+              <div class="alert alert-info">Accepted types are (.csv,.html,.json), title is optional and can be left blank</div>
+              </div>
+
+              <div class="well">
+                <strong>Data Synchronization</strong> Syntax : -sync -tableName
+                <div class="alert alert-info">Without definig a tableName, all tables in the database will be synchronized. Table Name must be in ARRAY format</div>
+                <p><strong>eg : -sync -["members"] or -sync</strong></p>
+              </div>
+
+
+        </div>
+        </div>
+
+      </div>
+  </div>
+</div>
+</body>
+</html>

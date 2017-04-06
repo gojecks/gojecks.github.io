@@ -1,0 +1,50 @@
+  <div style="margin-top:40px">
+  <go where="default" class="btn btn-link">index</go> 
+  <go where="home" class="btn btn-link">Home</go> 
+  <go where="profile:{id:1201,cid:1002}" class="btn btn-link">Profile</go>
+  <span class="btn btn-link" @click="newTest($event,'2');nextTest($event,3); showTheatre = !showTheatre">Show Modal</span>
+  {%showTheatre%}
+  <div j-view class="container-fluid"></div>
+
+  <div j-modal j-if="showTheatre"></div>
+  <div class="container-fluid">
+
+ <!--  <calendar config="{fullYear:1,year:1990}">
+  <div class="row">
+  	<div class="col-sm-3" j-for="(key,month) in calendar">
+  		<table>
+  			<tr><th></th><th colspan="5">{%month.monthName%} - {%month.year%}</th><th></th></tr>
+  			<tr><th j-for="weekdays in month.weekDays">{%weekdays%}</th></tr>
+  			<tr j-for="week in month.weeks"><td j-for="days in week">{%days.date%}</td></tr>
+  		</table>
+  	</div>
+  </div>
+  </calendar> -->
+
+  </div>
+  <div id="mount-point">
+    <filtered-list></filtered-list>
+  </div>
+
+  <j-for source="c in [1,2,0,3,5,6,4]" :finish-rendering="&"><div>{%c%}</div></j-for>
+
+  <j-do source="c in quickTest" while="((name === 'Tom' && id === 1) || name === 'Tom')">
+    <div>{%c | json%}</div>
+  </j-do>
+    <input type="checkbox" j-model="testCheck">{%testCheck%}<div :show="!testCheck">Testing</div>
+
+    <div  j-style="{color: myColor}">
+
+      <input type="text" j-model="myColor" placeholder="enter a color name">
+
+      <div j-for="item in [{name: 'Joseph',title: 'jEli creator'}, {name: 'Gojecks',title: 'Meetup master'},{name: 'Kadiri',title: 'Talk Less'}]" j-class="{'pending-delete': item.checked}">
+        name: {%:item.name%}, {%:item.title%}
+        <input type="checkbox" j-model="item.checked" />
+        <span j-show="item.checked"/><span>(will be deleted)</span>
+      </div>
+      <p>
+        <div j-hide="myColor== 'red'">I will hide if the color is set to 'red'.</div>
+    </div>
+
+    <!-- 
+<app-component items="items" two-way-model="twoWayModel" two-way-models="twoWayModels"></app-component> -->

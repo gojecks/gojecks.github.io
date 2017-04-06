@@ -1,0 +1,352 @@
+<!doctype>
+<html>
+
+<head>
+    <!-- <script src="jQuery1.8b2.min.js" type="text/javascript"></script> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <script src="../../dist/jelijs/jeli.min.js" type="text/javascript"></script>
+    <!-- <script src="../dist/jelijs/webRoute/webroute.min.js" type="text/javascript"></script>
+<script src="../dist/jelijs/jDateTime/jdatetime.min.js" type="text/javascript"></script>
+<script src="apps.js" type="text/javascript"></script>
+<script src="routes.js" type="text/javascript"></script> -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/styles.min.css" />
+    <link rel="icon" href="../css/image/favicon.png">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">JELIJS</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="btn btn-link" href="../guide/">Guide</a></li>
+                    <li><a class="btn btn-link" href="../api">Api</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:30px">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li><a href="Installation.html">Installation</a></li>
+                    <li class="active"><a href="#introduction">Introduction <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#gettingStarted">Getting Started</a></li>
+                    <li><a href="#indexPage">jEli Declaration</a></li>
+                    <li><a href="#todoModule">Todo Module</a></li>
+                    <li><a href="#todoController">Todo Controller</a></li>
+                    <li><a href="#renderingTodoApp">Render Our App</a></li>
+                    <li><a href="#overview">Overview</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+                <section id="introduction">
+                    <h2>
+                        Introduction
+                    </h2>
+
+                    <h4 class="page-header">
+                        What is JELIJS?
+                    </h4>
+                    <p>jEli (pronounced / J-ELI) is an <b>Amazing and Progressive Javascript Framework</b> for building User Interface without sacrificing power. As the name, jELI is just JavaScript written in modern and future approach. </p>
+                    <p>jEli is very easy to pick up and integrate with other libraries or existing projects. On the other hand, jEliJS is also perfectly capable of powering sophisticated Single-Page Applications (SPAs). However, jELi can be used both on
+                        client and server side.</p>
+                </section>
+
+                <section id="gettingStarted">
+                    <h4 class="page-header">
+                        Getting Started
+                    </h4>
+                    <div class="alert alert-info">
+                        <h4>Prerequisites</h4>
+                        This quick start guide will take you through creating a Todo app using jEli and briefly explain its main concepts. We assume you are familiar with JavaScript, HTML, and CSS. If you are new to frontend development, it might not be best idea to jump into
+                        a framework as your first-step. We strongly advice to grasp the basic of frontend-development then come back!
+                    </div>
+
+                    <p>
+                        In this tutorial, you will be introduced to the simplicity of jEli by creating a "Todo" application. As we get along in this tutorial, you will learn some of the basic concepts and capabilites of jEliJS.
+                    </p>
+                    <p>
+                        Before we start writing some code, you will need to setup your environment with a basic project structure. The <a href="installation.html">installation</a> page provides options on installing jEliJS.
+                    </p>
+                </section>
+
+                <section id="indexPage">
+                    <h4 class="page-header">jEli declaration</h4>
+                    <p class="alert alert-warning">By continuing this tutorial, we assume that your environment have been setup.</p>
+                    <p>Let's start by taking a look at the index.html file.</p>
+                    <div class="panel">
+                        <div class="panel-heading">index.html</div>
+                        <!--?prettify lang=html linenums=true?-->
+                        <pre class="prettyprint lang-html" id="indexPagePrettify"></pre>
+                    </div>
+
+                    <p>There re couple of things to notice here. First take a look at the body tag, it contains an attribute "j-module". This attribute tells jEli bootstrapper what module contains the application configuration as well as what HTML element
+                        is the "root" element where the application will be rendered. We'll look at creating that file a little bit later.</p>
+                    <p>Inside the body of our html file, we have a form having some custom attributes <code>":controller, @submit, @click"</code> we shall be looking into this later, but quickly lets create our application module file.</p>
+                </section>
+
+                <section id="todoModule">
+                    <h4 class="page-header"> Todo Module</h4>
+                    <p>We're going to begin by creating a Todo Module. Since we're making a Todo App, we'll need a controller to model out an individual Todo item. In the src folder of your project, create the following file:</p>
+                    <div class="panel">
+                        <div class="panel-heading">app.js</div>
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-js" id="todoModulePrettify"></pre>
+                    </div>
+                    <p>Looking at the javscript, it looks simple and straight forward. <code>jEli.jModule("Todo",[])</code> this method creates a "Todo" Instance enabling us to configure the Application, also notice the "Todo" in body tag <code>j-module="Todo"</code>,
+                        also we added a controller to our Todo configuration <code>jController('toDoController', todoControllerFn)</code>, which also matches a controller attribute in the index.html file <code>:controller="toDoController as $todo"</code></p>
+                </section>
+
+                <section id="toDoController">
+                    <h4 class="page-header">Todo Controller</h4>
+                    <p>Our todo application contains a list of Todo instances. It can add and remove todos. The todos are added by allowing the user to provide a todo description. Once they type a description and add the todo, the description is cleared
+                        so they can create another todo. Let's model these ideas. Here's the Todo Controller:</p>
+                    <div class="panel">
+                        <div class="panel-heading">app.js</div>
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-js" id="toDoControllerPrettify"></pre>
+                    </div>
+                    <p>Again its that simple. Let's review what we modeled: </p>
+                    <ul>
+                        <li>Our application has a heading of "Todos".</li>
+                        <li>The todo list is modeled as an array of Todo instances represented by the todos property.</li>
+                        <li>Todo instances can be added (addTodo) or removed (removeTodo)</li>
+                        <li>When instances are added, they are given a description, provided by the user.</li>
+                        <li>After the Todo is added, the description is cleared to enable the next addition.</li>
+                    </ul>
+
+                    <p class="alert alert-info">To better understand how controller works please read on "Controller" in jEli API section.</p>
+                    <p>Update your app.js file with the version below:</p>
+                    <div class="panel">
+                        <div class="panel-heading">app.js</div>
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-js" id="toDoControllerCompletePrettify"></pre>
+                    </div>
+                </section>
+
+                <section id="renderingTodoApp">
+                    <h4 class="page-header">Rendering Our App</h4>
+                    <p>Let's back to our index.html file, did you notice the <code>{%pageHeading%}</code> syntax? Well, inside of a view, you have access to all properties and methods of the View-Model instance associated with the view and you can access
+                        them inside the content of of any element or attribute by using jEli template string syntax as shown above. The above syntax creates a one-way data-binding to the associated property. By "one-way" we mean that the dataflow is unidirectional.
+                        The view only updates when the property binded to it changes. There is no "reverse" flow from the view back to the view-model.</p>
+
+                    <p class="alert alert-info">
+                        We call a View's associated class its View-Model because it's a model for, or a model of the View. Most jEli development leverages the Model - View - View-Model pattern. However, jEli is flexible enough to enable also using patterns like Supervising Controller
+                        (as our todo App), Passive View and Model - View - Controller if desired.
+                    </p>
+
+                    <p>
+                        We colect information from the user, when they click on the (addTodo) Button. <strong>How is this done? </strong> In the input element appended <code>:model</code> attribute, by doing so, we tell jEli that we want to bind "todoDescription"
+                        property in our View-Model. You can bind "Model" property to any HTML Element by appending <code>:model </code>.
+                    </p>
+
+                    <p>Here, we have another convention that it's important to point out. When we use :model jEli works on your behalf to pick the most sensible "binding mode" based on the element and attribute you are binding. For example, since this is
+                        an input and you are binding its value then :model will cause jEli to set up a two-way binding. This means that any time the view-model's todoDescription changes, it will be updated in the input's value property but also any time
+                        the input's value property changes, the view-model will have its todoDescription updated as well.</p>
+
+                    <p>There's something else of note in this markup though. We can not only bind properties, but you can attach to events. Take a look at the form element itself. In jEli, you can attach any DOM event to an ELEMENT by using the symbol "@"
+                        or "j-" followed by the event name. This means that when that event fires, it will trigger the associated expression to be evaluated. In this case, the submit event causes the addTodo() method to be invoked. Because we've used
+                        the submit event, it means that the todo will be added either by pressing the submit button or by pressing enter while inside the input</p>
+                    <p class="alert alert-info">For more on event binding, please read on "Events" in jEli API section </p>
+
+                    <p>When you run the application, you should be able to see the above explaination in action, but our templates is not complete. We can add todos, but can't see them! Let's update the index.html template to the below version:</p>
+                    <div class="panel">
+                        <div class="panel-heading">index.html</div>
+                        <!--?prettify lang=html linenums=true?-->
+                        <pre class="prettyprint lang-html" id="indexPageCompletePrettify"></pre>
+                    </div>
+
+                    <p>To generate HTML based on an Array, Map or Set, we use the ":for" directive syntax. This syntax is derived from the for loop. Here is what we have done so far in the updated html:
+                        <ul>
+                            <li>We generate one li for each item in our todos array, by appending the :for attribute on the li we want to be generated and we specify the todos collection and that we want the local loop variable to be named todo. With this
+                                we can bind to any property of the todo instance.</li>
+                            <li> We're binding the checked attribute to the todo's done property and its description property is being injected into the content of the span. </li>
+                            <li>Next is the span element, we show how you can bind css directly on any HTML elment. In this case, we want to add the text-decoration of line-through whenever the <code>todo.done</code> property is true, otherwise we want the
+                                none value.</li>
+                            <li>Finally, we're adding a click event on the button so that we can remove the todo, by passing in the index of the todo to be removed.</li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section id="overview">
+                    <h4 class="page-header">Overview</h4>
+                    <p>Thanks for taking your time to read through the guide. So far this guide has put us through on how to create a simple "Todo" application with jEli:
+                        <ul>
+                            <li>How to bootstrap our application using the j-module attribute</li>
+                            <li>How to create a controller and attach it to any HTML element</li>
+                            <li>How two-binding works with the :model directive</li>
+                            <li>How to attach event to any HTML element.</li>
+                            <li>How to generate view using the ":for" directive</li>
+                        </ul>
+                        There's so much to learn and do with jEli. The rest of this guide will cover the basic and advanced features with much details, so make sure to read it all!</p>
+                </section>
+
+
+
+
+                <hr>
+                <!-- Footer -->
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Copyright &copy; jEliJS.com 2014 - 2017. Proudly Sponsored by <a href="bezynet.com/bezynet">Bezynet INC.</a> All rights reserved</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" id="todoModuleScript">
+        jEli
+            .jModule('Todo', {
+                requiredModules: []
+            })
+            .jController('toDoController', todoControllerFn);
+
+        function todoControllerFn() {
+            this.pageHeading = "My First Todo App";
+            this.todos = [];
+            this.addTodo = function() {
+                if (this.todoDescription) {
+                    this.todos.push({
+                        description: this.todoDescription,
+                        done: false
+                    });
+                    this.todoDescription = '';
+                }
+            };
+
+            this.removeTodo = function(index) {
+                if (this.todos[index]) {
+                    this.todos.splice(index, 1);
+                }
+            };
+
+            this.todoDescription = "";
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+        (function() {
+            function htmlEscape(s) {
+                return s
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
+
+            var prettyHTML = {
+                indexPagePrettify: ['<!DOCTYPE html>',
+                    '<html>',
+                    '<head>',
+                    '<title>JELIJS</title>',
+                    '</head>',
+                    '<body j-module="Todo">',
+                    '<div :controller="toDoController as $todo">',
+                    '<h1>{%$todo.pageHeading%}</h1>',
+                    '<form @submit="$todo.addTodo()">',
+                    '<input type="text" :model="$todo.todoDescription">',
+                    '<button type="submit">Add Todo</button>',
+                    '</form></div>',
+                    '<script src="scripts/jelijs.min.js"><\/script>',
+                    '<script src="scripts/app.js"><\/script>',
+                    '</body>',
+                    '</html>'
+                ],
+                todoModulePrettify: ['jEli',
+                    '.jModule("Todo",{requiredModules : []})',
+                    '.jController("toDoController", todoControllerFn)'
+                ],
+                toDoControllerPrettify: ['function todoControllerFn(){',
+                    'this.pageHeading = "My First Todo App";',
+                    'this.todos = [];',
+                    'this.addTodo = function(){',
+                    'if (this.todoDescription) {',
+                    'this.todos.push({description : this.todoDescription, done:false});',
+                    'this.todoDescription = "";',
+                    '}',
+                    '};',
+
+                    'this.removeTodo = function(index){',
+                    'if (this.todos[index]) {',
+                    'this.todos.splice(index, 1);',
+                    '}',
+                    '};',
+
+                    'this.todoDescription = "";',
+                    '}'
+                ],
+                indexPageCompletePrettify: ['<!DOCTYPE html>',
+                    '<html>',
+                    '<head>',
+                    '<title>JELIJS</title>',
+                    '</head>',
+                    '<body j-module="Todo">',
+                    '<div :controller="toDoController as $todo">',
+                    '<h1>{%$todo.pageHeading%}</h1>',
+                    '<form @submit="$todo.addTodo()">',
+                    '<input type="text" :model="$todo.todoDescription">',
+                    '<button type="submit">Add Todo</button>',
+                    '</form>',
+                    '<ul>',
+                    '<li :for="todo in $todo.todos">',
+                    '<input type="checkbox" :model="todo.done">',
+                    '<span :style="{text-decoration: todo.done ? \'line-through\' : \'none\'}">',
+                    '{%todo.description%}',
+                    '</span>',
+                    '<button @click="$todo.removeTodo(todo)">Remove</button>',
+                    '</li>',
+                    '</ul>',
+                    '</div>',
+                    '<script src="scripts/jelijs.min.js"><\/script>',
+                    '<script src="scripts/app.js"><\/script>',
+                    '</body>',
+                    '</html>'
+                ],
+                toDoControllerCompletePrettify: "todoModuleScript"
+            };
+
+
+            for (var name in prettyHTML) {
+                build(name);
+            }
+
+            function build(name) {
+
+                // this page's own source code
+                if (typeof prettyHTML[name] === 'object') {
+                    var quineHtml = htmlEscape(prettyHTML[name].join('\n'));
+                } else {
+                    var quineHtml = htmlEscape(document.getElementById(prettyHTML[name]).textContent);
+                }
+
+                // Highlight the operative parts:
+                quineHtml = quineHtml.replace(
+                    /&lt;script src[\s\S]*?&gt;&lt;\/script&gt;|&lt;!--\?[\s\S]*?--&gt;|&lt;pre\b[\s\S]*?&lt;\/pre&gt;/g,
+                    '<span class="operative">$&<\/span>');
+
+                // insert into PRE
+                document.getElementById(name).innerHTML = quineHtml;
+            }
+
+
+        })();
+        //]]>
+    </script>
+</body>
+
+</html>
