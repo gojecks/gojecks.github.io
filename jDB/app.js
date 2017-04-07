@@ -4,9 +4,9 @@
 	'use strict';
 
 jEli
-.jModule('eliTest',['jEli.web.route'])
+.jModule('jelijs.jDB',['jEli.web.route'])
 .jConfig(["jDebugProvider",jDbuggerFn])
-.jController('baseCtrl',["$scope","$webState","$rootModel","$sessionStorage",baseCtrFN])
+.jController('baseCtrl',["$scope","$rootModel","$sessionStorage",baseCtrFN])
 .jElement('handleScroll',['$window',handleScrollFn]);
 
 //jDebuggerFn
@@ -41,7 +41,7 @@ function handleScrollFn($window)
 }
 
 //BaseCtrl Fn
-function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
+function baseCtrFN($scope,$rootModel,$sessionStorage)
 {
 	var db = null,
 		errorHandler = function(o){ console.log(o) },
@@ -49,7 +49,6 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 		cmdLockState = false,
 		cmdFinishState = false,
 		lastRunQuery = '';
-
 	$scope.db = {};
 	$scope.activeDb = null;
 	$scope.searchResult = [];
@@ -74,25 +73,35 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 			var self =this;
 			setTimeout(function(){
 				self.console.value = "";
-			},500);
+			},100);
 		};
 	}
 
 	//command prompt
 	var logController = new logController();
 
+	//getServiceHost
+	function getServiceHost(addPath)
+	{
+		var loc = location,
+			domain = loc.protocol+"//"+addPath+'.'+loc.hostname;
+
+		return domain;
+	}
 
 	function connectDB(connectDetails)
 	{
 		var req = new jEli.$jDB(connectDetails.name,connectDetails.version)
 					.open({
-							serviceHost:'http://192.168.1.5/jEliDB/',
+							serviceHost:getServiceHost('ws'),
 							logService : function(msg)
 							{
 								if(msg)
 								{
 									setMessage(msg);
 								}
+							},
+							interceptor : function(options,state){
 							}
 						});
 
@@ -107,28 +116,6 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 				$sessionStorage.setItem("activeSession",JSON.stringify(connectDetails));
 				$scope.$consume();
 
-				//set helpers
-			var list = [];
-				list.push("-env -usage");
-	          list.push("-export -[TBL_NAME] -[type] (csv , html or json) -(d or p) -[fileName] (optional)");
-	          list.push("-import -[table] -[insert]");
-	          list.push('-sync -[tbl_name] (optional)');
-	          list.push('-cls (clearScreen)');
-	          list.push("-help");
-	          list.push("-select -[fields] -[table] -Clause[ -[on] -[join] -[where] -[like] ]");
-	          list.push("-insert -[data] -[tbl_name]");
-	          list.push("-create -[tbl_name] [columns]");
-	          list.push("-delete -[tbl_name] -expression[[where] -[like:]]");
-	          list.push("-update -[tbl_name] [data] -expression[ [where] [like]]");
-	          list.push("-turncate -[tbl_name] -flag[[yes] : [no]]");
-	          list.push("-drop -t -[tbl_name] -flag[ [yes] : [no] ]");
-	          list.push("-drop -d -[db_name] -flag[ [yes] : [no] ]");
-	          list.push("-Alter -table] -a -c -columnName [config]");
-	          list.push("-Alter -[tbl_name] -a -p -columnName");
-	          list.push("-Alter -[tbl_name] -a -f -columnName -[relative table]");
-	          list.push("-Alter -[tbl_name] -d -columnName");
-	          list.push("-Alter -[tbl_name] -a -m -[read : write]");
-	          db.jDBHelpers.overwrite(list);
 			});
 	}
 
@@ -153,7 +140,7 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 		.synchronize()
 		.Entity(db.name)
 		.configSync({
-			serviceHost:'http://localhost/jEliDB/',
+			serviceHost:'http://ws.jdb.bezynet.com',
 			logService : function(msg)
 			{
 				setMessage(msg);
@@ -235,7 +222,6 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 					{
 						$scope.tables = db.list_tables();
 						setMessage( ret.result.message );
-						$scope.$consume();
 					}
 				break;
 				case("select"):
@@ -253,6 +239,7 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 				break;
 				default:
 					setMessage( ret.result.message );
+					$scope.searchResult = [];
 				break;
 
 			}
@@ -281,7 +268,7 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 			}
 
 			setMessage('Performing Task...');
-			db.jCMD(query, new queryHandler());
+			db.jQl(query, new queryHandler());
 		}
 	};
 
@@ -345,35 +332,5 @@ function baseCtrFN($scope,$webState,$rootModel,$sessionStorage)
 	}
 
 }
-
-})();
-
-
-
-(function(){
-	
-	'use strict';
-
-	jEli
-	.jModule('eliTest')
-	.jConfig(["$jEliWebStateProvider" , "$jEliWebProvider",jRouteConfigFn]);
-
-	//jRouteCOnfigFn
-	function jRouteConfigFn($jEliWebStateProvider , $jEliWebProvider)
-	{
-		$jEliWebProvider.fallBack('/');
-
-		$jEliWebStateProvider
-		.setState('profile',
-		{
-			url : '/tutorials',
-			template : '<div>My new Profile Page</div>'
-		})
-		.setState('default',
-		{
-			url : '/',
-			templateUrl : 'main.tmpl.html'
-		})
-	}
 
 })();
