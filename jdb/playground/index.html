@@ -1,0 +1,173 @@
+<!doctype>
+<html j-module :app="jelijs.jDB">
+<head>
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> 
+  <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications"> 
+  <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development"> 
+  <meta name="author" content="Joseph Gojecks Kadiri">
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../css/styles.min.css" />
+<link rel="icon" href="../css/image/favicon.png">
+<script src="https://unpkg.com/jeli-jdb@0.0.1/jeli.jdb.min.js" crossorigin></script>
+<title>jEliDB</title>
+</head>
+<body j-controller="baseCtrl">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/">jEliDB</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a class="btn btn-link" href="../api/">Api</a></li>
+                <li class="active"><a class="btn btn-link" href="#">Playground</a></li>
+              </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">PlayGround
+                    <small class="pull-right" j-if="activeDb">{%dbName%} - version : {%dbVersion%} <a class="btn btn-link" j-click="$disconnect()">Dis-Connect</a></small>
+                </h3>
+            </div>
+        </div>
+        <!-- /.row -->
+      <div class="row"  j-if="!activeDb">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+          <div class="panel panel-default">
+          <div class="panel-heading">Create / Open Database</div>
+          <div class="panel-body">
+            <div  class="form-group">
+                <input type="text" placeholder="Database Name" j-model="db.name"  class="form-control">
+            </div>
+            <div  class="form-group">
+                <input type="text" placeholder="version" j-model="db.version"  class="form-control">
+            </div>
+            <div class="pull-right"><button j-click="$create()" class="btn btn-primary">Create / Open</button></div>
+          </div>
+          </div>
+      </div>
+      <div class="col-md-4"></div>
+      </div>
+      <!-- / row -->
+
+      <!--Connected User -->
+      <div j-if="activeDb">
+      <div class="row">
+        <div class="col-xs-3">
+        <div class="panel panel-default" j-for="(tblName,tbl) in tables">
+        <div class="panel-heading">Search {%tblName%} Table</div>
+        <div class="panel-body">
+          <div  class="form-group">
+          <input type="text" placeholder="Search Table" j-model="queryString"  class="form-control">
+          </div>
+          <div ><button j-click="searchTable(tblName,queryString)" class="btn btn-primary">Search</button></div>
+        </div>
+        </div>
+
+      </div>
+      <div class="col-xs-6">
+       <div class="panel panel-default">
+        <div class="panel-heading">Search Result Displays here</div>
+        <div class="panel-body">
+            <div> {%searchResult | json%} </div>
+          </div>
+        </div>
+
+          <!-- Query Table -->
+       <div class="panel panel-default">
+        <div class="panel-heading">jEli Command Prompt</div>
+        <div class="panel-body">
+        <div class="form-group"> <textarea class="form-control"  j-keydown="commandPrompt($event)" rows="6" style="background: #000;color: #fff;"></textarea> </div>
+        <div><kbd>Select</kbd> <kbd>Insert</kbd> <kbd>Update</kbd> <kbd>Delete</kbd> <kbd>Alter</kbd>
+          <kbd>Drop</kbd> <kbd>Create</kbd> <kbd>Truncate</kbd> <kbd>Export</kbd> <kbd>Import</kbd></div>
+        <div class="clearfix">
+          <div class="pull-left"><span>{%queryMessage%}</span> 
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Tables display -->
+        <div class="panel panel-default">
+        <div class="panel-heading clearfix">Current Database Tables <button j-click="syncTable(tblName)" class="btn btn-primary pull-right">Sync </button></div>
+        <div class="panel-body">
+            <!-- <div> 
+              <div class="btn btn-group">
+                <button class="btn btn-primary">User</button>
+                <button class="btn btn-primary">Course</button>
+              </div>
+            </div> -->
+            <ul j-for="(tblName,tbl) in tables" class="list-group">
+              <li class="list-group-item">
+                <div class="clearfix">
+                  <div class="pull-right">
+                  <div class="btn btn-group">
+                    <button j-click="truncateTable(tblName)" class="btn btn-primary">Truncate</button>
+                    <button j-click="dropTable(tblName)" class="btn btn-primary">Drop </button>
+                    <button j-click="exportTable(tblName)" class="btn btn-primary">Export </button>
+                  </div>
+                  </div>
+                  <h4>{%tblName%}</h4></li>
+              <li class="list-group-item"><table class="table table-bordered">
+                <tr>
+                  <td>Records:</td><td>{%tbl.records%}</td>
+                </tr>
+                 <tr>
+                  <td>AllowedMode:</td><td>{%tbl.allowedMode%}</td>
+                </tr>
+                 <tr>
+                  <td>Foreign-Key:</td><td>{%tbl.foreignKey%}</td>
+                </tr>
+                 <tr>
+                  <td>Primary-Key:</td><td>{%tbl.primaryKey%}</td>
+                </tr>
+              </table></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3">
+      <!-- Add records -->
+        <div class="panel panel-default" j-for="(tblName,tbl) in tables">
+        <div class="panel-heading">Add data to {%tblName%} table</div>
+        <div class="panel-body">
+          <div class="form-group" j-for="(colName,col) in tbl.columns[0]">
+          <input type="text"  placeholder="{%colName%}" j-model="newData[tblName][colName]"  class="form-control">
+          </div>
+          <div class="btn btn-group"><button j-click="addUserTable(tblName,newData)" class="btn btn-primary">Add</button></div>
+          <div> {%addResult%} </div>
+        </div>
+      </div>
+      </div>
+
+      </div>
+      </div>
+    </div>
+    </div>
+
+
+<script src="../app.js" type="text/javascript"></script>
+</body>
+</body>
+</html>
