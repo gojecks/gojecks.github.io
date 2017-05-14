@@ -93,7 +93,7 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 	{
 		var req = new jEli.$jDB(connectDetails.name,connectDetails.version)
 					.open({
-							serviceHost:getServiceHost('ws'),
+							serviceHost:null,
 							logService : function(msg)
 							{
 								if(msg)
@@ -102,7 +102,8 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 								}
 							},
 							interceptor : function(options,state){
-							}
+							},
+							storage:'memory'
 						});
 
 			req.onSuccess(function(e)
@@ -111,11 +112,9 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 				db = e.result;
 				$scope.dbName = db.name;
 				$scope.dbVersion = db.version;
-				$scope.tables = db.list_tables();
+				$scope.tables = db.info();
 				//sessionStorage
 				$sessionStorage.setItem("activeSession",JSON.stringify(connectDetails));
-				$scope.$consume();
-
 			});
 	}
 
@@ -220,7 +219,7 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 				case("import"):
 					if( ret.result.message )
 					{
-						$scope.tables = db.list_tables();
+						$scope.tables = db.info();
 						setMessage( ret.result.message );
 					}
 				break;

@@ -43,8 +43,26 @@
         <div class="row">
           <div class="col-sm-3 col-md-2 sidebar">
               <ul class="nav nav-sidebar">
-                <li><a href="#createDB" ><i class="icon-chevron-right"></i> Create a database</a></li>
-                <li><a href="#createTbl" ><i class="icon-chevron-right"></i> Create a Table</a></li>
+                  <li>
+                    <a href="#createDB" ><i class="icon-chevron-right"></i>Create DataBase</a>
+                      <ul>
+                        <li><a href="#is_client"><i class="icon-chevron-right"></i> isClient </a></li>
+                        <li><a href="#requires_login" ><i class="icon-chevron-right"></i> requiresLogin </a></li>
+                        <li><a href="#open" ><i class="icon-chevron-right"></i> open </a></li>
+                      </ul>
+                    </li>
+                </ul>
+                <p>DB Method/Instance</p>
+                <ul  class="nav nav-sidebar">
+                <li>
+                    <a href="#env" ><i class="icon-chevron-right"></i>Env</a>
+                    <ul>
+                      <li><a href="#env-usuage" ><i class="icon-chevron-right"></i>Usage</a></li>
+                      <li><a href="#env-logger" ><i class="icon-chevron-right"></i>Logger</a></li>
+                      <li><a href="#env-appkey" ><i class="icon-chevron-right"></i>AppKey</a></li>
+                    </ul>
+                </li>
+                <li><a href="#createTbl" ><i class="icon-chevron-right"></i>Create Table</a></li>
                 <li>
                   <a href="#table">Table</a>
                   <ul>
@@ -56,7 +74,7 @@
                       </ul>
                     </li>
                     <li><a href="#truncate" ><i class="icon-chevron-right"></i>Truncate Table</a></li>
-                    <li><a href="#drop" ><i class="icon-chevron-right"></i>Drop Table / Database</a></li>
+                    <li><a href="#drop" ><i class="icon-chevron-right"></i>Drop Table </a></li>
                   </ul>
                 </li>
                 <li>
@@ -69,8 +87,12 @@
                   </ul>
                 </li>
                 
-                <li><a href="#imp_exp" ><i class="icon-chevron-right"></i> Import / Export</a></li>
-                <li><a href="#sync" ><i class="icon-chevron-right"></i> Synchronize</a></li>
+                <li><a href="#import" ><i class="icon-chevron-right"></i> Import</a></li>
+                <li><a href="#export" ><i class="icon-chevron-right"></i> Export</a></li>
+
+                <li>
+                  <a href="#sync" ><i class="icon-chevron-right"></i> Synchronize</a>
+                </li>
                 <li>
                   <a href="#users" ><i class="icon-chevron-right"></i>Users</a>
                   <ul>
@@ -81,6 +103,24 @@
                   </ul>
                 </li>
                 <li><a href="#jql" ><i class="icon-chevron-right"></i>jQL</a></li>
+                <li><a href="#promise" ><i class="icon-chevron-right"></i>jDB Promise</a></li>
+                <li>
+                    <a href="#clientService" ><i class="icon-chevron-right"></i>ClientService</a>
+                    <ul>
+                      <li><a href="#cs-getbyref" ><i class="icon-chevron-right"></i>getByRef</a></li>
+                      <li><a href="#cs-getall" ><i class="icon-chevron-right"></i>getAll</a></li>
+                      <li><a href="#cs-getone" ><i class="icon-chevron-right"></i>getOne</a></li>
+                      <li><a href="#cs-getnumrows" ><i class="icon-chevron-right"></i>getNumRows</a></li>
+                      <li><a href="#cs-put" ><i class="icon-chevron-right"></i>Put</a></li>
+                      <li><a href="#cs-delete" ><i class="icon-chevron-right"></i>Delete</a></li>
+                    </ul>
+                </li>
+                <li>
+                  <a href="#databas_info" ><i class="icon-chevron-right"></i> Database info</a>
+                </li>
+                <li>
+                  <a href="#close_db" ><i class="icon-chevron-right"></i> Close Database</a>
+                </li>
               </ul>
           </div>
     <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
@@ -104,7 +144,7 @@
                   <pre class="prettyprint lang-html" id="jdbscript">var DB; <br/>var dbInstance = new jEli.$jDB(DB_NAME,DB_VERSION)</pre>
               </li>
 
-              <li>
+              <li id="is_client">
                 <h4># isClient()</h4>
                 <ul>
                   <li>
@@ -114,7 +154,7 @@
                 </ul>
               </li>
 
-              <li>
+              <li id="requires_login">
                 <h4># requiresLogin()</h4>
                 <ul>
                   <li>
@@ -124,7 +164,7 @@
                 </ul>
               </li>
 
-              <li>
+              <li id="open">
                 <h4># open([definition])</h4>
                 <ul>
                   <li>
@@ -141,13 +181,22 @@
                     <h3>Definition</h3>
                     <ul id="sync_config">
                         <li>
-                          <p><strong>Storage:</strong> <code>[localstorage, sessionstorage, websql, indexedDB] (default:localStorage)</code></p>
+                          <p><strong>Storage:</strong> <code>[localstorage, sessionstorage, websql, indexedDB, memory, sqlite] (default:localStorage)</code></p>
                         </li>
                         <li>
                           <p>
                             <strong>Live:</strong><code>{boolean} (default:false)</code></p>
                             <p>Set to true for auto-sync</p>
-                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <strong>isClientMode:</strong><code>{boolean} (default:false)</code></p>
+                            <p>Equivalent to <code>isClient()</code></p>
+                        </li>
+                        <li>
+                          <p>
+                            <strong>isLoginRequired:</strong><code>{boolean} (default:false)</code></p>
+                            <p>Equivalent to <code>isLoginRequired()</code></p>
                         </li>
                         <li><h4>serviceHost</h4>
                         <p>Define the location of your server, by default is null e.g http://ws.jdb.bezynet.com</p></li>
@@ -185,6 +234,23 @@
           </ul>
       </section>
 
+      <section id="env">
+        <h4># DB.ENV</h4>
+        <ul>
+          <li>
+            <h5>DB.env.usage()</h5>
+            <p><code>returns the DB usage</code></p>
+          </li>
+          <li>
+            <h5>DB.env.apiKey()</h5>
+            <p> 
+              <code>returns the DB API key: {OBJECT}</code>
+            </p>
+            <p>This is available only when using JDB server.</p>
+          </li>
+        </ul>
+      </section>
+
       <section  id="createTbl">
       <h4># DB.createTbl(NAME, CONFIG)</h4>
           <ul>
@@ -215,6 +281,116 @@
                   </pre>
             </li>
           </ul>
+      </section>
+
+            <section id="table">
+        <h3 class="page_header"># DB.table(TBL_NAME)</h3>
+        <ul>
+          <li>
+              <p>Arguments</p>
+              <ul>
+                  <li><code>{string | ARRAY} TBL_NAME (required)</code></li>
+                  <li><code>{string} MODE</code></li>
+              </ul>
+          </li>
+          <li>
+              <p>Return</p>
+              <p><code>{object} jDB Promise Instance</code></p>
+          </li>
+          <li id="alt_Table">
+            <h4 class="page_header"># tbl.alter()</h4>
+              <ul>
+              <li>
+                <p>jQl: <code> -ALTER -TABLE_NAME</code></p>
+              </li>
+                <li>
+                  <p>Usage</p>
+                  <!--?prettify lang=js linenums=true?-->
+                  <pre class="prettyprint lang-html" id="jdbaltertblscript">//Below example our alters our table by adding two new columns<br>DB<br>.table(NAME)<br>.onSuccess(function(e)//e = event recieved from the success promise<br>{<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('username',{type:'String'}) //username<br>.column("Email",{type:"String"}); <br>//Email<br>})<br>.onError(function(e){<br>// Error handler goes in here<br>});
+                  </pre>
+                  
+                  <ul>
+                    <li id="drop">
+                      <h4># drop(columnName)</h4>
+                      <p>Drop column from current table</p>
+                    </li>
+                    <li id="add">
+                      <h4># add(type)</h4>
+                      <p><strong>Types:</strong> <code>[mode, key, index, column]</code>
+                      <p><strong>return </strong><code>{function} type instance</code></p>
+                      <p>Instance</p>
+                      <ul>
+                        <li>
+                          <h4># key(type, tableName)</h4>
+                          <p><strong>Types:</strong> <code>[primary, foreign]</code></p>
+                          <p><strong>TableName:</strong> required only for adding foreign key</p>
+                        </li>
+
+                        <li>
+                          <h4># column(columnName,config)</h4>
+                          <p><strong>columnName:</strong> {string}</p>
+                          <p><strong>config:</strong> {Object}</p>
+                        </li>
+
+                        <li>
+                          <h4># index(columnName,settings)</h4>
+                          <p><strong>columnName:</strong> {string}</p>
+                          <p><strong>settings:</strong> {Object}</p>
+                        </li>
+
+                        <li>
+                          <h4># mode(mode)</h4>
+                          <p><strong>mode:</strong> <code>{string} [readonly, writeonly]</code></p>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+          </li>
+
+          <li id="truncate">
+            <h4 class="page_header"># tbl.truncate(flag)</h4>
+              <ul>
+                <li>
+                  <p>Arguments</p>
+                  <ul>
+                    <li><code>{string} flag (YES | NO)</code></li>
+                  </ul>
+                </li>
+                <li>
+                  <p>jQl: <code> -truncate -tableName -flag(yes or no)</code></p>
+                </li>
+                <li>
+                  <p>Details</p>
+                    <p>
+                      Flag must be set to <code>yes</code> to empty the table. <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p> 
+                    </p>
+                </li>
+              </ul>
+          </li>
+
+          <li id="drop">
+            <h4 class="page_header"># tbl.drop(flag)</h4>
+              <ul>
+                <li>
+                  <p>Arguments</p>
+                  <ul>
+                    <li><code>{string} flag (YES | NO)</code></li>
+                  </ul>
+                </li>
+                <li>
+                  <p>jQl:<code> -drop -table -tableName -flag(yes or no)</code></p>
+                </li>
+                <li>
+                  <p>Details</p>
+                    <p>
+                      Flag must be set to <code>yes</code> to empty the table. <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p> 
+                    </p>
+                </li>
+              </ul>
+          </li>
+        </ul>
       </section>
 
       <section id="transaction">
@@ -379,116 +555,6 @@
            </div>
       </section>
 
-      <section id="table">
-        <h3 class="page_header"># DB.table(TBL_NAME)</h3>
-        <ul>
-          <li>
-              <p>Arguments</p>
-              <ul>
-                  <li><code>{string | ARRAY} TBL_NAME (required)</code></li>
-                  <li><code>{string} MODE</code></li>
-              </ul>
-          </li>
-          <li>
-              <p>Return</p>
-              <p><code>{object} jDB Promise Instance</code></p>
-          </li>
-          <li id="alt_Table">
-            <h4 class="page_header"># tbl.alter()</h4>
-              <ul>
-              <li>
-                <p>jQl: <code> -ALTER -TABLE_NAME</code></p>
-              </li>
-                <li>
-                  <p>Usage</p>
-                  <!--?prettify lang=js linenums=true?-->
-                  <pre class="prettyprint lang-html" id="jdbaltertblscript">//Below example our alters our table by adding two new columns<br>DB<br>.table(NAME)<br>.onSuccess(function(e)//e = event recieved from the success promise<br>{<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('username',{type:'String'}) //username<br>.column("Email",{type:"String"}); <br>//Email<br>})<br>.onError(function(e){<br>// Error handler goes in here<br>});
-                  </pre>
-                  
-                  <ul>
-                    <li id="drop">
-                      <h4># drop(columnName)</h4>
-                      <p>Drop column from current table</p>
-                    </li>
-                    <li id="add">
-                      <h4># add(type)</h4>
-                      <p><strong>Types:</strong> <code>[mode, key, index, column]</code>
-                      <p><strong>return </strong><code>{function} type instance</code></p>
-                      <p>Instance</p>
-                      <ul>
-                        <li>
-                          <h4># key(type, tableName)</h4>
-                          <p><strong>Types:</strong> <code>[primary, foreign]</code></p>
-                          <p><strong>TableName:</strong> required only for adding foreign key</p>
-                        </li>
-
-                        <li>
-                          <h4># column(columnName,config)</h4>
-                          <p><strong>columnName:</strong> {string}</p>
-                          <p><strong>config:</strong> {Object}</p>
-                        </li>
-
-                        <li>
-                          <h4># index(columnName,settings)</h4>
-                          <p><strong>columnName:</strong> {string}</p>
-                          <p><strong>settings:</strong> {Object}</p>
-                        </li>
-
-                        <li>
-                          <h4># mode(mode)</h4>
-                          <p><strong>mode:</strong> <code>{string} [readonly, writeonly]</code></p>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-          </li>
-
-          <li id="truncate">
-            <h4 class="page_header"># tbl.truncate(flag)</h4>
-              <ul>
-                <li>
-                  <p>Arguments</p>
-                  <ul>
-                    <li><code>{string} flag (YES | NO)</code></li>
-                  </ul>
-                </li>
-                <li>
-                  <p>jQl: <code> -truncate -tableName -flag(yes or no)</code></p>
-                </li>
-                <li>
-                  <p>Details</p>
-                    <p>
-                      Flag must be set to <code>yes</code> to empty the table. <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p> 
-                    </p>
-                </li>
-              </ul>
-          </li>
-
-          <li id="drop">
-            <h4 class="page_header"># tbl.drop(flag)</h4>
-              <ul>
-                <li>
-                  <p>Arguments</p>
-                  <ul>
-                    <li><code>{string} flag (YES | NO)</code></li>
-                  </ul>
-                </li>
-                <li>
-                  <p>jQl:<code> -drop -table -tableName -flag(yes or no)</code></p>
-                </li>
-                <li>
-                  <p>Details</p>
-                    <p>
-                      Flag must be set to <code>yes</code> to empty the table. <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p> 
-                    </p>
-                </li>
-              </ul>
-          </li>
-        </ul>
-      </section>
-
       <section id="import">
         <h4 class="page_header"># DB.import(TBL_NAME, [definition])</h4>
         <ul>
@@ -554,9 +620,34 @@
             <p>Details</p>
             <p>Synchronize changes on the client to the server,synchronizer adapter can compare and check for changes between client and server
                   if the server have the latest changes, the client will be updated with the server records else changes will be pushed to server for update</p> 
-                <!--?prettify lang=js linenums=true?-->
-                <pre class="prettyprint lang-html">DB<br/>.synchronize()<br/>.Entity([TBL_1]) // Array of TABLES to sync<br/>.configSync({}) //Configuration used in sync method<br/>.processEntity()</pre>
-              <p class="alert alert-info">This configurations can also be define when creating the database and it's extensible. Please look at <a href="#createDB"><i class="icon-chevron-right"></i> Create a database</a></p>
+                       <!--?prettify lang=js linenums=true?-->
+          <pre class="prettyprint lang-html">DB<br/>.synchronize()<br/>.Entity([TBL_1]) // Array of TABLES to sync<br/>.configSync({}) //Configuration used in sync method<br/>.processEntity()</pre>
+          </li>
+          <li>
+              <h4 class="page_header"># sync.Entity(ARRAY_OF_TABLES)</h4>
+              <ul>
+                <li><p>return: Sync Instance</p></li>
+                <li>
+                  <p>Arguments:<code>[ARRAYLIST] ARRAY_OF_TABLES optional</code></p>
+                </li>
+                <li>
+                  <p>Details</p>
+                  <p>Synchronize specific tables by defining them in the arguments, to sync complete DB set to null.</p>
+                </li>
+              </ul>
+          </li>
+          <li>
+            <h4 class="page_header"># sync.ConfigSync([definition])</h4>
+            <ul>
+                <li><p>return: <code>sync.processEntity || clientService Instance</code></p></li>
+                <li>
+                  <p>Arguments:<code> {OBJECT} Definition</code></p>
+                </li>
+                <li>
+                  <p>Details:</p>
+                  <p>This configurations can also be define when creating the database and it's extensible. Please look at <a href="#createDB"><i class="icon-chevron-right"></i> Create a database</a></p>
+                </li>
+            </ul>
           </li>
         </ul>
       </section>
@@ -662,6 +753,139 @@
                 <p>jQL is the best feature of jEliDB, it have the ability to perform query using it's own query Syntax, it's easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions like calling REST APIS provided by JELIDB Applications. </p>
               </li>
           </ul>
+      </section>
+
+      <section id="promise">
+        <h4># DB Promise Instance</h4>
+          <ul>
+              <li><code>onSuccess</code> Function(CB)</li>
+              <li><code>onError</code> Function(CB)</li>
+              <li><code>onUpgrade</code> Function(CB)
+                  <p>Available only when opening the DB for the first time or when version has changed.</p>
+              </li>
+              <li><code>then</code> Function(success, error)</li>
+          </ul>
+      </section>
+
+      <section id="clientService">
+        <h4># DB.clientService</h4>
+          <ul>
+            <li>
+              <p><code>returns clientService Instance: {OBJECT}</code></p>
+            </li>
+          </ul>
+          <ul>
+              <li id="cs-getbyref">
+                  <h4># DB.clientService.getByRef(tbl, query)</h4>
+                  <ul>
+                    <li>Arguments:
+                    <ul>
+                      <li>tbl <code>{STRING}</code> required</li>
+                      <li>query <code>{OBJECT}</code> required</li>
+                    </ul>
+                    </li>
+                  </ul>
+              </li>
+              <li id="cs-getall">
+                  <h4># DB.clientService.getAll(tbl, query)</h4>
+                  <ul>
+                    <li>Arguments:
+                    <ul>
+                      <li>tbl <code>{STRING}</code> required</li>
+                      <li>query <code>{OBJECT}</code> required</li>
+                    </ul>
+                    </li>
+                  </ul>
+              </li>
+
+              <li  id="cs-getone">
+                  <h4># DB.clientService.getOne(tbl, query)</h4>
+                  <ul>
+                    <li>Arguments:
+                    <ul>
+                      <li>tbl <code>{STRING}</code> required</li>
+                      <li>query <code>{OBJECT}</code> required</li>
+                    </ul>
+                    </li>
+                  </ul>
+              </li>
+
+              <li id="cs-getnumrows">
+                  <h4># DB.clientService.getNumRows(tbl, query)</h4>
+                  <ul>
+                    <li>Arguments:
+                    <ul>
+                      <li>tbl <code>{STRING}</code> required</li>
+                      <li>query <code>{OBJECT}</code> required</li>
+                    </ul>
+                    </li>
+                  </ul>
+              </li>
+
+              <li id="cs-put">
+                  <h4># DB.clientService.put(tbl, [data])</h4>
+                  <ul>
+                    <li>Arguments:
+                    <ul>
+                      <li>tbl <code>{STRING}</code> required</li>
+                      <li>data <code>{OBJECT}</code> required</li>
+                    </ul>
+                    </li>
+                  </ul>
+              </li>
+
+              <li id="cs-delete">
+                  <h4># DB.clientService.delete(tbl, [data])</h4>
+                  <ul>
+                    <li>Arguments:
+                    <ul>
+                      <li>tbl <code>{STRING}</code> required</li>
+                      <li>data <code>{OBJECT}</code> required</li>
+                    </ul>
+                    </li>
+                  </ul>
+              </li>
+          </ul>
+
+          <p class="alert alert-info">
+            clientService functionality is available only when serviceHost is set to true.
+          </p>
+      </section>
+
+      <section id="databas_info">
+        <h4 class="page_header"># DB.info()</h4>
+        <ul>
+          <li>
+            <p>Details</p>
+            <p>Get information about a database</p>
+          </li>
+          <li>
+            <p>Example Response:</p>
+            <!--?prettify lang=js ?-->
+            <pre class="prettyprint lang-js">
+            {
+                  records : 1,
+                  columns : 1,
+                  primaryKey : null,
+                  foreignKey : null,
+                  allowedMode : 'readwrite'
+          }</pre>
+          </li>
+        </ul>
+      </section>
+
+      <section id="close_db">
+        <h4 class="page_header"># DB.close(flag)</h4>
+        <ul>
+          <li>
+            Arguments
+            <p><code>{boolean} flag (required)</code></p>
+          </li>
+          <li>
+            <p>Details</p>
+            <p>Close the database, this closes any open connection to the underlying storage and frees memory (event listeners) the database may be using.</p>
+          </li>
+        </ul>
       </section>
   </div>
   </div>
