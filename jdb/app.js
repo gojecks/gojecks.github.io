@@ -116,6 +116,8 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 				//sessionStorage
 				$sessionStorage.setItem("activeSession",JSON.stringify(connectDetails));
 			});
+
+
 	}
 
 	//check active session
