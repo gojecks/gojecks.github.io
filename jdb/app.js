@@ -116,10 +116,10 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 
 				if(!Object.keys($scope.tables).length){
 					setTimeout(function(){
-						jEli.dom('textarea').val('create -test -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]')
-					$scope.runQuery('create -test -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]', 1);
+						jEli.dom('textarea').val('create -members -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]')
+						$scope.runQuery('create -test -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]', 1);
 
-					},500)
+					},500);
 				}
 				//sessionStorage
 				$sessionStorage.setItem("activeSession",JSON.stringify(connectDetails));
