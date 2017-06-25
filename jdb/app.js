@@ -103,7 +103,7 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 							},
 							interceptor : function(options,state){
 							},
-							storage:'memory'
+							storage:'sqlite'
 						});
 
 			req.onSuccess(function(e)
@@ -113,6 +113,14 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 				$scope.dbName = db.name;
 				$scope.dbVersion = db.version;
 				$scope.tables = db.info();
+
+				if(!Object.keys($scope.tables).length){
+					setTimeout(function(){
+						jEli.dom('textarea').val('create -test -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]')
+					$scope.runQuery('create -test -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]', 1);
+
+					},500)
+				}
 				//sessionStorage
 				$sessionStorage.setItem("activeSession",JSON.stringify(connectDetails));
 			});
