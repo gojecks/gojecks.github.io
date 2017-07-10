@@ -502,7 +502,7 @@
                             <li><code>{OBJECT} DEFINITION OPTIONAL</code> <strong>v1.0.0</strong>
                               <p>Definition</p>
                               <!--?prettify lang=js linenums=true?-->
-                              <pre class="prettyprint lang-html">{<br/> where:STRING,<br/> like:STRING,<br/>  limit:STRING,<br/>  orderBy:STRING,<br/>  groupBy:FIELD,<br/> join:[{<br/> table:STRING,<br/> on:STRING,<br/>  type:STRING (INNER,OUTER,LEFT,RIGHT),<br/>  feilds:{ //OPTIONAL<br/>}<br/>}]<br/>}</pre>
+                              <pre class="prettyprint lang-html">{<br/> where:STRING,<br/> like:STRING,<br/>  limit:STRING,<br/>  orderBy:STRING,<br/>  groupBy:FIELD,<br/> join:[{<br/> table:STRING,<br/> on:STRING,<br/>  type:STRING (INNER,OUTER,LEFT,RIGHT),<br/>}]<br/>}</pre>
                             </li>
                             <li>
                               <p>column types</p>
@@ -530,6 +530,7 @@
                     </li>
                     <li>
                       <p>jQL: <code>-select -columns -table_name [-where [-like]] -[limit] -[orderby -[DESC || ASC]] -[groupBy -[columnName]]</code></p>
+                      <p>jQL: <code>-select -columns -table_name [-where(condition)] -[join(definition)] -[limit('0,1')] -[orderBy(DESC || ASC)] -[groupBy(columnName)]</code> <strong>v1.0.0</strong></p>
                     </li>
                     <li>
                         <p>Using CLAUSE in Select</p>
@@ -537,7 +538,7 @@
                           <li><strong>WHERE : </strong>
                           <p>eg : <code>where(id === 1)</code></p></li>
                           <li><strong>-LIKE :</strong> -LIKE:expression
-                          <p>eg <code>where(fullName LIKE:foo)</code></p></li>
+                          <p>eg <code>where(fullName:LIKE:foo)</code></p></li>
                           <li><strong>Join Clause :</strong> 
                           <h3>List of Join Clause to use</h3>
                           <ul>
