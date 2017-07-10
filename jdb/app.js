@@ -103,7 +103,7 @@ function baseCtrFN($scope,$rootModel,$sessionStorage)
 							},
 							interceptor : function(options,state){
 							},
-							storage:'sqlite'
+							storage:'indexeddb'
 						});
 
 			req.onSuccess(function(e)

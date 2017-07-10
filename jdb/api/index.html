@@ -493,18 +493,34 @@
               </li>
 
               <li id="select">
-               <h4 class="page_header"># transaction.select(STATEMENT)</h4>                  
+               <h4 class="page_header"># transaction.select(STATEMENT, [definition])</h4>                  
                   <ul>
                     <li>
                         <p>Arguments</p>
                         <ul>
                             <li><code>{STRING} STATEMENT (required)</code></li>
+                            <li><code>{OBJECT} DEFINITION OPTIONAL</code> <strong>v1.0.0</strong>
+                              <p>Definition</p>
+                              <!--?prettify lang=js linenums=true?-->
+                              <pre class="prettyprint lang-html">{<br/> where:STRING,<br/> like:STRING,<br/>  limit:STRING,<br/>  orderBy:STRING,<br/>  groupBy:FIELD,<br/> join:[{<br/> table:STRING,<br/> on:STRING,<br/>  type:STRING (INNER,OUTER,LEFT,RIGHT),<br/>  feilds:{ //OPTIONAL<br/>}<br/>}]<br/>}</pre>
+                            </li>
                             <li>
                               <p>column types</p>
                               <ul>
                                 <li><code>*</code> To select all columns</li>
                                 <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
                                 <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
+                                <li>
+                                  <p>Private Column Method <strong>v1.0.0</strong></p>
+                                  <ul>
+                                    <li>-COUNT() : return total number of search result found</li>
+                                    <li>-LOWERCASE(columnName) : returns column value in lowercase</li>
+                                    <li>-UPPERCASE(columnName) : returns column value in uppercase</li>
+                                    <li>-TIMESTAMP(columnName) : returns column value in DATE_TMESTAMP</li>
+                                    <li>-CURDATE() : returns current DATE (string)</li>
+                                    <li>-DATE_DIFF(columnName1, columnName2) : returns difference between two date</li>
+                                  </ul>
+                                </li>
                               </ul>
                             </li>
                         </ul>
@@ -513,7 +529,7 @@
                       <p>Mode: read or readonly</p>
                     </li>
                     <li>
-                      <p>jQL: <code>-select -columns -table_name [-where [-like]] [-limit]</code></p>
+                      <p>jQL: <code>-select -columns -table_name [-where [-like]] -[limit] -[orderby -[DESC || ASC]] -[groupBy -[columnName]]</code></p>
                     </li>
                     <li>
                         <p>Using CLAUSE in Select</p>
@@ -531,8 +547,13 @@
                             <li>OUTER</li>
                           </ul>
                           </li>
-                          <li><strong>Limit:</strong>
-                          <p>eg: <code>limit(0,10)</code></p></li>
+                          <li>
+                            <strong>Limit:</strong>
+                            <p>eg: <code>limit(0,10)</code></p>
+                          </li>
+                          <li>
+                            #groupBy(fieldName) AND #orderBy(DESC) <strong>v1.0.0</strong>
+                          </li>
                         </ul>
                       <!--?prettify lang=js linenums=true?-->
                       <pre class="prettyprint lang-html">//Below example selects record from 1 table<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
@@ -544,7 +565,7 @@
                       <pre class="prettyprint lang-html">//using WHERE and LIKE CLAUSE<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.where("COL_NAME like:foo")<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//e.getResult(); displays our query result<br/>});</pre>
 
                       <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">//using Limit Clause<br>DB<br/>.transaction(TBL_NAME)<br/>.select('COL_1,COL_2,COL_3')<br/>.where("COL_NAME like:foo")<br/>.limit('0,10')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//console.log("Success Result:",e.getResult())<br/>});</pre>
+                      <pre class="prettyprint lang-html">//using Limit Clause<br>DB<br/>.transaction(TBL_NAME)<br/>.select('COL_1,COL_2,COL_3')<br/>.where("COL_NAME like:foo")<br/>.limit('0,10')<br/>.groupBy(COL_NAME)<br/>.orderBy('DESC')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//console.log("Success Result:",e.getResult())<br/>});</pre>
                     </li>
                   </ul>
               </li>
@@ -614,7 +635,7 @@
         <ul>
           <li><p>return: Sync Instance</p></li>
           <li>
-            <p>jQl:<code>-sync [optional [-tableName]]</code></p>
+            <p>jQl:<code>-sync [optional [-tableName] -[force]]</code></p>
           </li>
           <li>
             <p>Details</p>
@@ -637,11 +658,12 @@
               </ul>
           </li>
           <li>
-            <h4 class="page_header"># sync.ConfigSync([definition])</h4>
+            <h4 class="page_header"># sync.ConfigSync([definition], force)</h4>
             <ul>
                 <li><p>return: <code>sync.processEntity || clientService Instance</code></p></li>
                 <li>
                   <p>Arguments:<code> {OBJECT} Definition</code></p>
+                  <p>Arguments:<code> {STRING} force</code> v1.0.0</p>
                 </li>
                 <li>
                   <p>Details:</p>
@@ -750,7 +772,7 @@
 
               <li>
                 <p>Details</p>
-                <p>jQL is the best feature of jEliDB, it have the ability to perform query using it's own query Syntax, it's easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions like calling REST APIS provided by JELIDB Applications. </p>
+                <p>jQL is the best feature of jEliDB, it have the ability to perform query using it's own query Syntax, it's easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions like calling REST APIS provided by JELIDB Applications. <a href="jql/">read more..</a></p>
               </li>
           </ul>
       </section>
