@@ -1,19 +1,20 @@
 <!doctype>
 <html j-module="jelijs.jDB">
+
 <head>
-  <meta charset="utf-8"> 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-  <meta name="viewport" content="width=device-width,initial-scale=1"> 
-  <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications"> 
-  <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development"> 
-  <meta name="author" content="Joseph Gojecks Kadiri">
-  <link rel="stylesheet" href="../css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../css/styles.min.css" />
-<link rel="icon" href="../css/image/favicon.png">
-<title>JELI - JDB</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/styles.min.css" />
+    <link rel="icon" href="../css/image/favicon.png">
+    <title>JELI - JDB</title>
 </head>
 
-<body j-controller="baseCtrl">
+<body :controller="baseCtrl">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -29,63 +30,65 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a class="btn btn-link" href="api/">Api</a></li>
-                <li><a class="btn btn-link" href="playground/">Playground</a></li>
-                <li><a class="btn btn-link" href="http://frontendonly.bezynet.com">jFrontEndOnly</a></li>
-              </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="btn btn-link" href="api/">Api</a></li>
+                    <li><a class="btn btn-link" href="playground/">Playground</a></li>
+                    <li><a class="btn btn-link" href="https://frontendonly.com">Frontendonly</a></li>
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
     <div class="container" style="margin-top:30px">
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-          <h1 class="page-header">jEliDB</h1>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1 class="page-header">jEliDB</h1>
 
-          <p>JavaScript object literal look a lot like database table records, And wrapping a group of javascript objects up in an array gives you something that looks a lot like a database table. jDB is created out of Javascript Objects to produce result with a uniform and familiar SQL-like interface.</p>
-          <p>Using jDB in your application help reduces development time, improves performance, simplifies maintenance, and increases quality.</p>
+                <p>JavaScript object literal look a lot like database table records, And wrapping a group of javascript objects up in an array gives you something that looks a lot like a database table. jDB is created out of Javascript Objects to produce
+                    result with a uniform and familiar SQL-like interface.</p>
+                <p>Using jDB in your application help reduces development time, improves performance, simplifies maintenance, and increases quality.</p>
 
-          <h2>Why use jDB</h2>
-          <ul>
-            <li>Extremely fast</li>
-            <li>Powerful JavaScript-centric data selection engine</li>
-            <li>SQL inspired features such as insert, update, unique, count, and more</li>
-            <li>Import and export data (JSON,csv and html) format</li>
-            <li>Synchronize and replicate Data on the fly using jSync Algorithm</li>
-            <li>cross browser support</li>
-            <li>Easy to extend with your own functions</li>
-            <li>Compatible with any DOM library</li>
-            <li>Access your DB anywhere in the world</li>
-            <li>Bundled with Private and Public APIS</li>
-          </ul>
-          <section id="installation">
-          <h4 class="page-header">
-              Installation
-          </h4>
-          Using npm 
-          <div class="well">
-              npm install jelidb
-          </div>
-          or cdn
-          <div class="well">
-              https://unpkg.com/jelidb@[version]
-          </div>
-        </section>
-      </div>
+                <h2>Why use jDB</h2>
+                <ul>
+                    <li>Extremely fast</li>
+                    <li>Powerful JavaScript-centric data selection engine</li>
+                    <li>SQL inspired features such as insert, update, unique, count, and more</li>
+                    <li>Import and export data (JSON,csv and html) format</li>
+                    <li>Synchronize and replicate Data on the fly using jSync Algorithm</li>
+                    <li>cross browser support</li>
+                    <li>Easy to extend with your own functions</li>
+                    <li>Compatible with any DOM library</li>
+                    <li>Access your DB anywhere in the world</li>
+                    <li>Bundled with Private and Public APIS</li>
+                </ul>
+                <section id="installation">
+                    <h4 class="page-header">
+                        Installation
+                    </h4>
+                    Using npm
+                    <div class="well">
+                        npm install jelidb
+                    </div>
+                    or cdn
+                    <div class="well">
+                        https://unpkg.com/jelidb@[version]
+                    </div>
+                </section>
+            </div>
 
-    </div>
+        </div>
 
         <hr>
-          <!-- Footer -->
-          <footer>
-              <div class="row">
-                  <div class="col-lg-12">
-                      <p>Copyright &copy; jEliJS.com 2014 - 2017. Proudly Sponsored by <a href="bezynet.com/bezynet">Bezynet INC.</a> All rights reserved</p>
-                  </div>
-              </div>
-          </footer>
-  </div>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; jEliJS.com 2014 - 2017. Proudly Sponsored by <a href="bezynet.com/bezynet">Bezynet INC.</a> All rights reserved</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
+
 </html>

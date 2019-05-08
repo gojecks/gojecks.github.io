@@ -1,17 +1,18 @@
-<!doctype>
+<!doctype html>
 <html j-module="jelijs.jDB">
+
 <head>
-  <meta charset="utf-8"> 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-  <meta name="viewport" content="width=device-width,initial-scale=1"> 
-  <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications"> 
-  <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development"> 
-  <meta name="author" content="Joseph Gojecks Kadiri">
-  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../css/styles.min.css" />
-<link rel="icon" href="../../css/image/favicon.png">
-<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<title>JELIDB | API</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/styles.min.css" />
+    <link rel="icon" href="../../css/image/favicon.png">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <title>JELIDB | API</title>
 </head>
 
 <body j-controller="baseCtrl">
@@ -30,10 +31,10 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a class="btn btn-link" href="api/">Api</a></li>
-                <li><a class="btn btn-link" href="../playground/">Playground</a></li>
-              </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="btn btn-link" href="api/">Api</a></li>
+                    <li><a class="btn btn-link" href="../playground/">Playground</a></li>
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -41,855 +42,878 @@
     </nav>
     <div class="container-fluid" style="margin-top:30px">
         <div class="row">
-          <div class="col-sm-3 col-md-2 sidebar">
-              <ul class="nav nav-sidebar">
-                  <li>
-                    <a href="#createDB" ><i class="icon-chevron-right"></i>Create DataBase</a>
-                      <ul>
-                        <li><a href="#is_client"><i class="icon-chevron-right"></i> isClient </a></li>
-                        <li><a href="#requires_login" ><i class="icon-chevron-right"></i> requiresLogin </a></li>
-                        <li><a href="#open" ><i class="icon-chevron-right"></i> open </a></li>
-                      </ul>
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a href="#createDB"><i class="icon-chevron-right"></i>Create DataBase</a>
+                        <ul>
+                            <li><a href="#is_client"><i class="icon-chevron-right"></i> isClient </a></li>
+                            <li><a href="#requires_login"><i class="icon-chevron-right"></i> requiresLogin </a></li>
+                            <li><a href="#open"><i class="icon-chevron-right"></i> open </a></li>
+                        </ul>
                     </li>
                 </ul>
                 <p>DB Method/Instance</p>
-                <ul  class="nav nav-sidebar">
-                <li>
-                    <a href="#env" ><i class="icon-chevron-right"></i>Env</a>
-                    <ul>
-                      <li><a href="#env-usuage" ><i class="icon-chevron-right"></i>Usage</a></li>
-                      <li><a href="#env-logger" ><i class="icon-chevron-right"></i>Logger</a></li>
-                      <li><a href="#env-appkey" ><i class="icon-chevron-right"></i>AppKey</a></li>
-                    </ul>
-                </li>
-                <li><a href="#createTbl" ><i class="icon-chevron-right"></i>Create Table</a></li>
-                <li>
-                  <a href="#table">Table</a>
-                  <ul>
+                <ul class="nav nav-sidebar">
                     <li>
-                      <a href="#alt_Table" ><i class="icon-chevron-right"></i> Alter Table</a>
-                      <ul>
-                        <li><a href="#add">Add</a></li>
-                        <li><a href="#drop">Drop</a></li>
-                      </ul>
+                        <a href="#env"><i class="icon-chevron-right"></i>Env</a>
+                        <ul>
+                            <li><a href="#env-usuage"><i class="icon-chevron-right"></i>Usage</a></li>
+                            <li><a href="#env-logger"><i class="icon-chevron-right"></i>Logger</a></li>
+                            <li><a href="#env-appkey"><i class="icon-chevron-right"></i>AppKey</a></li>
+                        </ul>
                     </li>
-                    <li><a href="#truncate" ><i class="icon-chevron-right"></i>Truncate Table</a></li>
-                    <li><a href="#drop" ><i class="icon-chevron-right"></i>Drop Table </a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#transaction">Transaction</a>
-                  <ul>
-                    <li><a href="#insert"><i class="icon-chevron-right"></i> Insert </a></li>
-                    <li><a href="#update" ><i class="icon-chevron-right"></i> Update </a></li>
-                    <li><a href="#delete" ><i class="icon-chevron-right"></i>Delete </a>        </li>
-                    <li><a href="#select" ><i class="icon-chevron-right"></i>Select </a></li>
-                  </ul>
-                </li>
-                
-                <li><a href="#import" ><i class="icon-chevron-right"></i> Import</a></li>
-                <li><a href="#export" ><i class="icon-chevron-right"></i> Export</a></li>
+                    <li><a href="#createTbl"><i class="icon-chevron-right"></i>Create Table</a></li>
+                    <li>
+                        <a href="#table">Table</a>
+                        <ul>
+                            <li>
+                                <a href="#alt_Table"><i class="icon-chevron-right"></i> Alter Table</a>
+                                <ul>
+                                    <li><a href="#add">Add</a></li>
+                                    <li><a href="#drop">Drop</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#truncate"><i class="icon-chevron-right"></i>Truncate Table</a></li>
+                            <li><a href="#drop"><i class="icon-chevron-right"></i>Drop Table </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#transaction">Transaction</a>
+                        <ul>
+                            <li><a href="#insert"><i class="icon-chevron-right"></i> Insert </a></li>
+                            <li><a href="#update"><i class="icon-chevron-right"></i> Update </a></li>
+                            <li><a href="#delete"><i class="icon-chevron-right"></i>Delete </a> </li>
+                            <li><a href="#select"><i class="icon-chevron-right"></i>Select </a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                  <a href="#sync" ><i class="icon-chevron-right"></i> Synchronize</a>
-                </li>
-                <li>
-                  <a href="#users" ><i class="icon-chevron-right"></i>Users</a>
-                  <ul>
-                    <li><a href="#add_users" >Add</a></li>
-                    <li><a href="#auth_users" >Authorize</a></li>
-                    <li><a href="#update_users" >Update</a></li>
-                    <li><a href="#remove_users" >Remove</a></li>
-                  </ul>
-                </li>
-                <li><a href="#jql" ><i class="icon-chevron-right"></i>jQL</a></li>
-                <li><a href="#promise" ><i class="icon-chevron-right"></i>jDB Promise</a></li>
-                <li>
-                    <a href="#clientService" ><i class="icon-chevron-right"></i>ClientService</a>
-                    <ul>
-                      <li><a href="#cs-getbyref" ><i class="icon-chevron-right"></i>getByRef</a></li>
-                      <li><a href="#cs-getall" ><i class="icon-chevron-right"></i>getAll</a></li>
-                      <li><a href="#cs-getone" ><i class="icon-chevron-right"></i>getOne</a></li>
-                      <li><a href="#cs-getnumrows" ><i class="icon-chevron-right"></i>getNumRows</a></li>
-                      <li><a href="#cs-put" ><i class="icon-chevron-right"></i>Put</a></li>
-                      <li><a href="#cs-delete" ><i class="icon-chevron-right"></i>Delete</a></li>
-                    </ul>
-                </li>
-                <li>
-                  <a href="#databas_info" ><i class="icon-chevron-right"></i> Database info</a>
-                </li>
-                <li>
-                  <a href="#close_db" ><i class="icon-chevron-right"></i> Close Database</a>
-                </li>
-              </ul>
-          </div>
-    <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-      <section id="createDB">
-          <h4># jEli.$jDB(DB_NAME,DB_VERSION)</h4>
-          <ul>
-              <li>
-                  <p>Arguments</p>
-                  <ul>
-                      <li><code>{string} DB_NAME (required)</code></li>
-                      <li><code>{string|Number} DB_VERSION</code></li>
-                  </ul>
-              </li>
-              <li>
-                  <p>Return</p>
-                  <p><code>{object} jDB Instance</code></p>
-              </li>
-              <li>
-                  <p>Usage</p>                
-                  <!--?prettify lang=js linenums=true?-->
-                  <pre class="prettyprint lang-html" id="jdbscript">var DB; <br/>var dbInstance = new jEli.$jDB(DB_NAME,DB_VERSION)</pre>
-              </li>
+                    <li><a href="#import"><i class="icon-chevron-right"></i> Import</a></li>
+                    <li><a href="#export"><i class="icon-chevron-right"></i> Export</a></li>
 
-              <li id="is_client">
-                <h4># isClient()</h4>
-                <ul>
-                  <li>
-                    <p>Details</p>
-                    <p>Initialize <code>isClient()</code> method to set the env to production. <code>default: dev</code></p>
-                  </li>
+                    <li>
+                        <a href="#sync"><i class="icon-chevron-right"></i> Synchronize</a>
+                    </li>
+                    <li>
+                        <a href="#users"><i class="icon-chevron-right"></i>Users</a>
+                        <ul>
+                            <li><a href="#add_users">Add</a></li>
+                            <li><a href="#auth_users">Authorize</a></li>
+                            <li><a href="#update_users">Update</a></li>
+                            <li><a href="#remove_users">Remove</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#jql"><i class="icon-chevron-right"></i>jQL</a></li>
+                    <li><a href="#promise"><i class="icon-chevron-right"></i>jDB Promise</a></li>
+                    <li>
+                        <a href="#clientService"><i class="icon-chevron-right"></i>ClientService</a>
+                        <ul>
+                            <li><a href="#cs-getbyref"><i class="icon-chevron-right"></i>getByRef</a></li>
+                            <li><a href="#cs-getall"><i class="icon-chevron-right"></i>getAll</a></li>
+                            <li><a href="#cs-getone"><i class="icon-chevron-right"></i>getOne</a></li>
+                            <li><a href="#cs-getnumrows"><i class="icon-chevron-right"></i>getNumRows</a></li>
+                            <li><a href="#cs-put"><i class="icon-chevron-right"></i>Put</a></li>
+                            <li><a href="#cs-delete"><i class="icon-chevron-right"></i>Delete</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#databas_info"><i class="icon-chevron-right"></i> Database info</a>
+                    </li>
+                    <li>
+                        <a href="#close_db"><i class="icon-chevron-right"></i> Close Database</a>
+                    </li>
                 </ul>
-              </li>
-
-              <li id="requires_login">
-                <h4># requiresLogin()</h4>
-                <ul>
-                  <li>
-                    <p>Details</p>
-                    <p>Initialize <code>requiresLogin()</code> method to set the login flag for a database. <code>default: false</code></p>
-                  </li>
-                </ul>
-              </li>
-
-              <li id="open">
-                <h4># open([definition])</h4>
-                <ul>
-                  <li>
-                    <p>Arguments</p>
+            </div>
+            <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+                <section id="createDB">
+                    <h4># jdb(DB_NAME, DB_VERSION)</h4>
                     <ul>
-                      <li><code>{object} definition</code></li>
-                    </ul>
-                  </li>
-                  <li>
-                    <p>return: <code>jDB Promise Instance</code></p>
-                  </li>
-                  <li>
-                    <p>Details</p>
-                    <h3>Definition</h3>
-                    <ul id="sync_config">
                         <li>
-                          <p><strong>Storage:</strong> <code>[localstorage, sessionstorage, websql, indexedDB, memory, sqlite] (default:localStorage)</code></p>
-                        </li>
-                        <li>
-                          <p>
-                            <strong>Live:</strong><code>{boolean} (default:false)</code></p>
-                            <p>Set to true for auto-sync</p>
-                        </li>
-                        <li>
-                          <p>
-                            <strong>isClientMode:</strong><code>{boolean} (default:false)</code></p>
-                            <p>Equivalent to <code>isClient()</code></p>
-                        </li>
-                        <li>
-                          <p>
-                            <strong>isLoginRequired:</strong><code>{boolean} (default:false)</code></p>
-                            <p>Equivalent to <code>isLoginRequired()</code></p>
-                        </li>
-                        <li><h4>serviceHost</h4>
-                        <p>Define the location of your server, by default is null e.g http://ws.jdb.bezynet.com</p></li>
-                        <li>
-                            <h4>conflictResolver</h4>
-                            <p>Define a function that will resolve conflict, this function is only initialized when there is a conflict between server and client tables.</p>
-                            <div><strong>Parameter:</strong> serverData, clientData</div>
-                            <p class="alert alert-warning">Only define a function if you don't want our tool to resolve the conflict.</p>
-                        </li>
-                        <li><h4>logService</h4>
-                        <p>Define a function that can register all logs thrown from the sync method.</p>
-                        <div><strong>Parameter:</strong> message </div></p>
-                        </li>
-                        <li>
-                            <h4>handler</h4>
+                            <p>Arguments</p>
                             <ul>
-                              <li><h4>onSuccess</h4>
-                              <p>Define a function that will perform an action when sync is successfull</p>
-                              </li>
-                               <li><h4>onError</h4>
-                                <p>Define a function that will perform an action when sync fails.</p>
-                               </li>
+                                <li><code>{string} DB_NAME (required)</code></li>
+                                <li><code>{Number} DB_VERSION</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Return</p>
+                            <p><code>{object} jDB Instance</code></p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <!--?prettify lang=js linenums=true?-->
+                            <pre class="prettyprint lang-html" id="jdbscript">var DB; <br/>var dbInstance = jdb(DB_NAME, DB_VERSION)</pre>
+                        </li>
+
+                        <li id="is_client">
+                            <h4># isClient()</h4>
+                            <ul>
+                                <li>
+                                    <p>Details</p>
+                                    <p>Initialize <code>isClient()</code> method to set the env to production. <code>default: dev</code></p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="requires_login">
+                            <h4># requiresLogin()</h4>
+                            <ul>
+                                <li>
+                                    <p>Details</p>
+                                    <p>Initialize <code>requiresLogin()</code> method to set the login flag for a database. <code>default: false</code></p>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="open">
+                            <h4># open([definition])</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{object} definition</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>return: <code>jDB Promise Instance</code></p>
+                                </li>
+                                <li>
+                                    <p>Details</p>
+                                    <h3>Definition</h3>
+                                    <ul id="sync_config">
+                                        <li>
+                                            <p><strong>Storage:</strong> <code>[localstorage, sessionstorage, websql, indexedDB, memory, sqlite] (default:localStorage)</code></p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <strong>Live:</strong><code>{boolean} (default:false)</code></p>
+                                            <p>Set to true for auto-sync</p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <strong>isClientMode:</strong><code>{boolean} (default:false)</code></p>
+                                            <p>Equivalent to <code>isClient()</code></p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <strong>isLoginRequired:</strong><code>{boolean} (default:false)</code></p>
+                                            <p>Equivalent to <code>isLoginRequired()</code></p>
+                                        </li>
+                                        <li>
+                                            <h4>serviceHost</h4>
+                                            <p>Define the location of your server, by default is null</p>
+                                        </li>
+                                        <li>
+                                            <h4>conflictResolver</h4>
+                                            <p>Define a function that will resolve conflict, this function is only initialized when there is a conflict between server and client tables.</p>
+                                            <div><strong>Parameter:</strong> serverData, clientData</div>
+                                            <p class="alert alert-warning">Only define a function if you don't want our jdbSyncService to resolve the conflict.</p>
+                                        </li>
+                                        <li>
+                                            <h4>logService</h4>
+                                            <p>Define a function that can register all logs thrown from the sync method.</p>
+                                            <div><strong>Parameter:</strong> message </div>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <h4>handler</h4>
+                                            <ul>
+                                                <li>
+                                                    <h4>onSuccess</h4>
+                                                    <p>Define a function that will perform an action when sync is successfull</p>
+                                                </li>
+                                                <li>
+                                                    <h4>onError</h4>
+                                                    <p>Define a function that will perform an action when sync fails.</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html" id="jdbopenscript"><br>dbInstance.open({//config  goes here})<br>.onCreate(()=>{ <br> // do something})<br>.onUpgrade(function(ex){<br>//do something each time the onUpgrade is initialized<br>});<br>.onSuccess(function(ex){<br>DB = ex.result;<br> })<br>.onError(function(ex){<br>//Error handler goes in here <br>})</pre>
+                                    <p class="alert alert-info">
+                                        <strong>Note : onCreate() is called when creating the database for the first time while onUpgrade() function is called when the version number of the DB changes. </strong>
+                                    </p>
+
+                                </li>
                             </ul>
                         </li>
                     </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jdbopenscript"><br>dbInstance.open({//config  goes here})<br>.onSuccess(function(ex){<br>DB = ex.result;<br> })<br>.onError(function(ex){<br>//Error handler goes in here <br>})<br>.onUpgrade(function(ex){<br>//do something each time the onUpgrade is initialized<br>});</pre>
-                    <p class="alert alert-info">
-                    <strong>Note : onUpgrade function only initializes when creating the DB for the first time or when the version number of the DB changes. </strong>
-                  </p>
-                  
-                  </li>
-                </ul>
-              </li>
-          </ul>
-      </section>
+                </section>
 
-      <section id="env">
-        <h4># DB.ENV</h4>
-        <ul>
-          <li>
-            <h5>DB.env.usage()</h5>
-            <p><code>returns the DB usage</code></p>
-          </li>
-          <li>
-            <h5>DB.env.apiKey()</h5>
-            <p> 
-              <code>returns the DB API key: {OBJECT}</code>
-            </p>
-            <p>This is available only when using JDB server.</p>
-          </li>
-        </ul>
-      </section>
+                <section id="env">
+                    <h4># DB.ENV</h4>
+                    <ul>
+                        <li>
+                            <h5>DB.env.usage()</h5>
+                            <p><code>returns the DB usage</code></p>
+                        </li>
+                        <li>
+                            <h5>DB.env.apiKey()</h5>
+                            <p>
+                                <code>returns the DB API key: {OBJECT}</code>
+                            </p>
+                            <p>This is available only when using JDB server (https://frontendonly.com).</p>
+                        </li>
+                    </ul>
+                </section>
 
-      <section  id="createTbl">
-      <h4># DB.createTbl(NAME, CONFIG)</h4>
-          <ul>
-              <li>
-                  <p>Arguments</p>
-                  <ul>
-                      <li><code>{string} NAME (required)</code></li>
-                      <li><code>{object} CONFIG</code></li>
-                  </ul>
-              </li>
-              <li>
-                  <p>Return</p>
-                  <p><code>{object} jDB Promise Instance</code></p>
-              </li>
-              <li>
-                <p>jQL: <code> -CREATE -TABLE_NAME -COLUMNS</code></p>
-              </li>
-              <li>
-                <p>Usage</p>
-                <strong>Create table without configuration</strong>
-                <!--?prettify lang=js linenums=true?-->
-                  <pre class="prettyprint lang-html" id="jdbcreatetblscript">DB<br>.createTbl(NAME)<br>.onSuccess(function(e){<br>//Directly alter table after it has been created<br>//Add a new column to table<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('id',{AUTO_INCREMENT:1,type:'number'})<br>.column("name",{type:"String"});<br> })<br>.onError(function(e){<br>// Error handler goes in here<br>});
+                <section id="createTbl">
+                    <h4># DB.createTbl(NAME, CONFIG)</h4>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} NAME (required)</code></li>
+                                <li><code>{object} CONFIG</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Return</p>
+                            <p><code>{object} jDB Promise Instance</code></p>
+                        </li>
+                        <li>
+                            <p>jQL: <code> -CREATE -TABLE_NAME -COLUMNS</code></p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <strong>Create table without configuration</strong>
+                            <!--?prettify lang=js linenums=true?-->
+                            <pre class="prettyprint lang-html" id="jdbcreatetblscript">DB<br>.createTbl(NAME)<br>.onSuccess(function(e){<br>//Directly alter table after it has been created<br>//Add a new column to table<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('id',{AUTO_INCREMENT:1,type:'number'})<br>.column("name",{type:"String"});<br> })<br>.onError(function(e){<br>// Error handler goes in here<br>});
                   </pre>
 
-                  <strong>Create table with configuration</strong>
-                  <!--?prettify lang=js linenums=true?-->
-                  <pre class="prettyprint lang-html" id="jdbcreatetblscript">DB<br>.createTbl(NAME,[{id:{AUTO_INCREMENT:1,type:'number'},name:{type:"String"}}])<br>.onSuccess(function(e){<br>// Success handler goes in here<br/>})<br>.onError(function(e){<br>// Error handler goes in here<br> });
+                            <strong>Create table with configuration</strong>
+                            <!--?prettify lang=js linenums=true?-->
+                            <pre class="prettyprint lang-html" id="jdbcreatetblscript">DB<br>.createTbl(NAME,[{id:{AUTO_INCREMENT:1,type:'number'},name:{type:"String"}}])<br>.onSuccess(function(e){<br>// Success handler goes in here<br/>})<br>.onError(function(e){<br>// Error handler goes in here<br> });
                   </pre>
-            </li>
-          </ul>
-      </section>
+                        </li>
+                    </ul>
+                </section>
 
-            <section id="table">
-        <h3 class="page_header"># DB.table(TBL_NAME)</h3>
-        <ul>
-          <li>
-              <p>Arguments</p>
-              <ul>
-                  <li><code>{string | ARRAY} TBL_NAME (required)</code></li>
-                  <li><code>{string} MODE</code></li>
-              </ul>
-          </li>
-          <li>
-              <p>Return</p>
-              <p><code>{object} jDB Promise Instance</code></p>
-          </li>
-          <li id="alt_Table">
-            <h4 class="page_header"># tbl.alter()</h4>
-              <ul>
-              <li>
-                <p>jQl: <code> -ALTER -TABLE_NAME</code></p>
-              </li>
-                <li>
-                  <p>Usage</p>
-                  <!--?prettify lang=js linenums=true?-->
-                  <pre class="prettyprint lang-html" id="jdbaltertblscript">//Below example our alters our table by adding two new columns<br>DB<br>.table(NAME)<br>.onSuccess(function(e)//e = event recieved from the success promise<br>{<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('username',{type:'String'}) //username<br>.column("Email",{type:"String"}); <br>//Email<br>})<br>.onError(function(e){<br>// Error handler goes in here<br>});
+                <section id="table">
+                    <h3 class="page_header"># DB.table(TBL_NAME)</h3>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string | ARRAY} TBL_NAME (required)</code></li>
+                                <li><code>{string} MODE</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Return</p>
+                            <p><code>{object} jDB Promise Instance</code></p>
+                        </li>
+                        <li id="alt_Table">
+                            <h4 class="page_header"># tbl.alter()</h4>
+                            <ul>
+                                <li>
+                                    <p>jQl: <code> -ALTER -TABLE_NAME</code></p>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html" id="jdbaltertblscript">//Below example our alters our table by adding two new columns<br>DB<br>.table(NAME)<br>.onSuccess(function(e)//e = event recieved from the success promise<br>{<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('username',{type:'String'}) //username<br>.column("Email",{type:"String"}); <br>//Email<br>})<br>.onError(function(e){<br>// Error handler goes in here<br>});
                   </pre>
-                  
-                  <ul>
-                    <li id="drop">
-                      <h4># drop(columnName)</h4>
-                      <p>Drop column from current table</p>
-                    </li>
-                    <li id="add">
-                      <h4># add(type)</h4>
-                      <p><strong>Types:</strong> <code>[mode, key, index, column]</code>
-                      <p><strong>return </strong><code>{function} type instance</code></p>
-                      <p>Instance</p>
-                      <ul>
-                        <li>
-                          <h4># key(type, tableName)</h4>
-                          <p><strong>Types:</strong> <code>[primary, foreign]</code></p>
-                          <p><strong>TableName:</strong> required only for adding foreign key</p>
+
+                                    <ul>
+                                        <li id="drop">
+                                            <h4># drop(columnName)</h4>
+                                            <p>Drop column from current table</p>
+                                        </li>
+                                        <li id="add">
+                                            <h4># add(type)</h4>
+                                            <p><strong>Types:</strong> <code>[mode, key, index, column]</code>
+                                                <p><strong>return </strong><code>{function} type instance</code></p>
+                                                <p>Instance</p>
+                                                <ul>
+                                                    <li>
+                                                        <h4># key(type, tableName)</h4>
+                                                        <p><strong>Types:</strong> <code>[primary, foreign]</code></p>
+                                                        <p><strong>TableName:</strong> required only for adding foreign key</p>
+                                                    </li>
+
+                                                    <li>
+                                                        <h4># column(columnName,config)</h4>
+                                                        <p><strong>columnName:</strong> {string}</p>
+                                                        <p><strong>config:</strong> {Object}</p>
+                                                    </li>
+
+                                                    <li>
+                                                        <h4># index(columnName,settings)</h4>
+                                                        <p><strong>columnName:</strong> {string}</p>
+                                                        <p><strong>settings:</strong> {Object}</p>
+                                                    </li>
+
+                                                    <li>
+                                                        <h4># mode(mode)</h4>
+                                                        <p><strong>mode:</strong> <code>{string} [readonly, writeonly]</code></p>
+                                                    </li>
+                                                </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
 
-                        <li>
-                          <h4># column(columnName,config)</h4>
-                          <p><strong>columnName:</strong> {string}</p>
-                          <p><strong>config:</strong> {Object}</p>
+                        <li id="truncate">
+                            <h4 class="page_header"># tbl.truncate(flag)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{string} flag (YES | NO)</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>jQl: <code> -truncate -tableName -flag(yes or no)</code></p>
+                                </li>
+                                <li>
+                                    <p>Details</p>
+                                    <p>
+                                        Flag must be set to <code>yes</code> to empty the table.
+                                        <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p>
+                                    </p>
+                                </li>
+                            </ul>
                         </li>
 
+                        <li id="drop">
+                            <h4 class="page_header"># tbl.drop(flag)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{string} flag (YES | NO)</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>jQl:<code> -drop -table -tableName -flag(yes or no)</code></p>
+                                </li>
+                                <li>
+                                    <p>Details</p>
+                                    <p>
+                                        Flag must be set to <code>yes</code> to empty the table.
+                                        <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p>
+                                    </p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="transaction">
+                    <h4 class="page_header"># DB.transaction(TBL_NAME, MODE)</h4>
+                    <ul>
                         <li>
-                          <h4># index(columnName,settings)</h4>
-                          <p><strong>columnName:</strong> {string}</p>
-                          <p><strong>settings:</strong> {Object}</p>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string | ARRAY} TBL_NAME (required)</code></li>
+                                <li><code>{string} MODE</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Return</p>
+                            <p><code>{object} jDB Promise Instance</code></p>
+                        </li>
+                        <li id="insert">
+                            <h4 class="page_header"># transaction.insert(DATA,...)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{ARRAY|OBJECT} DATA (required)</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Mode: write or writeonlyy</p>
+                                </li>
+                                <li>
+                                    <p>jQL: <code> -insert -data -table_name</code></p>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <div class="alert alert-info">
+                                        Column name must be defined when using OBJECT, while for ARRAY the data must follow according to their column position in the table. When inserting data in ARRAY format, data in each arraylist will be Mapped to the table column according to their index.
+                                        Fields can be ommited only if they have a default value.
+                                    </div>
+                                    <div>
+                                        <code>[{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}]</code>
+                                    </div>
+                                    <div>
+                                        <code>[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]]</code>
+                                    </div>
+
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html" id="jdbinsertscript">//Below example inserts data into our table<br/>DB<br/>.transaction(tblName,"writeonly")<br/>.onSuccess(function(ins){<br/> var res = ins.result;<br/>res<br/>.insert(data)<br/>.execute()<br/>.onSuccess(function(e){<br/>//e = EVENT Object <br/>})<br/>.onError(function(e){ <br/>//Handle Failed Insert here<br/>});<br/>})<br/>.onError(function(){ <br/>//Handle Failed Transaction here<br/>})</pre>
+                                </li>
+                            </ul>
                         </li>
 
-                        <li>
-                          <h4># mode(mode)</h4>
-                          <p><strong>mode:</strong> <code>{string} [readonly, writeonly]</code></p>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-          </li>
-
-          <li id="truncate">
-            <h4 class="page_header"># tbl.truncate(flag)</h4>
-              <ul>
-                <li>
-                  <p>Arguments</p>
-                  <ul>
-                    <li><code>{string} flag (YES | NO)</code></li>
-                  </ul>
-                </li>
-                <li>
-                  <p>jQl: <code> -truncate -tableName -flag(yes or no)</code></p>
-                </li>
-                <li>
-                  <p>Details</p>
-                    <p>
-                      Flag must be set to <code>yes</code> to empty the table. <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p> 
-                    </p>
-                </li>
-              </ul>
-          </li>
-
-          <li id="drop">
-            <h4 class="page_header"># tbl.drop(flag)</h4>
-              <ul>
-                <li>
-                  <p>Arguments</p>
-                  <ul>
-                    <li><code>{string} flag (YES | NO)</code></li>
-                  </ul>
-                </li>
-                <li>
-                  <p>jQl:<code> -drop -table -tableName -flag(yes or no)</code></p>
-                </li>
-                <li>
-                  <p>Details</p>
-                    <p>
-                      Flag must be set to <code>yes</code> to empty the table. <p class="alert alert-warning"><strong>Note : NO flag will trigger an error.   @DEFAULT : NO</strong></p> 
-                    </p>
-                </li>
-              </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section id="transaction">
-        <h4 class="page_header"># DB.transaction(TBL_NAME, MODE)</h4>
-          <ul>
-              <li>
-                  <p>Arguments</p>
-                  <ul>
-                      <li><code>{string | ARRAY} TBL_NAME (required)</code></li>
-                      <li><code>{string} MODE</code></li>
-                  </ul>
-              </li>
-              <li>
-                  <p>Return</p>
-                  <p><code>{object} jDB Promise Instance</code></p>
-              </li>
-              <li id="insert">
-                <h4 class="page_header"># transaction.insert(DATA,...)</h4>
-                  <ul>
-                    <li>
-                        <p>Arguments</p>
-                        <ul>
-                            <li><code>{ARRAY|OBJECT} DATA (required)</code></li>
-                        </ul>
-                    </li>
-                    <li>
-                      <p>Mode: write or writeonlyy</p>
-                    </li>
-                    <li>
-                      <p>jQL: <code> -insert -data -table_name</code></p>
-                    </li>
-                    <li>
-                      <p>Usage</p>
-                      <div class="alert alert-info">
-                        Column name must be defined when using OBJECT, while for ARRAY the data must follow according to their column position in the table. When inserting data in ARRAY format, data in each arraylist will be Mapped to the table column according to their index. Fields can be ommited only if they have a default value.
-                      </div>
-                      <div>
-                        <code>[{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}]</code>
-                      </div>
-                      <div>
-                        <code>[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]]</code>
-                      </div>
-
-                      <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html" id="jdbinsertscript">//Below example inserts data into our table<br/>DB<br/>.transaction(tblName,"writeonly")<br/>.onSuccess(function(ins){<br/> var res = ins.result;<br/>res<br/>.insert(data)<br/>.execute()<br/>.onSuccess(function(e){<br/>//e = EVENT Object <br/>})<br/>.onError(function(e){ <br/>//Handle Failed Insert here<br/>});<br/>})<br/>.onError(function(){ <br/>//Handle Failed Transaction here<br/>})</pre>
-                    </li>
-                  </ul>
-              </li>
-
-              <li id="update">
-                <h4 class="page_header"># transaction.update(DATA,CLAUSE)</h4>                  
-                  <ul>
-                    <li>
-                        <p>Arguments</p>
-                        <ul>
-                            <li><code>{OBJECT|STRING} DATA (required)</code></li>
-                            <li><code>{STRING|OBJECT} CLAUSE (optional)</code></li>
-                        </ul>
-                    </li>
-                    <li>
-                      <p>Mode: write or writeonly</p>
-                    </li>
-                    <li>
-                      <p>jQL: <code> -update -TBL_NAME -records -where</code></p>
-                    </li>
-                    <li>
-                      <p>Usage</p>
-                       <ul>
-                        <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
-                        <li>PARAM : fullName="Foo Boo",email="foo@boo.com"</li>
-                      </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">//Below example updates our table<br/>db<br/>.transaction(TBL_NAME,'writeonly')<br/>.onSuccess(function(upd){<br/>upd<br/>.result<br/>.update(DATA,WHERE) <br/>// requires two parameter DATA to update and which row to update using WHERE<br/>.execute()<br/>.onSuccess(function(e){<br/>result = e;<br/>})<br/>.onError(function(e){<br/>//Update Error Handler<br/>})})<br/>.onError(function(e){<br/>//Transaction Error Handler<br/>});
+                        <li id="update">
+                            <h4 class="page_header"># transaction.update(DATA,CLAUSE)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{OBJECT|STRING} DATA (required)</code></li>
+                                        <li><code>{STRING|OBJECT} CLAUSE (optional)</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Mode: write or writeonly</p>
+                                </li>
+                                <li>
+                                    <p>jQL: <code> -update -TBL_NAME -records -where</code></p>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <ul>
+                                        <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
+                                        <li>PARAM : fullName="Foo Boo",email="foo@boo.com"</li>
+                                    </ul>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">//Below example updates our table<br/>db<br/>.transaction(TBL_NAME,'writeonly')<br/>.onSuccess(function(upd){<br/>upd<br/>.result<br/>.update(DATA,WHERE) <br/>// requires two parameter DATA to update and which row to update using WHERE<br/>.execute()<br/>.onSuccess(function(e){<br/>result = e;<br/>})<br/>.onError(function(e){<br/>//Update Error Handler<br/>})})<br/>.onError(function(e){<br/>//Transaction Error Handler<br/>});
                     </pre>
-                    </li>
-                  </ul>
-              </li>
+                                </li>
+                            </ul>
+                        </li>
 
-               <li id="delete">
-                <h4 class="page_header"># transaction.delete(condition)</h4>                  
-                  <ul>
-                    <li>
-                        <p>Arguments</p>
-                        <ul>
-                            <li><code>{OBJECT|STRING} condition</code></li>
-                        </ul>
-                    </li>
-                    <li>
-                      <p>Mode: write or writeonly</p>
-                    </li>
-                    <li>
-                      <p>jQL:<code> -delete -tableName -WHERE -expression</code></p>
-                    </li>
-                    <li>
-                      <p>Usage</p>
-                      <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">db<br/>.transaction(table,'writeonly')<br/>.onSuccess(function(del){<br/>    del<br/>    .result<br/>    .delete(condition) // where condition e.g user like:'foo'<br/>  .execute()<br/>   .onSuccess(function(e){<br/>   //success Handler<br/> })<br/>  .onError(function(e){<br/>//delete Transaction Error Handler<br/> })<br/>}).onError(function(e){<br/>//DB Error Handler<br/> })</pre>
-                    </li>
-                  </ul>
-              </li>
+                        <li id="delete">
+                            <h4 class="page_header"># transaction.delete(condition)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{OBJECT|STRING} condition</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Mode: write or writeonly</p>
+                                </li>
+                                <li>
+                                    <p>jQL:<code> -delete -tableName -WHERE -expression</code></p>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">db<br/>.transaction(table,'writeonly')<br/>.onSuccess(function(del){<br/>    del<br/>    .result<br/>    .delete(condition) // where condition e.g user like:'foo'<br/>  .execute()<br/>   .onSuccess(function(e){<br/>   //success Handler<br/> })<br/>  .onError(function(e){<br/>//delete Transaction Error Handler<br/> })<br/>}).onError(function(e){<br/>//DB Error Handler<br/> })</pre>
+                                </li>
+                            </ul>
+                        </li>
 
-              <li id="select">
-               <h4 class="page_header"># transaction.select(STATEMENT)</h4>                  
-                  <ul>
-                    <li>
-                        <p>Arguments</p>
-                        <ul>
-                            <li><code>{STRING} STATEMENT (required)</code></li>
-                            <li>
-                              <p>column types</p>
-                              <ul>
-                                <li><code>*</code> To select all columns</li>
-                                <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
-                                <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
-                              </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                      <p>Mode: read or readonly</p>
-                    </li>
-                    <li>
-                      <p>jQL: <code>-select -columns -table_name [-where [-like]] [-limit]</code></p>
-                    </li>
-                    <li>
-                        <p>Using CLAUSE in Select</p>
-                        <ul>
-                          <li><strong>WHERE : </strong>
-                          <p>eg : <code>where(id === 1)</code></p></li>
-                          <li><strong>-LIKE :</strong> -LIKE:expression
-                          <p>eg <code>where(fullName LIKE:foo)</code></p></li>
-                          <li><strong>Join Clause :</strong> 
-                          <h3>List of Join Clause to use</h3>
-                          <ul>
-                            <li>INNER</li>
-                            <li>LEFT</li>
-                            <li>RIGHT</li>
-                            <li>OUTER</li>
-                          </ul>
-                          </li>
-                          <li><strong>Limit:</strong>
-                          <p>eg: <code>limit(0,10)</code></p></li>
-                        </ul>
-                      <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">//Below example selects record from 1 table<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
+                        <li id="select">
+                            <h4 class="page_header"># transaction.select(STATEMENT)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{STRING} STATEMENT (required)</code></li>
+                                        <li>
+                                            <p>column types</p>
+                                            <ul>
+                                                <li><code>*</code> To select all columns</li>
+                                                <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
+                                                <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Mode: read or readonly</p>
+                                </li>
+                                <li>
+                                    <p>jQL: <code>-select -columns -table_name [-where [-like]] [-limit]</code></p>
+                                </li>
+                                <li>
+                                    <p>Using CLAUSE in Select</p>
+                                    <ul>
+                                        <li><strong>WHERE : </strong>
+                                            <p>eg : <code>where(id === 1)</code></p>
+                                        </li>
+                                        <li><strong>-LIKE :</strong> -LIKE:expression
+                                            <p>eg <code>where(fullName LIKE:foo)</code></p>
+                                        </li>
+                                        <li><strong>Join Clause :</strong>
+                                            <h3>List of Join Clause to use</h3>
+                                            <ul>
+                                                <li>INNER</li>
+                                                <li>LEFT</li>
+                                                <li>RIGHT</li>
+                                                <li>OUTER</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Limit:</strong>
+                                            <p>eg: <code>limit(0,10)</code></p>
+                                        </li>
+                                    </ul>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">//Below example selects record from 1 table<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
 
-                      <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">//Below example selects record from 2 table using the join CLAUSE<br/>DB<br/>.transaction([TBL_1,TBL_2])<br/>.select('TBL_1.COL_NAME,TBL_2.COL_COURSE')<br/>.join('inner:TBL_2')<br/>.on('TBL_1.course = TBL_2.id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">//Below example selects record from 2 table using the join CLAUSE<br/>DB<br/>.transaction([TBL_1,TBL_2])<br/>.select('TBL_1.COL_NAME,TBL_2.COL_COURSE')<br/>.join('inner:TBL_2')<br/>.on('TBL_1.course = TBL_2.id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
 
-                      <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">//using WHERE and LIKE CLAUSE<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.where("COL_NAME like:foo")<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//e.getResult(); displays our query result<br/>});</pre>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">//using WHERE and LIKE CLAUSE<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.where("COL_NAME like:foo")<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//e.getResult(); displays our query result<br/>});</pre>
 
-                      <!--?prettify lang=js linenums=true?-->
-                      <pre class="prettyprint lang-html">//using Limit Clause<br>DB<br/>.transaction(TBL_NAME)<br/>.select('COL_1,COL_2,COL_3')<br/>.where("COL_NAME like:foo")<br/>.limit('0,10')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//console.log("Success Result:",e.getResult())<br/>});</pre>
-                    </li>
-                  </ul>
-              </li>
-          </ul>
-
-           <div class="alert alert-warning">
-              <strong>Note : If "MODE" is undefined transaction is treated as read_only, for insert we re using the writeonly mode.</strong>
-           </div>
-      </section>
-
-      <section id="import">
-        <h4 class="page_header"># DB.import(TBL_NAME, [definition])</h4>
-        <ul>
-          <li>
-            <p>Arguments</p>
-            <ul>
-              <li><code>{string} TBL_NAME</code></li>
-              <li><code>{object} definition</code></li>
-            </ul>
-          </li>
-          <li>
-            <p>return: jDB Promise Instance</p>
-          </li>
-          <li>
-            <p>jQl:<code>-import -tableName</code></p>
-          </li>
-          <li>
-            <p>Details</p>
-            <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.html,.json) </p> 
-            <!--?prettify lang=js linenums=true?-->
-            <pre class="prettyprint lang-html">DB<br/>.import(TBL_NAME,{<br/>onselect : function(fileName,file)<br/>{<br/>//Perform an action when file is selected;<br/>},<br/>onSuccess : //Handle successfull file import,<br/>onError : //Handle Error file import<br/>})</pre>
-          </li>
-        </ul>
-      </section>
-
-      <section id="export">
-        <h4 class="page_header"># DB.export(FORMAT)</h4>
-        <ul>
-          <li>
-            <p>Arguments</p>
-            <ul>
-              <li><code>{string} FORMAT</code></li>
-            </ul>
-          </li>
-          <li>
-            <p>return: export Instance</p>
-          </li>
-          <li>
-            <p>jQl: <code> -export -tableName -format -task</code></p>
-          </li>
-          <li>
-            <p>Details</p>
-            <p>Export a table record for referrence, accepted format are (.csv,.html,.json,.pdf)</p>
-            <p>Task List</p>
-              <ul>
-                <li>Download </li>
-                <li>Print </li>
-              </ul>
-            <!--?prettify lang=js linenums=true?-->
-            <pre class="prettyprint lang-html">DB<br/>.export(FORMAT)//type<br/>.initialize(TBL_NAME)<br/> .download(FILENAME)// download the file<br/>.print() //console.log the file</pre>
-          </li>
-        </ul>
-      </section>
-
-      <section id="sync">
-        <h4 class="page_header"># DB.synchronize()</h4>
-        <ul>
-          <li><p>return: Sync Instance</p></li>
-          <li>
-            <p>jQl:<code>-sync [optional [-tableName]]</code></p>
-          </li>
-          <li>
-            <p>Details</p>
-            <p>Synchronize changes on the client to the server,synchronizer adapter can compare and check for changes between client and server
-                  if the server have the latest changes, the client will be updated with the server records else changes will be pushed to server for update</p> 
-                       <!--?prettify lang=js linenums=true?-->
-          <pre class="prettyprint lang-html">DB<br/>.synchronize()<br/>.Entity([TBL_1]) // Array of TABLES to sync<br/>.configSync({}) //Configuration used in sync method<br/>.processEntity()</pre>
-          </li>
-          <li>
-              <h4 class="page_header"># sync.Entity(ARRAY_OF_TABLES)</h4>
-              <ul>
-                <li><p>return: Sync Instance</p></li>
-                <li>
-                  <p>Arguments:<code>[ARRAYLIST] ARRAY_OF_TABLES optional</code></p>
-                </li>
-                <li>
-                  <p>Details</p>
-                  <p>Synchronize specific tables by defining them in the arguments, to sync complete DB set to null.</p>
-                </li>
-              </ul>
-          </li>
-          <li>
-            <h4 class="page_header"># sync.ConfigSync([definition])</h4>
-            <ul>
-                <li><p>return: <code>sync.processEntity || clientService Instance</code></p></li>
-                <li>
-                  <p>Arguments:<code> {OBJECT} Definition</code></p>
-                </li>
-                <li>
-                  <p>Details:</p>
-                  <p>This configurations can also be define when creating the database and it's extensible. Please look at <a href="#createDB"><i class="icon-chevron-right"></i> Create a database</a></p>
-                </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section id="users">
-        <h4 class="page_header"># DB._users()</h4>
-        <ul>
-          <li><code>return: user Instance</code></li>
-          <li>
-            <p>Details</p>
-            <p>Protect your database by adding users and priviledges. It can also be used for login verification.</p>
-          </li>
-          <li id="add_users">
-            <h4 class="page_header"># user.add(PARAM)</h4>
-            <ul>
-              <li>
-              <p>Arguments</p>
-                <ul>
-                  <li><code>{OBJECT} PARAM</code></li>
-                </ul>
-              </li>
-              <li>
-                <p>Usage</p>
-                <!--?prettify lang=js linenums=true?-->
-                <pre class="prettyprint lang-html">DB<br/>._users()<br/>.add(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-              </li>
-            </ul>
-          </li>
-
-          <li id="auth_users">
-            <h4 class="page_header"># user.authorize(PARAM)</h4>
-            <ul>
-              <li>
-              <p>Arguments</p>
-                <ul>
-                  <li><code>{OBJECT} PARAM</code></li>
-                </ul>
-              </li>
-              <li>
-                <p>Usage</p>
-                <!--?prettify lang=js linenums=true?-->
-                <pre class="prettyprint lang-html">DB<br/>._users()<br/>.authorize(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-              </li>
-            </ul>
-          </li>
-
-          <li id="update_users">
-            <h4 class="page_header"># user.update(PARAM)</h4>
-            <ul>
-              <li>
-              <p>Arguments</p>
-                <ul>
-                  <li><code>{OBJECT} PARAM</code></li>
-                </ul>
-              </li>
-              <li>
-                <p>Usage</p>
-                <!--?prettify lang=js linenums=true?-->
-                <pre class="prettyprint lang-html">DB<br/>._users()<br/>.update(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-              </li>
-            </ul>
-          </li>
-
-          <li id="remove_users">
-            <h4 class="page_header"># user.remove(PARAM)</h4>
-            <ul>
-              <li>
-              <p>Arguments</p>
-                <ul>
-                  <li><code>{OBJECT} PARAM</code></li>
-                </ul>
-              </li>
-              <li>
-                <p>Usage</p>
-                <!--?prettify lang=js linenums=true?-->
-                <pre class="prettyprint lang-html">DB<br/>._users()<br/>.remove(queryData) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section id="jql">
-        <h4># DB.jQl(command, [Handlers])</h4>
-          <ul>
-              <li>
-                <p>Arguments</p>
-                <ul>
-                  <li><code>{string} command (required)</code></li>
-                  <li>
-                    <p><code>{object} handlers</code></p>
-                    Define how to handle response from jQl method.
-                    <ul>
-                      <li><h5>onSuccess</h5></li>
-                      <li><h5>onError</h5></li>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">//using Limit Clause<br>DB<br/>.transaction(TBL_NAME)<br/>.select('COL_1,COL_2,COL_3')<br/>.where("COL_NAME like:foo")<br/>.limit('0,10')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//console.log("Success Result:",e.getResult())<br/>});</pre>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-                </ul>
-              </li>
 
-              <li>
-                <p>Details</p>
-                <p>jQL is the best feature of jEliDB, it have the ability to perform query using it's own query Syntax, it's easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions like calling REST APIS provided by JELIDB Applications. </p>
-              </li>
-          </ul>
-      </section>
+                    <div class="alert alert-warning">
+                        <strong>Note : If "MODE" is undefined transaction is treated as read_only, for insert we re using the writeonly mode.</strong>
+                    </div>
+                </section>
 
-      <section id="promise">
-        <h4># DB Promise Instance</h4>
-          <ul>
-              <li><code>onSuccess</code> Function(CB)</li>
-              <li><code>onError</code> Function(CB)</li>
-              <li><code>onUpgrade</code> Function(CB)
-                  <p>Available only when opening the DB for the first time or when version has changed.</p>
-              </li>
-              <li><code>then</code> Function(success, error)</li>
-          </ul>
-      </section>
-
-      <section id="clientService">
-        <h4># DB.clientService</h4>
-          <ul>
-            <li>
-              <p><code>returns clientService Instance: {OBJECT}</code></p>
-            </li>
-          </ul>
-          <ul>
-              <li id="cs-getbyref">
-                  <h4># DB.clientService.getByRef(tbl, query)</h4>
-                  <ul>
-                    <li>Arguments:
+                <section id="import">
+                    <h4 class="page_header"># DB.import(TBL_NAME, [definition])</h4>
                     <ul>
-                      <li>tbl <code>{STRING}</code> required</li>
-                      <li>query <code>{OBJECT}</code> required</li>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} TBL_NAME</code></li>
+                                <li><code>{object} definition</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>return: jDB Promise Instance</p>
+                        </li>
+                        <li>
+                            <p>jQl:<code>-import -tableName</code></p>
+                        </li>
+                        <li>
+                            <p>Details</p>
+                            <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.jql,.html,.json) </p>
+                            <!--?prettify lang=js linenums=true?-->
+                            <pre class="prettyprint lang-html">DB<br/>.import(TBL_NAME,{<br/>onselect : function(fileName,file)<br/>{<br/>//Perform an action when file is selected;<br/>},<br/>onSuccess : //Handle successfull file import,<br/>onError : //Handle Error file import<br/>})</pre>
+                        </li>
                     </ul>
-                    </li>
-                  </ul>
-              </li>
-              <li id="cs-getall">
-                  <h4># DB.clientService.getAll(tbl, query)</h4>
-                  <ul>
-                    <li>Arguments:
+                </section>
+
+                <section id="export">
+                    <h4 class="page_header"># DB.export(FORMAT)</h4>
                     <ul>
-                      <li>tbl <code>{STRING}</code> required</li>
-                      <li>query <code>{OBJECT}</code> required</li>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} FORMAT</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>return: export Instance</p>
+                        </li>
+                        <li>
+                            <p>jQl: <code> -export -tableName -format -task</code></p>
+                        </li>
+                        <li>
+                            <p>Details</p>
+                            <p>Export a table record for referrence, accepted format are (.csv,.html,.json,.jql)</p>
+                            <p>Task List</p>
+                            <ul>
+                                <li>Download </li>
+                                <li>Print </li>
+                            </ul>
+                            <!--?prettify lang=js linenums=true?-->
+                            <pre class="prettyprint lang-html">DB<br/>.export(FORMAT)//type<br/>.initialize(TBL_NAME)<br/> .download(FILENAME)// download the file<br/>.print() //console.log the file</pre>
+                        </li>
                     </ul>
-                    </li>
-                  </ul>
-              </li>
-
-              <li  id="cs-getone">
-                  <h4># DB.clientService.getOne(tbl, query)</h4>
-                  <ul>
-                    <li>Arguments:
+                </section>
+                <section id="promise">
+                    <h4># DB Promise Instance</h4>
                     <ul>
-                      <li>tbl <code>{STRING}</code> required</li>
-                      <li>query <code>{OBJECT}</code> required</li>
+                        <li><code>onSuccess</code> Function(CB)</li>
+                        <li><code>onError</code> Function(CB)</li>
+                        <li><code>onUpgrade</code> Function(CB)
+                            <p>Available only when opening the DB for the first time or when version has changed.</p>
+                        </li>
+                        <li><code>then</code> Function(success, error)</li>
                     </ul>
-                    </li>
-                  </ul>
-              </li>
+                </section>
 
-              <li id="cs-getnumrows">
-                  <h4># DB.clientService.getNumRows(tbl, query)</h4>
-                  <ul>
-                    <li>Arguments:
+                <section id="jql">
+                    <h4># DB.jQl(command, [Handlers])</h4>
                     <ul>
-                      <li>tbl <code>{STRING}</code> required</li>
-                      <li>query <code>{OBJECT}</code> required</li>
-                    </ul>
-                    </li>
-                  </ul>
-              </li>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} command (required)</code></li>
+                                <li>
+                                    <p><code>{object} handlers</code></p>
+                                    Define how to handle response from jQl method.
+                                    <ul>
+                                        <li>
+                                            <h5>onSuccess</h5>
+                                        </li>
+                                        <li>
+                                            <h5>onError</h5>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
 
-              <li id="cs-put">
-                  <h4># DB.clientService.put(tbl, [data])</h4>
-                  <ul>
-                    <li>Arguments:
+                        <li>
+                            <p>Details</p>
+                            <p>jQL is the best feature of jEliDB, it have the ability to perform query using it's own query Syntax, it's easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions
+                                like calling REST APIS provided by JELIDB Applications. </p>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="databas_info">
+                    <h4 class="page_header"># DB.info()</h4>
                     <ul>
-                      <li>tbl <code>{STRING}</code> required</li>
-                      <li>data <code>{OBJECT}</code> required</li>
+                        <li>
+                            <p>Details</p>
+                            <p>Get information about a database</p>
+                        </li>
+                        <li>
+                            <p>Example Response:</p>
+                            <!--?prettify lang=js ?-->
+                            <pre class="prettyprint lang-js">
+                            {
+                                  records : 1,
+                                  columns : 1,
+                                  primaryKey : null,
+                                  foreignKey : null,
+                                  allowedMode : 'readwrite'
+                          }</pre>
+                        </li>
                     </ul>
-                    </li>
-                  </ul>
-              </li>
+                </section>
 
-              <li id="cs-delete">
-                  <h4># DB.clientService.delete(tbl, [data])</h4>
-                  <ul>
-                    <li>Arguments:
+                <section id="close_db">
+                    <h4 class="page_header"># DB.close(flag)</h4>
                     <ul>
-                      <li>tbl <code>{STRING}</code> required</li>
-                      <li>data <code>{OBJECT}</code> required</li>
+                        <li>
+                            Arguments
+                            <p><code>{boolean} flag (required)</code></p>
+                        </li>
+                        <li>
+                            <p>Details</p>
+                            <p>Close the database, this closes any open connection to the underlying storage and frees memory (event listeners) the database may be using.</p>
+                        </li>
                     </ul>
-                    </li>
-                  </ul>
-              </li>
-          </ul>
+                </section>
 
-          <p class="alert alert-info">
-            clientService functionality is available only when serviceHost is set to true.
-          </p>
-      </section>
+                <p class="alert alert-info">
+                    Functionalities below can work only when serviceHost is set to true. Please refer to <a href="https://frontendonly.com">https://frontendonly.com</a> for more details
+                </p>
 
-      <section id="databas_info">
-        <h4 class="page_header"># DB.info()</h4>
-        <ul>
-          <li>
-            <p>Details</p>
-            <p>Get information about a database</p>
-          </li>
-          <li>
-            <p>Example Response:</p>
-            <!--?prettify lang=js ?-->
-            <pre class="prettyprint lang-js">
-            {
-                  records : 1,
-                  columns : 1,
-                  primaryKey : null,
-                  foreignKey : null,
-                  allowedMode : 'readwrite'
-          }</pre>
-          </li>
-        </ul>
-      </section>
+                <section id="sync">
+                    <h4 class="page_header"># DB.synchronize()</h4>
+                    <ul>
+                        <li>
+                            <p>return: Sync Instance</p>
+                        </li>
+                        <li>
+                            <p>jQl:<code>-sync [optional [-tableName]]</code></p>
+                        </li>
+                        <li>
+                            <p>Details</p>
+                            <p>Synchronize changes on the client to the server, jdbSyncService adapter will compare and check for changes between client and server. If the server is having the latest changes, the client will be updated with the server records
+                                else changes will be pushed to server for update</p>
+                            <!--?prettify lang=js linenums=true?-->
+                            <pre class="prettyprint lang-html">DB<br/>.synchronize()<br/>.Entity([TBL_1]) // Array of TABLES to sync<br/>.configSync({}) //Configuration used in sync method<br/>.processEntity()</pre>
+                        </li>
+                        <li>
+                            <h4 class="page_header"># sync.Entity(ARRAY_OF_TABLES)</h4>
+                            <ul>
+                                <li>
+                                    <p>return: Sync Instance</p>
+                                </li>
+                                <li>
+                                    <p>Arguments:<code>[ARRAYLIST] ARRAY_OF_TABLES optional</code></p>
+                                </li>
+                                <li>
+                                    <p>Details</p>
+                                    <p>Synchronize specific tables by defining them in the arguments, to sync complete DB set to null.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4 class="page_header"># sync.ConfigSync([definition])</h4>
+                            <ul>
+                                <li>
+                                    <p>return: <code>sync.processEntity || clientService Instance</code></p>
+                                </li>
+                                <li>
+                                    <p>Arguments:<code> {OBJECT} Definition</code></p>
+                                </li>
+                                <li>
+                                    <p>Details:</p>
+                                    <p>This configurations can also be define when creating the database and it's extensible. Please look at <a href="#createDB"><i class="icon-chevron-right"></i> Create a database</a></p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
 
-      <section id="close_db">
-        <h4 class="page_header"># DB.close(flag)</h4>
-        <ul>
-          <li>
-            Arguments
-            <p><code>{boolean} flag (required)</code></p>
-          </li>
-          <li>
-            <p>Details</p>
-            <p>Close the database, this closes any open connection to the underlying storage and frees memory (event listeners) the database may be using.</p>
-          </li>
-        </ul>
-      </section>
-  </div>
-  </div>
-  </div>
+                <section id="users">
+                    <h4 class="page_header"># DB._users()</h4>
+                    <ul>
+                        <li><code>return: user Instance</code></li>
+                        <li>
+                            <p>Details</p>
+                            <p>Protect your database by adding users and priviledges. It can also be used for login verification.</p>
+                        </li>
+                        <li id="add_users">
+                            <h4 class="page_header"># user.add(PARAM)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{OBJECT} PARAM</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.add(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="auth_users">
+                            <h4 class="page_header"># user.authorize(PARAM)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{OBJECT} PARAM</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.authorize(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="update_users">
+                            <h4 class="page_header"># user.update(PARAM)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{OBJECT} PARAM</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.update(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="remove_users">
+                            <h4 class="page_header"># user.remove(PARAM)</h4>
+                            <ul>
+                                <li>
+                                    <p>Arguments</p>
+                                    <ul>
+                                        <li><code>{OBJECT} PARAM</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Usage</p>
+                                    <!--?prettify lang=js linenums=true?-->
+                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.remove(queryData) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="clientService">
+                    <h4># DB.clientService</h4>
+                    <ul>
+                        <li>
+                            <p><code>returns clientService Instance: {OBJECT}</code></p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li id="cs-getbyref">
+                            <h4># DB.clientService.getByRef(tbl, query)</h4>
+                            <ul>
+                                <li>Arguments:
+                                    <ul>
+                                        <li>tbl <code>{STRING}</code> required</li>
+                                        <li>query <code>{OBJECT}</code> required</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="cs-getall">
+                            <h4># DB.clientService.getAll(tbl, query)</h4>
+                            <ul>
+                                <li>Arguments:
+                                    <ul>
+                                        <li>tbl <code>{STRING}</code> required</li>
+                                        <li>query <code>{OBJECT}</code> required</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="cs-getone">
+                            <h4># DB.clientService.getOne(tbl, query)</h4>
+                            <ul>
+                                <li>Arguments:
+                                    <ul>
+                                        <li>tbl <code>{STRING}</code> required</li>
+                                        <li>query <code>{OBJECT}</code> required</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="cs-getnumrows">
+                            <h4># DB.clientService.getNumRows(tbl, query)</h4>
+                            <ul>
+                                <li>Arguments:
+                                    <ul>
+                                        <li>tbl <code>{STRING}</code> required</li>
+                                        <li>query <code>{OBJECT}</code> required</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="cs-put">
+                            <h4># DB.clientService.put(tbl, [data])</h4>
+                            <ul>
+                                <li>Arguments:
+                                    <ul>
+                                        <li>tbl <code>{STRING}</code> required</li>
+                                        <li>data <code>{OBJECT}</code> required</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li id="cs-delete">
+                            <h4># DB.clientService.delete(tbl, [data])</h4>
+                            <ul>
+                                <li>Arguments:
+                                    <ul>
+                                        <li>tbl <code>{STRING}</code> required</li>
+                                        <li>data <code>{OBJECT}</code> required</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>

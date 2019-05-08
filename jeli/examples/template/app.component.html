@@ -3,26 +3,23 @@
     <h4>Test Switch Functionality</h4>
     <div :switch="$app.twoWayModel">
         <div switch-when="1">
-          I am from 1 - ${$app.twoWayModel}
+            I am from 1 - ${$app.twoWayModel}
         </div>
         <div :when="2">
-          I am from 2 - ${$app.twoWayModel}
+            I am from 2 - ${$app.twoWayModel}
         </div>
         <div switch-when="3">
-          I am from 3 - ${$app.twoWayModel}
+            I am from 3 - ${$app.twoWayModel}
         </div>
         <div switch-when="default">
-          <div :switch="$app.twoWayModels">
-            <div switch-when="2">
-              I am nested switch
+            <div :switch="$app.twoWayModels">
+                <div switch-when="2">
+                    I am nested switch
+                </div>
+                <div switch-when="default">I am default from nested switch</div>
             </div>
-            <div switch-when="default">I am default from nested switch</div>
-          </div>
         </div>
     </div>
 </div>
 
-<button @click="$app.onClick()">Click Me</button>
-
-${loaded}
-
+<button @click="$app.onClick()">Click Me</button> ${loaded}
