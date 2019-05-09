@@ -141,8 +141,6 @@
                         </li>
                         <li>
                             <p>Usage</p>
-                            <!--?prettify lang=js linenums=true?-->
-                            <pre class="prettyprint lang-html" id="jdbscript">var DB; <br/>var dbInstance = jdb(DB_NAME, DB_VERSION)</pre>
                         </li>
 
                         <li id="is_client">
@@ -229,8 +227,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html" id="jdbopenscript"><br>dbInstance.open({//config  goes here})<br>.onCreate(()=>{ <br> // do something})<br>.onUpgrade(function(ex){<br>//do something each time the onUpgrade is initialized<br>});<br>.onSuccess(function(ex){<br>DB = ex.result;<br> })<br>.onError(function(ex){<br>//Error handler goes in here <br>})</pre>
+                                    <script src="https://gist.github.com/gojecks/7e13ccfcb84a5bdfac8f179aa7f8eea6.js"></script>
                                     <p class="alert alert-info">
                                         <strong>Note : onCreate() is called when creating the database for the first time while onUpgrade() function is called when the version number of the DB changes. </strong>
                                     </p>
@@ -277,15 +274,7 @@
                         </li>
                         <li>
                             <p>Usage</p>
-                            <strong>Create table without configuration</strong>
-                            <!--?prettify lang=js linenums=true?-->
-                            <pre class="prettyprint lang-html" id="jdbcreatetblscript">DB<br>.createTbl(NAME)<br>.onSuccess(function(e){<br>//Directly alter table after it has been created<br>//Add a new column to table<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('id',{AUTO_INCREMENT:1,type:'number'})<br>.column("name",{type:"String"});<br> })<br>.onError(function(e){<br>// Error handler goes in here<br>});
-                  </pre>
-
-                            <strong>Create table with configuration</strong>
-                            <!--?prettify lang=js linenums=true?-->
-                            <pre class="prettyprint lang-html" id="jdbcreatetblscript">DB<br>.createTbl(NAME,[{id:{AUTO_INCREMENT:1,type:'number'},name:{type:"String"}}])<br>.onSuccess(function(e){<br>// Success handler goes in here<br/>})<br>.onError(function(e){<br>// Error handler goes in here<br> });
-                  </pre>
+                            <script src="https://gist.github.com/gojecks/12bee82bb43e2f16d769622eaeeb9b90.js"></script>
                         </li>
                     </ul>
                 </section>
@@ -312,9 +301,7 @@
                                 </li>
                                 <li>
                                     <p>Usage</p>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html" id="jdbaltertblscript">//Below example our alters our table by adding two new columns<br>DB<br>.table(NAME)<br>.onSuccess(function(e)//e = event recieved from the success promise<br>{<br>var tbl = e.result;<br>tbl.Alter.add()<br>.column('username',{type:'String'}) //username<br>.column("Email",{type:"String"}); <br>//Email<br>})<br>.onError(function(e){<br>// Error handler goes in here<br>});
-                  </pre>
+                                    <script src="https://gist.github.com/gojecks/e086ecf6bc274a5750c32e1752e7b657.js"></script>
 
                                     <ul>
                                         <li id="drop">
@@ -434,18 +421,10 @@
                                 <li>
                                     <p>Usage</p>
                                     <div class="alert alert-info">
-                                        Column name must be defined when using OBJECT, while for ARRAY the data must follow according to their column position in the table. When inserting data in ARRAY format, data in each arraylist will be Mapped to the table column according to their index.
-                                        Fields can be ommited only if they have a default value.
+                                        Column name must be defined when using OBJECT, while for ARRAY the data must follow the order of column in the table. When inserting data in ARRAY format, data in each arraylist will be Mapped to the table column according to their index. Fields can be
+                                        ommited only if they have a default value.
                                     </div>
-                                    <div>
-                                        <code>[{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}]</code>
-                                    </div>
-                                    <div>
-                                        <code>[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]]</code>
-                                    </div>
-
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html" id="jdbinsertscript">//Below example inserts data into our table<br/>DB<br/>.transaction(tblName,"writeonly")<br/>.onSuccess(function(ins){<br/> var res = ins.result;<br/>res<br/>.insert(data)<br/>.execute()<br/>.onSuccess(function(e){<br/>//e = EVENT Object <br/>})<br/>.onError(function(e){ <br/>//Handle Failed Insert here<br/>});<br/>})<br/>.onError(function(){ <br/>//Handle Failed Transaction here<br/>})</pre>
+                                    <script src="https://gist.github.com/gojecks/8094333801b5aa3db0b31ac8c63e7667.js"></script>
                                 </li>
                             </ul>
                         </li>
@@ -468,13 +447,7 @@
                                 </li>
                                 <li>
                                     <p>Usage</p>
-                                    <ul>
-                                        <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
-                                        <li>PARAM : fullName="Foo Boo",email="foo@boo.com"</li>
-                                    </ul>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">//Below example updates our table<br/>db<br/>.transaction(TBL_NAME,'writeonly')<br/>.onSuccess(function(upd){<br/>upd<br/>.result<br/>.update(DATA,WHERE) <br/>// requires two parameter DATA to update and which row to update using WHERE<br/>.execute()<br/>.onSuccess(function(e){<br/>result = e;<br/>})<br/>.onError(function(e){<br/>//Update Error Handler<br/>})})<br/>.onError(function(e){<br/>//Transaction Error Handler<br/>});
-                    </pre>
+                                    <script src="https://gist.github.com/gojecks/a7574f7465f255d6022446fa4e00ef20.js"></script>
                                 </li>
                             </ul>
                         </li>
@@ -496,25 +469,38 @@
                                 </li>
                                 <li>
                                     <p>Usage</p>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">db<br/>.transaction(table,'writeonly')<br/>.onSuccess(function(del){<br/>    del<br/>    .result<br/>    .delete(condition) // where condition e.g user like:'foo'<br/>  .execute()<br/>   .onSuccess(function(e){<br/>   //success Handler<br/> })<br/>  .onError(function(e){<br/>//delete Transaction Error Handler<br/> })<br/>}).onError(function(e){<br/>//DB Error Handler<br/> })</pre>
+                                    <script src="https://gist.github.com/gojecks/4cdafb966bb2e6b2c0fe4c10054ad19e.js"></script>
                                 </li>
                             </ul>
                         </li>
 
                         <li id="select">
-                            <h4 class="page_header"># transaction.select(STATEMENT)</h4>
+                            <h4 class="page_header"># transaction.select(fields, queryDefinition)</h4>
                             <ul>
                                 <li>
                                     <p>Arguments</p>
                                     <ul>
-                                        <li><code>{STRING} STATEMENT (required)</code></li>
+                                        <li><code>{String} fields (required)</code></li>
+                                        <li><code>{Object} queryDefinition (optional)</code></li>
+                                        <script src="https://gist.github.com/gojecks/8606ac4a1df63261ffcb02400adaf907.js"></script>
                                         <li>
                                             <p>column types</p>
                                             <ul>
                                                 <li><code>*</code> To select all columns</li>
-                                                <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
-                                                <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
+                                                <li>-columnName : Select a column set from given table ( Seperate multiple columns with a comma)</li>
+                                                <li>-columnName as user-defined : select columns and return as user-defined prop (eg : -fullName as fName)</li>
+                                                <li>
+                                                    <strong>Extra select statement</strong>
+                                                    <ul>
+                                                        <li><code>COUNT()</code> total result in a query</li>
+                                                        <li><code>LOWERCASE(field)</code> convert field value to lowercase</li>
+                                                        <li><code>UPPERCASE(field)</code> convert field value to uppercase</li>
+                                                        <li><code>CURDATE()</code> return current timestamp</li>
+                                                        <li><code>TIMESTAMP(FIELD)</code> converts DATETIME value to timestamp</li>
+                                                        <li><code>CASE( WHEN COLUMN = CONDITION THEN COLUMN2 ELSE WHEN COLUMN2 = CONDITION THEN COLUMN ELSE NULL)</code> for field conditional statement</li>
+                                                        <li><code>GET(FIELD)</code> return FIELD_VALUE</li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -523,10 +509,10 @@
                                     <p>Mode: read or readonly</p>
                                 </li>
                                 <li>
-                                    <p>jQL: <code>-select -columns -table_name [-where [-like]] [-limit]</code></p>
+                                    <p>jQL: <code>-select -columns -table_name OPTIONAL: [-where([-like]]) -limit() -groupBy() -orderBy()]</code></p>
                                 </li>
                                 <li>
-                                    <p>Using CLAUSE in Select</p>
+                                    <p>Using Query Builder</p>
                                     <ul>
                                         <li><strong>WHERE : </strong>
                                             <p>eg : <code>where(id === 1)</code></p>
@@ -534,7 +520,7 @@
                                         <li><strong>-LIKE :</strong> -LIKE:expression
                                             <p>eg <code>where(fullName LIKE:foo)</code></p>
                                         </li>
-                                        <li><strong>Join Clause :</strong>
+                                        <li><strong>Join:</strong>
                                             <h3>List of Join Clause to use</h3>
                                             <ul>
                                                 <li>INNER</li>
@@ -546,25 +532,24 @@
                                         <li><strong>Limit:</strong>
                                             <p>eg: <code>limit(0,10)</code></p>
                                         </li>
+                                        <li><strong>gorupBy:</strong>
+                                            <p>eg: <code>groupBy(field)</code></p>
+                                        </li>
+                                        <li><strong>orderBy:</strong>
+                                            <p>eg: <code>orderBy(fields:'ASC | DESC')</code></p>
+                                        </li>
+                                        <li><strong>groupByStrict:</strong>
+                                            <p>eg: <code>groupByStrict(field)</code></p>
+                                        </li>
                                     </ul>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">//Below example selects record from 1 table<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
-
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">//Below example selects record from 2 table using the join CLAUSE<br/>DB<br/>.transaction([TBL_1,TBL_2])<br/>.select('TBL_1.COL_NAME,TBL_2.COL_COURSE')<br/>.join('inner:TBL_2')<br/>.on('TBL_1.course = TBL_2.id')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>console.log("Success Result:",e.getResult())<br/>});</pre>
-
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">//using WHERE and LIKE CLAUSE<br/>DB<br/>.transaction(TBL_NAME)<br/>.select('name,email,password,id')<br/>.where("COL_NAME like:foo")<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//e.getResult(); displays our query result<br/>});</pre>
-
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">//using Limit Clause<br>DB<br/>.transaction(TBL_NAME)<br/>.select('COL_1,COL_2,COL_3')<br/>.where("COL_NAME like:foo")<br/>.limit('0,10')<br/>.execute()<br/>.onError(errorHandler)<br/>.onSuccess(function(e){<br/>//console.log("Success Result:",e.getResult())<br/>});</pre>
+                                    <script src="https://gist.github.com/gojecks/ee9a68618800189bdc6530ee3d11f946.js"></script>
                                 </li>
                             </ul>
                         </li>
                     </ul>
 
                     <div class="alert alert-warning">
-                        <strong>Note : If "MODE" is undefined transaction is treated as read_only, for insert we re using the writeonly mode.</strong>
+                        <strong>Note : If "MODE" is undefined transaction is treated as read_only, for insert writeonly mode should be specified when opening a transaction.</strong>
                     </div>
                 </section>
 
@@ -587,8 +572,7 @@
                         <li>
                             <p>Details</p>
                             <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.jql,.html,.json) </p>
-                            <!--?prettify lang=js linenums=true?-->
-                            <pre class="prettyprint lang-html">DB<br/>.import(TBL_NAME,{<br/>onselect : function(fileName,file)<br/>{<br/>//Perform an action when file is selected;<br/>},<br/>onSuccess : //Handle successfull file import,<br/>onError : //Handle Error file import<br/>})</pre>
+                            <script src="https://gist.github.com/gojecks/baadf0182b85bbbaef6498a48d61e321.js"></script>
                         </li>
                     </ul>
                 </section>
@@ -616,8 +600,7 @@
                                 <li>Download </li>
                                 <li>Print </li>
                             </ul>
-                            <!--?prettify lang=js linenums=true?-->
-                            <pre class="prettyprint lang-html">DB<br/>.export(FORMAT)//type<br/>.initialize(TBL_NAME)<br/> .download(FILENAME)// download the file<br/>.print() //console.log the file</pre>
+                            <script src="https://gist.github.com/gojecks/b792fc26be63b3fb7ad7f299343408b7.js"></script>
                         </li>
                     </ul>
                 </section>
@@ -672,15 +655,7 @@
                         </li>
                         <li>
                             <p>Example Response:</p>
-                            <!--?prettify lang=js ?-->
-                            <pre class="prettyprint lang-js">
-                            {
-                                  records : 1,
-                                  columns : 1,
-                                  primaryKey : null,
-                                  foreignKey : null,
-                                  allowedMode : 'readwrite'
-                          }</pre>
+                            <script src="https://gist.github.com/gojecks/502031e75498f30ffbcfa3d01f47a303.js"></script>
                         </li>
                     </ul>
                 </section>
@@ -700,7 +675,7 @@
                 </section>
 
                 <p class="alert alert-info">
-                    Functionalities below can work only when serviceHost is set to true. Please refer to <a href="https://frontendonly.com">https://frontendonly.com</a> for more details
+                    Functionalities below can only work when serviceHost is set to true. Please refer to <a href="https://frontendonly.com">https://frontendonly.com</a> for more details
                 </p>
 
                 <section id="sync">
@@ -716,8 +691,6 @@
                             <p>Details</p>
                             <p>Synchronize changes on the client to the server, jdbSyncService adapter will compare and check for changes between client and server. If the server is having the latest changes, the client will be updated with the server records
                                 else changes will be pushed to server for update</p>
-                            <!--?prettify lang=js linenums=true?-->
-                            <pre class="prettyprint lang-html">DB<br/>.synchronize()<br/>.Entity([TBL_1]) // Array of TABLES to sync<br/>.configSync({}) //Configuration used in sync method<br/>.processEntity()</pre>
                         </li>
                         <li>
                             <h4 class="page_header"># sync.Entity(ARRAY_OF_TABLES)</h4>
@@ -750,6 +723,7 @@
                             </ul>
                         </li>
                     </ul>
+                    <script src="https://gist.github.com/gojecks/295809419b832515b093359543cd8cd5.js"></script>
                 </section>
 
                 <section id="users">
@@ -769,11 +743,6 @@
                                         <li><code>{OBJECT} PARAM</code></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <p>Usage</p>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.add(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-                                </li>
                             </ul>
                         </li>
 
@@ -786,11 +755,7 @@
                                         <li><code>{OBJECT} PARAM</code></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <p>Usage</p>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.authorize(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -802,11 +767,6 @@
                                     <ul>
                                         <li><code>{OBJECT} PARAM</code></li>
                                     </ul>
-                                </li>
-                                <li>
-                                    <p>Usage</p>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.update(PARAM) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
                                 </li>
                             </ul>
                         </li>
@@ -820,14 +780,10 @@
                                         <li><code>{OBJECT} PARAM</code></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <p>Usage</p>
-                                    <!--?prettify lang=js linenums=true?-->
-                                    <pre class="prettyprint lang-html">DB<br/>._users()<br/>.remove(queryData) //add data required <br/>.onSuccess(function(){}) //handle success<br/>.onError(function(){}) //handle error</pre>
-                                </li>
                             </ul>
                         </li>
                     </ul>
+                    <script src="https://gist.github.com/gojecks/3c349d96eb0846d2754906f80c76c985.js"></script>
                 </section>
 
                 <section id="clientService">
