@@ -180,12 +180,18 @@
                                     <h3>Definition</h3>
                                     <ul id="sync_config">
                                         <li>
-                                            <p><strong>Storage:</strong> <code>[localstorage, sessionstorage, websql, indexedDB, memory, sqlite] (default:localStorage)</code></p>
+                                            <p><strong>Storage types:</strong> <code>[localstorage, sessionstorage, memory] (in-built)</code></p>
+                                            <p class="alert alert-info">
+                                                Other storage types are sql(sqlite, websql), indexedDB and flatfile which requires jdb adapter to perform.
+                                            </p>
                                         </li>
+                                        <li><strong>location</strong>{String}</li>
+                                        <li><strong>key</strong>{String}</li>
+                                        <li><strong>folderPath</strong>{String}</li>
                                         <li>
                                             <p>
-                                                <strong>Live:</strong><code>{boolean} (default:false)</code></p>
-                                            <p>Set to true for auto-sync</p>
+                                                <strong>live:</strong><code>{boolean} (default:false)</code></p>
+                                            <p>Set to true for autoSyncService to always sync client changes to server.</p>
                                         </li>
                                         <li>
                                             <p>
@@ -198,18 +204,38 @@
                                             <p>Equivalent to <code>isLoginRequired()</code></p>
                                         </li>
                                         <li>
-                                            <h4>serviceHost</h4>
+                                            <strong>serviceHost</strong><code>{String}</code>
                                             <p>Define the location of your server, by default is null</p>
                                         </li>
                                         <li>
-                                            <h4>conflictResolver</h4>
-                                            <p>Define a function that will resolve conflict, this function is only initialized when there is a conflict between server and client tables.</p>
-                                            <div><strong>Parameter:</strong> serverData, clientData</div>
-                                            <p class="alert alert-warning">Only define a function if you don't want our jdbSyncService to resolve the conflict.</p>
+                                            <strong>disableApiLoading</strong> {Boolean}
                                         </li>
                                         <li>
-                                            <h4>logService</h4>
-                                            <p>Define a function that can register all logs thrown from the sync method.</p>
+                                            <strong>ignoreSync</strong> {Boolean|Array
+                                            <Table_Names>}
+                                                <p>If set to true no record will be synced to server</p>
+                                        </li>
+                                        <li>
+                                            <strong>ajax</strong>{Function}
+                                            <p>Define Ajax method to be used within JDB for transporting data to server</p>
+                                        </li>
+                                        <li>
+                                            <strong>interceptor</strong>{Function}
+                                            <p>This method is trigger before actuall call to server are made.</p>
+                                        </li>
+                                        <li>
+                                            <strong>organisation</strong> {String} required
+                                            <p>Define your organisation name, this is used with jdb</p>
+                                        </li>
+                                        <li>
+                                            <strong>conflictResolver</strong><code>{Function}</code>
+                                            <p>This function is only initialized when there is a conflict between server and client tables.</p>
+                                            <div><strong>Parameter:</strong> serverData, clientData</div>
+                                            <p class="alert alert-warning">Only define a function if you don't want jdbSyncService to resolve the conflict.</p>
+                                        </li>
+                                        <li>
+                                            <strong>logService</strong><code>{Function}</code>
+                                            <p>Define a function that can register all logs thrown from the syncService.</p>
                                             <div><strong>Parameter:</strong> message </div>
                                             </p>
                                         </li>
@@ -256,21 +282,21 @@
                 </section>
 
                 <section id="createTbl">
-                    <h4># DB.createTbl(NAME, CONFIG)</h4>
+                    <h4># DB.createTbl(name, schema)</h4>
                     <ul>
                         <li>
                             <p>Arguments</p>
                             <ul>
-                                <li><code>{string} NAME (required)</code></li>
-                                <li><code>{object} CONFIG</code></li>
+                                <li><code>{string} name (required)</code></li>
+                                <li><code>{Array} schema</code></li>
                             </ul>
                         </li>
                         <li>
                             <p>Return</p>
-                            <p><code>{object} jDB Promise Instance</code></p>
+                            <p><code>jDB Promise Instance</code></p>
                         </li>
                         <li>
-                            <p>jQL: <code> -CREATE -TABLE_NAME -COLUMNS</code></p>
+                            <p>jQL: <code> create -name -schema</code></p>
                         </li>
                         <li>
                             <p>Usage</p>
@@ -297,12 +323,10 @@
                             <h4 class="page_header"># tbl.alter()</h4>
                             <ul>
                                 <li>
-                                    <p>jQl: <code> -ALTER -TABLE_NAME</code></p>
+                                    <p>jQl: <code> alter -tableName</code></p>
                                 </li>
                                 <li>
                                     <p>Usage</p>
-                                    <script src="https://gist.github.com/gojecks/e086ecf6bc274a5750c32e1752e7b657.js"></script>
-
                                     <ul>
                                         <li id="drop">
                                             <h4># drop(columnName)</h4>
@@ -339,6 +363,7 @@
                                                 </ul>
                                         </li>
                                     </ul>
+                                    <script src="https://gist.github.com/gojecks/e086ecf6bc274a5750c32e1752e7b657.js"></script>
                                 </li>
                             </ul>
                         </li>
@@ -353,7 +378,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <p>jQl: <code> -truncate -tableName -flag(yes or no)</code></p>
+                                    <p>jQl: <code> truncate -tableName -flag(yes or no)</code></p>
                                 </li>
                                 <li>
                                     <p>Details</p>
@@ -375,7 +400,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <p>jQl:<code> -drop -table -tableName -flag(yes or no)</code></p>
+                                    <p>jQl:<code> drop -table -tableName -flag(yes or no)</code></p>
                                 </li>
                                 <li>
                                     <p>Details</p>
@@ -416,7 +441,7 @@
                                     <p>Mode: write or writeonlyy</p>
                                 </li>
                                 <li>
-                                    <p>jQL: <code> -insert -data -table_name</code></p>
+                                    <p>jQL: <code> insert -data -table_name</code></p>
                                 </li>
                                 <li>
                                     <p>Usage</p>
@@ -443,7 +468,7 @@
                                     <p>Mode: write or writeonly</p>
                                 </li>
                                 <li>
-                                    <p>jQL: <code> -update -TBL_NAME -records -where</code></p>
+                                    <p>jQL: <code> update -tableName -records -where</code></p>
                                 </li>
                                 <li>
                                     <p>Usage</p>
@@ -465,7 +490,7 @@
                                     <p>Mode: write or writeonly</p>
                                 </li>
                                 <li>
-                                    <p>jQL:<code> -delete -tableName -WHERE -expression</code></p>
+                                    <p>jQL:<code> delete -tableName -expression</code></p>
                                 </li>
                                 <li>
                                     <p>Usage</p>
@@ -510,7 +535,7 @@
                                     <p>Mode: read or readonly</p>
                                 </li>
                                 <li>
-                                    <p>jQL: <code>-select -columns -table_name OPTIONAL: [-where([-like]]) -limit() -groupBy() -orderBy()]</code></p>
+                                    <p>jQL: <code>select -columns -table_name OPTIONAL: [-where([-like]]) -limit() -groupBy() -orderBy()]</code></p>
                                 </li>
                                 <li>
                                     <p>Using Query Builder</p>
@@ -568,7 +593,7 @@
                             <p>return: jDB Promise Instance</p>
                         </li>
                         <li>
-                            <p>jQl:<code>-import -tableName</code></p>
+                            <p>jQl:<code>import -tableName</code></p>
                         </li>
                         <li>
                             <p>Details</p>
@@ -591,7 +616,7 @@
                             <p>return: export Instance</p>
                         </li>
                         <li>
-                            <p>jQl: <code> -export -tableName -format -task</code></p>
+                            <p>jQl: <code> export -tableName -format -task</code></p>
                         </li>
                         <li>
                             <p>Details</p>
@@ -686,7 +711,7 @@
                             <p>return: Sync Instance</p>
                         </li>
                         <li>
-                            <p>jQl:<code>-sync [optional [-tableName]]</code></p>
+                            <p>jQl:<code>sync [optional [-tableName]]</code></p>
                         </li>
                         <li>
                             <p>Details</p>
