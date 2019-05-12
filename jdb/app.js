@@ -8,13 +8,13 @@
             selector: 'app-root',
             template: '<j-place selector="nav"> </j-place> <j-place selector=".container"> </j-place>',
             DI: ["$sessionStorage", 'ElementRef']
-        }, baseCtrFN)
+        }, AppRootElementController)
         .element({
             selector: 'handle-scroll',
             DI: ['$window', 'ElementRef']
         }, handleScrollFn);
 
-    function handleScrollFn($window, elementRef) {
+    function handleScrollFn() {
         this.didInit = function() {
             // $window.on('scroll', function(e) {
             //     if (this.scrollY > 510) {
@@ -33,7 +33,7 @@
     }
 
     //BaseCtrl Fn
-    function baseCtrFN($sessionStorage, elementRef) {
+    function AppRootElementController($sessionStorage, elementRef) {
         var db = null,
             self = this,
             errorHandler = function(o) { console.log(o) },
@@ -45,7 +45,7 @@
             name: 'test',
             version: 1
         };
-        this.activeDb = null;
+        this.activeDb = false;
         this.searchResult = [];
         this.newData = {};
         this.queryString = "";
@@ -71,7 +71,6 @@
 
         //command prompt
         var logController = new logController();
-
         //getServiceHost
         function getServiceHost(addPath) {
             var loc = location,
@@ -83,17 +82,19 @@
         function connectDB(connectDetails) {
             var req = new jdb(connectDetails.name, connectDetails.version)
                 .open({
-                    serviceHost: null,
                     logService: function(msg) {
                         if (msg) {
                             setMessage(msg);
                         }
                     },
-                    interceptor: function(options, state) {
-                        options.headers.Authorization = "Basic af53a5a2f0c5d27f941df9053b5b553f8a594b9c"; //e4dc9b47d414c923abaf123d0c36c0666f10f456
-                    },
-                    storage: connectDetails.storage
+                    storage: 'sessionStorage'
                 });
+
+            req.onCreate(function(e) {
+                var schema = [{ id: { type: "INT", AUTO_INCREMENT: true }, firstName: { type: "VARCHAR" }, lastName: { type: "VARCHAR" } }]
+                e.result.createTbl('users', schema)
+                    .onError(console.log);
+            });
 
             req.onSuccess(function(e) {
                 self.activeDb = true;
@@ -102,19 +103,11 @@
                 self.dbVersion = db.version;
                 self.tables = db.info();
                 window.db = db;
-                setTimeout(function() {
-                    logController.console = document.querySelector('textarea');
-                    if (!self.tables.length) {
-                        logController.console.value = ('create -members -[{id:{type:"INT",AUTO_INCREMENT:true}, firstName:{type:"VARCHAR"}, lastName:{type:"VARCHAR"}}]');
-                        logController.console.focus();
-                    }
-
-                }, 100);
                 //sessionStorage
                 $sessionStorage.setItem("activeSession", JSON.stringify(connectDetails));
+                elementRef.context.tick();
+                logController.console = document.querySelector('textarea');
             });
-
-
         }
 
         this.didInit = function() {
@@ -122,6 +115,7 @@
             if ($sessionStorage.getItem('activeSession')) {
                 var connection = JSON.parse($sessionStorage.getItem('activeSession'));
                 connectDB(connection);
+                this.activeDb = true;
             }
         }
 
@@ -225,7 +219,6 @@
                 }
 
                 setCMDState();
-                //this.$consume();
             };
 
             this.onError = function(ret) {
