@@ -120,6 +120,9 @@
                         <a href="#databas_info"><i class="icon-chevron-right"></i> Database info</a>
                     </li>
                     <li>
+                        <a href="#store_proc"><i class="icon-chevron-right"></i> Store Procedure</a>
+                    </li>
+                    <li>
                         <a href="#close_db"><i class="icon-chevron-right"></i> Close Database</a>
                     </li>
                 </ul>
@@ -520,11 +523,26 @@
                                                         <li><code>COUNT()</code> total result in a query</li>
                                                         <li><code>LOWERCASE(field)</code> convert field value to lowercase</li>
                                                         <li><code>UPPERCASE(field)</code> convert field value to uppercase</li>
-                                                        <li><code>CURDATE()</code> return current timestamp</li>
+                                                        <li><code>CURDATE()</code> return current date string</li>
                                                         <li><code>DATE_DIFF(field1, field2)</code>returns difference between 2 DATE</li>
                                                         <li><code>TIMESTAMP(FIELD)</code> converts DATETIME value to timestamp</li>
                                                         <li><code>CASE( WHEN COLUMN = CONDITION THEN COLUMN2 ELSE WHEN COLUMN2 = CONDITION THEN COLUMN ELSE NULL)</code> for field conditional statement</li>
-                                                        <li><code>GET(FIELD)</code> return FIELD_VALUE</li>
+                                                        <li><code>GET(column)</code> return column_VALUE</li>
+                                                        <li><strong>New CLAUSE version 1.0.5-beta</strong></li>
+                                                        <li><code>CURDATETIME()</code> return current date and time string</li>
+                                                        <li><code>MIN(column)</code> return minimum value in column</li>
+                                                        <li><code>MAX(column)</code> return maximum value in column</li>
+                                                        <li><code>SUM(column)</code> return sum of all value in column</li>
+                                                        <li><code>AVG(column)</code> return average of all value in column</li>
+                                                        <li><code>DIV(column_1:column_2)</code> return division of 2 column in a table</li>
+                                                        <li><code>REVERSE(column)</code> return reverse string of a column</li>
+                                                        <li><code>LENGTH(column)</code> return string length of a column</li>
+                                                        <li><code>CONCAT(${column} ...)</code> return concatenated parameter, specify column using placeholder.</li>
+                                                        <li><code>RIGHT(column:length)</code> return substr from right.</li>
+                                                        <li><code>LEFT(column:length)</code> return substr from left.</li>
+                                                        <li><code>INSTR(column:needle)</code> return indexof of a needle in a column.</li>
+                                                        <li><code>TRIM(column)</code> return trimmed value of a column</li>
+                                                        <li><code>SUBSTR(column:start:length)</code> return substring of a column by specifying the start position and length</li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -682,6 +700,32 @@
                         <li>
                             <p>Example Response:</p>
                             <script src="https://gist.github.com/gojecks/502031e75498f30ffbcfa3d01f47a303.js"></script>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="store_proc">
+                    <h4 class="page_header"># DB.storeProc (Avaiable v1.0.5-beta)</h4>
+                    <ul>
+                        <li>
+                            Methods
+                            <ul>
+                                <li>
+                                    <h4 class="page_header"># DB.storeProc.create(storeName, query)</h4>
+                                </li>
+                                <li>
+                                    <h4 class="page_header"># DB.storeProc.delete(storeName)</h4>
+                                </li>
+                                <li>
+                                    <h4 class="page_header"># DB.storeProc.execute(storeName, params)</h4>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Details</p>
+                            <p>A stored procedure is a prepared jQl statement that you can save, so the code can be reused over and over again. You can also pass parameters to a stored procedure query, so that the stored procedure can act based on the parameter
+                                value(s) that is passed during execution state.
+                            </p>
                         </li>
                     </ul>
                 </section>
