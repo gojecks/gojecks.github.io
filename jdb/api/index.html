@@ -15,11 +15,10 @@
     <title>JELIDB | API</title>
 </head>
 
-<body j-controller="baseCtrl">
+<body>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -29,20 +28,18 @@
                 </button>
                 <a class="navbar-brand" href="../">JELIDB</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a class="btn btn-link" href="api/">Api</a></li>
                     <li><a class="btn btn-link" href="../playground/">Playground</a></li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
     <div class="container-fluid" style="margin-top:30px">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
+                <p style="color:gray">V1.0.6-beta</p>
                 <ul class="nav nav-sidebar">
                     <li>
                         <a href="#createDB"><i class="icon-chevron-right"></i>Create DataBase</a>
@@ -432,12 +429,13 @@
                             <p><code>{object} jDB Promise Instance</code></p>
                         </li>
                         <li id="insert">
-                            <h4 class="page_header"># transaction.insert(DATA,...)</h4>
+                            <h4 class="page_header"># transaction.insert(DATA, hardInsert)</h4>
                             <ul>
                                 <li>
                                     <p>Arguments</p>
                                     <ul>
-                                        <li><code>{ARRAY|OBJECT} DATA (required)</code></li>
+                                        <li><code>{ARRAY} DATA (required)</code></li>
+                                        <li><code>{Boolean} hardInsert (optional)</code> introduced in v1.0.5-beta</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -445,6 +443,7 @@
                                 </li>
                                 <li>
                                     <p>jQL: <code> insert -data -table_name</code></p>
+                                    <p>hardInsert parameter is used when importing a jQl file format.</p>
                                 </li>
                                 <li>
                                     <p>Usage</p>
@@ -458,13 +457,13 @@
                         </li>
 
                         <li id="update">
-                            <h4 class="page_header"># transaction.update(DATA,CLAUSE)</h4>
+                            <h4 class="page_header"># transaction.update(DATA, Condition)</h4>
                             <ul>
                                 <li>
                                     <p>Arguments</p>
                                     <ul>
                                         <li><code>{OBJECT|STRING} DATA (required)</code></li>
-                                        <li><code>{STRING|OBJECT} CLAUSE (optional)</code></li>
+                                        <li><code>{STRING|OBJECT} Condition (optional)</code></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -558,11 +557,9 @@
                                 <li>
                                     <p>Using Query Builder</p>
                                     <ul>
-                                        <li><strong>WHERE : </strong>
-                                            <p>eg : <code>where(id === 1)</code></p>
-                                        </li>
-                                        <li><strong>-LIKE :</strong> -LIKE:expression
-                                            <p>eg <code>where(fullName LIKE:foo)</code></p>
+                                        <li><strong>WHERE: </strong>
+                                            <p>eg : <code>where(COLUMN = VALUE)</code></p>
+                                            <p>Please refer to JQL.select for more on string WHERE CLAUSE</p>
                                         </li>
                                         <li><strong>Join:</strong>
                                             <h3>List of Join Clause to use</h3>
@@ -686,6 +683,7 @@
                             <p>Details</p>
                             <p>jQL is the best feature of jEliDB, it have the ability to perform query using it's own query Syntax, it's easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions
                                 like calling REST APIS provided by JELIDB Applications. </p>
+                            <p>For more on JQL please <a href="./jql">click here</a></p>
                         </li>
                     </ul>
                 </section>

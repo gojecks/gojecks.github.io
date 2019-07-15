@@ -1,17 +1,18 @@
 <!doctype>
 <html j-module="jelijs.jDB">
+
 <head>
-  <meta charset="utf-8"> 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-  <meta name="viewport" content="width=device-width,initial-scale=1"> 
-  <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications"> 
-  <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development"> 
-  <meta name="author" content="Joseph Gojecks Kadiri">
-  <link rel="stylesheet" href="../../../css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../../css/styles.min.css" />
-<link rel="icon" href="../../../css/image/favicon.png">
-<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<title>JELIDB | API</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../css/styles.min.css" />
+    <link rel="icon" href="../../../css/image/favicon.png">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <title>JELIDB | API</title>
 </head>
 
 <body j-controller="baseCtrl">
@@ -30,207 +31,327 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a class="btn btn-link" href="../">Api</a></li>
-                <li><a class="btn btn-link" href="../playground/">Playground</a></li>
-              </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="btn btn-link" href="../">Api</a></li>
+                    <li><a class="btn btn-link" href="../playground/">Playground</a></li>
+                </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
     <div class="container-fluid" style="margin-top:30px">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
-                  <div class="list-group" handle-scroll>
-                      <a href="#createTbl" class="list-group-item"><i class="icon-chevron-right"></i> Create a Table</a>
-                      <a href="#alt_Table" class="list-group-item"><i class="icon-chevron-right"></i> Alter Table</a>
-                      <a href="#insert" class="list-group-item"><i class="icon-chevron-right"></i> Insert Records</a>
-                      <a href="#update" class="list-group-item"><i class="icon-chevron-right"></i> Update Records</a>
-                      <a href="#delete" class="list-group-item"><i class="icon-chevron-right"></i>Delete Records</a>        
-                      <a href="#select" class="list-group-item"><i class="icon-chevron-right"></i>Select Records</a>
-                      <a href="#truncate" class="list-group-item"><i class="icon-chevron-right"></i>Truncate Table</a>
-                      <a href="#drop" class="list-group-item"><i class="icon-chevron-right"></i>Drop Table / Database</a>
-                      <a href="#imp_exp" class="list-group-item"><i class="icon-chevron-right"></i> Import / Export</a>
-                      <a href="#sync" class="list-group-item"><i class="icon-chevron-right"></i> Synchronize</a>
-                      <a href="#users" class="list-group-item"><i class="icon-chevron-right"></i>Add Users</a>
-                  </div>
-              </div>
-        <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-        <p>jQL is the best feature of jEliDB, Jeli Query Language( jQL ) have the ability to perform query using it's own query Syntax. JQL is easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for other actions like calling REST APIS provided by JELIDB Applications. </p>
-              <h4>jQl accepts two paramaters</h4>
-              <ul>
-                <li>
-                  <h4>Command - STRING</h4>
-                  <div>Define the query you want to perform, using our query syntax</div>
-                </li>
-                <li>
-                  <h4>Handlers - OBJECT</h4>
-                  Define how to handle response from jQl method.
-                  <ul>
-                    <li><h4>onSuccess</h4></li>
-                    <li><h4>onError</h4></li>
-                  </ul>
-                </li>
-            </ul>
-
-            <div class="code">
-              <pre>DB<br/>.jQl(QUERY_TO_PERFORM,{<br/>onSuccess : function(){},<br/>onError : function(){}<br/>});</pre>
-              <p><strong>Type -help to see command syntax</strong></p>
-              <p>jQl command plugins are extensible, which means you can write your own custom command to be executed.</p>
-               <div class="alert alert-info">The sandbox page uses jQl to perform all task</div>
-            </div>
-
-            <div class="panel panel-primary" id="createTbl">
-                <div class="panel-heading">Create a Table</div>
-                <div class="panel-body">
-                    Syntax : -CREATE -TABLE_NAME -COLUMNS
-                    <pre>-CREATE -members -[{ID:{type:"INTERGER",AUTO_INCREMENT:1},email:{type:"VARCHAR"}}]</pre>
-                    <div class="alert alert-info">COLUMNS command is an ARRAY OF OBJECTS with list of columns with their configuration. A column must contain a type of input to accept. For empty column pass an empty ARRAY : [] </div>
-                    </p>
-                </div>
-            </div>
-
-            <div class="panel panel-primary" id="alt_Table">
-                <div class="panel-heading">Alter Table</div>
-                <div class="panel-body">
-                   Syntax : -ALTER -TABLE_NAME
-                    <pre>-add -new -column -COLUMN_NAME -CONFIGURATION</pre>
-                    <p><strong>adding a new column to our table</strong></p>
-                    <pre>ALTER -members -add -new -column -fullName -{type:"VARCHAR",defaultValue:"Foo Bar"}</pre>
-                    <div class="alert alert-info">Configuration must be a javascript Object</div>
-                    <br>
-                    <p><strong>Adding Primary Key</strong></p> 
-                    <pre>-add -primary -key -column_name</pre>
-                    <p><strong>Drop a column</strong></p> 
-                    <pre> -drop -column_name </pre>
-                    <div class="alert alert-info">Column dropped will be removed from table rows.</div>
-                </div>
-            </div>
-
-            <div class="panel panel-primary" id="insert">
-            <div class="panel-heading">Insert Data into Table</div>
-                <div class="panel-body">
-                    Syntax : -insert -data -table_name
-                    <div class="alert alert-info"> -data command accepts ARRAY of OBJECTS or ARRAY of ARRAYS. Column name must be defined when using ARRAY of Objects, while for ARRAY of ARRAYS the data must follow according to their column position in the table.</div>
-                    <p>In Array of Objects AUTO_INCREMENT field can be omitted, while for ARRAY of Arrays cannot.</p>
-                    <p>Inserting Data with Array of Objects into our members table</p>
-                    <pre>-insert -[{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}] -members</pre>
-                    <p><strong>ID field was omitted, because it has a configuration of AUTO_INCREMENT</strong></p>
-
-                    <p>Inserting Data with Array of Arrays into our members table</p>
-                    <pre>-insert -[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]] -members</pre>
-                    <div class="alert alert-info">As said above, the ID field cannot be omitted even if having the auto_incremement configuration when inserting data with ARRAY of ARRAYS. Data in each array will be Mapped to the columns</div>
-                </div>
-            </div>
-
-            <div class="panel panel-primary" id="update">
-            <div class="panel-heading">Update records</div>
-                <div class="panel-body">
-                Syntax : -update -TBL_NAME -records -where 
-                 <div class="alert alert-info">Data command accepts only 2 type of data (OBJECT and params ) </div>
-                    <ul>
-                      <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
-                      <li>PARAM : fullName ="Foo Boo",email="foo@boo.com"</li>
-                    </ul>
-                    <pre> -update -members -fullName="Foo Boo" -where -(ID === 1 || fullName ==="Foo Bar")</pre>
-                    <div class="alert alert-danger">If where clause is not defined, all rows in the table will be updated.</div>
-                </div>
-            </div>
-
-            <div class="panel panel-primary" id="select">
-            <div class="panel-heading">Select From Table</div>
-                <div class="panel-body">
-                Syntax : -select -columns -table_name
-                <p>-columns command accepts different parameter</p>
-                    <ul>
-                      <li>* - To select all columns</li>
-                      <li>-columnName : Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
-                      <li>-columnName as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
-                    </ul>
-                <p>Using CLAUSE in Select</p>
-                <ul>
-                  <li><strong>WHERE : </strong> -Where -expression
-                  <p><strong>eg : -select -* -members -where -(id === 1)</strong></p></li>
-                  <li><strong>-LIKE :</strong> -LIKE:expression
-                  <p><strong>eg : -select -* -members -where -fullName -LIKE:foo</strong></p></li>
-                  <li><strong>Join Clause :</strong> -join -CLAUSENAME:tableName -on -expression
-                  <strong>List of Join Clause to use</strong>
-                  <ul>
-                    <li>INNER</li>
-                    <li>LEFT</li>
-                    <li>RIGHT</li>
-                    <li>OUTER</li>
-                  </ul>
-                  </li>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#overview"><i class="icon-chevron-right"></i>Overview</a></li>
                 </ul>
-                <pre>-select -members.fullName,info.address -members -join -inner:info -on -memebers.ID === info.PID</pre>
-                <div class="alert alert-danger">All tables must exists before performing the join, else error exception will be thrown.</div>
-              </div>
-            </div>
+                <p>Table</p>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#createTbl"><i class="icon-chevron-right"></i> Create</a></li>
+                    <li><a href="#alt_Table"><i class="icon-chevron-right"></i> Alter</a></li>
+                    <li><a href="#truncate"><i class="icon-chevron-right"></i>Truncate</a></li>
+                    <li><a href="#drop_tbl"><i class="icon-chevron-right"></i>Drop</a></li>
 
-            <div class="panel panel-primary" id="delete">
-                <div class="panel-heading">Delete records</div>
-                <div class="panel-body">
-                    Syntax : -delete -tableName -WHERE -expression
-                    <pre>-delete -memebers -where -(ID === 1 || fullName ==="Foo Bar")</pre>
-                    <div class="alert alert-danger">If where clause is not defined, all rows in the table will be deleted.</div>
+                </ul>
+                <p>Transactions</p>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#insert"><i class="icon-chevron-right"></i> Insert</a></li>
+                    <li><a href="#update"><i class="icon-chevron-right"></i> Update</a></li>
+                    <li><a href="#delete"><i class="icon-chevron-right"></i>Delete</a> </li>
+                    <li><a href="#select"><i class="icon-chevron-right"></i>Select</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#imp"><i class="icon-chevron-right"></i> Import</a></li>
+                    <li><a href="#exp"><i class="icon-chevron-right"></i> Export</a></li>
+                    <li><a href="#sync"><i class="icon-chevron-right"></i> Synchronize</a></li>
+                    <li><a href="#drop_db"><i class="icon-chevron-right"></i>Drop Database</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+            <section id="overview">
+                <h4>#Overview</h4>
+                <p>Jeli Query Language or for short jQl is a part of jEliDb core written for the purpose of perform query using it's own query Syntax. JQL is easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be
+                    used for other actions such as like calling REST APIS provided by JELIDB Applications.</p>
+                <h4>jQl accepts two paramaters</h4>
+                <ul>
+                    <li>
+                        <h4><code>{string} Command (required)</code></h4>
+                        <div>Define the query you want to perform, using our query syntax</div>
+                    </li>
+                    <li>
+                        <h4><code>{Object} Handlers (required)</code></h4>
+                        <p>Define how to handle response from jQl method.</p>
+                        <ul>
+                            <li>
+                                <h4>onSuccess</h4>
+                            </li>
+                            <li>
+                                <h4>onError</h4>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4><code>{Object} params (Optional)</code></h4>
+                        <div>Pass values to your query, using the placeholder pattern.</div>
+                    </li>
+                </ul>
+
+                <div class="code">
+                    <pre>DB<br/>.jQl(QUERY_TO_PERFORM,{<br/>onSuccess : function(){},<br/>onError : function(){}<br/>});</pre>
+                    <p><strong>Type -help to see command syntax</strong></p>
+                    <p>jQl command plugins are extensible, which means you can write your own custom command to be executed.</p>
+                    <div class="alert alert-info">The sandbox page uses jQl to perform all task</div>
                 </div>
-            </div>
+            </section>
 
-            <div class="panel panel-primary" id="truncate">
-            <div class="panel-heading">Truncate Table</div>
-                <div class="panel-body">
-                    Syntax : -truncate -tableName -flag(yes or no)
-                    <pre>-truncate -members -yes</pre>
-                    <div class="alert alert-info">Truncating a table deletes every record in the table, flag must be set to yes before task is performed, else an error exception will be thrown.</div>
-                </div>
-            </div>
+            <h3>Table Section</h3>
+            <section id="createTbl">
+                <h4>#Create</h4>
+                <ul>
+                    <li>
+                        <code>Syntax : create -TABLE_NAME -[COLUMNS]</code>
+                    </li>
+                    <li>
+                        <p>Details</p>
+                        <p>COLUMNS command is an ARRAY OF OBJECTS with list of columns with their configuration. A column must contain a type of input to accept. For empty column pass an empty ARRAY : [] </p>
+                    </li>
+                </ul>
+                <code>create -TBL_NAME -[{ID:{type:"INTERGER",AUTO_INCREMENT:1},email:{type:"VARCHAR"}}]</code>
+            </section>
 
-            <div class="panel panel-primary" id="drop">
-                <div class="panel-heading">Drop Table / Database</div>
-                <div class="panel-body">
-                  Syntax : -drop -table -tableName -flag(yes or no)
-                <pre>-drop -table -members -yes</pre>
-                <div class="alert alert-info">Dropping a table removes the table from the Database, flag must be set to yes before task is performed, else an error exception will be thrown.</div>
-                </div>
-            </div>
+            <section id="alt_Table">
+                <h4>#Alter</h4>
+                <ul>
+                    <li>
+                        <code>Syntax : alter -TABLE_NAME</code>
+                    </li>
+                    <li>
+                        <h5>Add New column</h5>
+                        <p><code>Syntax: -add -n -c -COLUMN_NAME -CONFIGURATION</code></p>
+                        <p>Details:</p>
+                        <p>Add a new column to an existing table. Configuration must be a javascript Object</p>
+                        <code>Command: ALTER -members -add -new -column -fullName -{type:"VARCHAR",defaultValue:"Foo Bar"}</code>
+                    </li>
+                    <li>
+                        <h5>Add Primary Key</h5>
+                        <p><code>Syntax: -add -p -key -column_name</code></p>
+                        <p>Details:</p>
+                        <p>Alter by adding setting an existing column as primary key.</p>
+                        <code>Command: ALTER -TBL_NAME -add -p -key -column_name</code>
+                    </li>
+                    <li>
+                        <h5>Drop a column</h5>
+                        <p><code>Syntax: -drop -column_name</code></p>
+                        <p>Details:</p>
+                        <p>Drop an existing column from a table, dropped column will be removed from table rows including data.</p>
+                        <code>Command: ALTER -TBL_NAME -drop -column_name</code>
+                    </li>
+                </ul>
+            </section>
 
-             <div class="panel panel-primary" id="imp_exp">
-                <div class="panel-heading">Import </div>
-                <div class="panel-body">
-                    Syntax : -import -tableName
-                    <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.html,.json) </p>
-                    <div class="alert alert-info">if the table doesn't exist it will be created and data will be inserted into the table.</div>
-                </div>
-            </div>
+            <section id="truncate">
+                <h4>#Truncate</h4>
+                <ul>
+                    <li><code>Syntax : -truncate -tableName -flag(yes or no)</code></li>
+                    <li>
+                        <p>Details:</p>
+                        <p><code>-truncate -members -yes</code></p>
+                        <p>Truncating a table deletes every record in the table, flag must be set to yes before task is performed, else an error exception will be thrown.</p>
+                    </li>
+                </ul>
+            </section>
+            <section id="drop_tbl">
+                <h4>#Drop</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : drop -t -TBL_NAME -flag(yes or no)</code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>Dropping a table removes the table from the Database, flag must be set to yes before task is performed, else an error exception will be thrown.</p>
+                    </li>
+                </ul>
+            </section>
 
-            <div class="panel panel-primary" id="imp_exp">
-                <div class="panel-heading">Export</div>
-                <div class="panel-body">
-                    Syntax : -export -tableName -format -task
-                  <p>Task List</p>
-                  <ul>
-                    <li>Download : -d -fileName</li>
-                    <li>Print : -p to console</li>
-                  </ul>
+            <h3>Transaction Section</h3>
+            <section id="insert">
+                <h4>#Insert</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : insert -data -table_name</code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>-data parameter accepts ARRAY of OBJECTS or ARRAY of ARRAYS. Column name must be defined when using ARRAY of Objects, while for ARRAY of ARRAYS the data must follow according to their column position in the table.</p>
+                        <p>In Array of Objects AUTO_INCREMENT field can be omitted, while for ARRAY of Arrays cannot.</p>
+                        <p><code>insert [{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}] -TBL_NAME</code></p>
+                        <p>Inserting Data with Array of Arrays into a Table</p>
+                        <p><code>insert -[[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]] -TBL_NAME</code></p>
+                    </li>
+                    <li>
+                        <p>As said above, the ID field cannot be omitted even if having the auto_incremement configuration when inserting data with ARRAY of ARRAYS. Data in each array will be Mapped to the columns</p>
+                    </li>
+                </ul>
+            </section>
 
-                <div class="alert alert-info">Accepted types are (.csv,.html,.json), title is optional and can be left blank</div>
-                </div>
-            </div>
+            <section id="update">
+                <h4>#Update</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : -update -TBL_NAME -records  (optional)-jQlWHERECLAUSE</code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>records parameter accepts only 2 type of data (OBJECT and params )</p>
+                        <ul>
+                            <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
+                            <li>PARAM : fullName="Foo Boo",email="foo@boo.com"</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>If where clause is not defined, all rows in the table will be updated.</p>
+                    </li>
+                </ul>
+            </section>
 
-            <div class="panel panel-primary" id="sync">
-            <div class="panel-heading">Synchronize Database or Table</div>
-                <div class="panel-body">
-                    Syntax : -sync -tableName -force
-                    <div class="alert alert-info">Without definig a tableName, all tables in the database will be synchronized. Table Name must be in ARRAY format</div>
-                    <pre> -sync -["members"] or -sync</strong></pre>
-                </div>
-            </div>
-           
+            <section id="select">
+                <h4>#Select</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : select -[fields] -[TABLE_NAME] -Clause[ -join  -where( CLAUSE[Like|IN|NOTIN]]) -limit -[orderBy] -[groupBy]</code></p>
+                        <p>fields parameter accepts below values.</p>
+                        <ul>
+                            <li>* - To select all columns</li>
+                            <li>-COLUMN_NAME: Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
+                            <li>-COLUMN_NAME as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
+                            <li>-JQLFIELDCLAUSE : use the Select Clause defined by JQL e.g COUNT() as total.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>Using JQLSELECTCLAUSE in Select</p>
+                        <ul>
+                            <li><strong>WHERE() : </strong>
+                                <p>List of WHERECLAUSE Functions</p>
+                                <ul>
+                                    <li>
+                                        <h5>#IN()</h5>
+                                        <p><code>IN(@select(t2.column) @table(t2) OR @value([values]) @field(t1.column))</code></p>
+                                    </li>
+                                    <li>
+                                        <h5>#NOTIN()</h5>
+                                        <p><code>NOTIN(@select(t2.column) @table(t2) OR @value([values]) @field(t1.column))</code></p>
+                                    </li>
+                                    <li>
+                                        <h5>#LIKE()</h5>
+                                        <p><code> Like(@value(needle) @field(COLUMN))</code></p>
+                                    </li>
+                                </ul>
+                                <h4>Operands and name used in JQL</h4>
+                                <ul>
+                                    <li><code>$is</code> Symbol <code>===</code></li>
+                                    <li><code>$isEqual</code> Symbol <code>= or ==</code></li>
+                                    <li><code>$gte</code> Symbol <code>>=</code></li>
+                                    <li><code>$gt</code> Symbol <code>></code></li>
+                                    <li><code>$lte</code> Symbol <code><=</code></li>
+                                    <li><code>$lt</code> Symbol <code><</code></li>
+                                    <li><code>$not</code> Symbol <code>!=</code></li>
+                                    <li><code>$isNot</code> Symbol <code>!==</code></li>
+                                    <li><code>$inArray</code> Symbol <code>[] or [=]</code></li>
+                                    <li><code>$noInArray</code> Symbol <code>![] or [!]</code></li>
+                                    <li><code>$lk</code> Symbol <code>~</code></li>
+                                    <li><code>$!</code> Symbol <code>! or !!</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Join Clause :</strong>
+                                <p><code>Syntax: select -t1.Column, t2.Column -TBL as t1, TBL2 as t2 -join(@table(t2) @clause(INNER) @on(t1.column=t2.column))</code></p>
+                                <strong>Join Clause to use</strong>
+                                <ul>
+                                    <li>INNER</li>
+                                    <li>LEFT</li>
+                                    <li>RIGHT</li>
+                                    <li>OUTER</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>When performing join clause all required tables must exists else error exception will be thrown.</p>
+                    </li>
+                </ul>
+            </section>
+            <section id="delete">
+                <h4>#Delete</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : delete -TABLE_NAME -jQlWHERECLAUSE</code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>If where clause is not defined, all rows in the table will be deleted.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="imp">
+                <h4>#Import</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : import -TABLE_NAME -[fileType[json|jql|csv|html]] </code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.html,.json, .jql) </p>
+                        <p>if the table doesn't exist it will be created and data will be inserted into the table.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="exp">
+                <h4>#Export</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : export -TABLE_NAME --[fileType[json|jql|csv|html]] -task[download|print]  (optional) -fileName </code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>Accepted types are (.csv,.html,.json, .jql), title is optional and can be left blank</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="sync">
+                <h4>#Sync</h4>
+                <ul>
+                    <li><code>Syntax : sync -TBL_NAME -force</code></li>
+                    <li>
+                        <p>Details:</p>
+                        <p>Without definig a tableName, all tables in the database will be synchronized. Table Name must be in ARRAY format</p>
+                    </li>
+                    <li>
+                        <p>Read more on Sync API</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="drop_db">
+                <h4>#Drop Database</h4>
+                <ul>
+                    <li>
+                        <p><code>Syntax : drop -d -DB_NAME -flag(yes or no)</code></p>
+                    </li>
+                    <li>
+                        <p>Details:</p>
+                        <p>Dropping a database removes every record and information about the database, flag must be set to yes before task is performed, else an error exception will be thrown.</p>
+                    </li>
+                </ul>
+            </section>
+
         </div>
     </div>
-  </div>
+    </div>
 
 </body>
+
 </html>
