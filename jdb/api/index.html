@@ -205,15 +205,17 @@
                                         </li>
                                         <li>
                                             <strong>serviceHost</strong><code>{String}</code>
-                                            <p>Define the location of your server, by default is null</p>
+                                            <p>Define the URL of your server, by default is null</p>
+                                            <p>Don't have a server? <a href="https://frontendonly.com" target="_blank">Frontendonly</a> is available for free.</p>
                                         </li>
                                         <li>
                                             <strong>disableApiLoading</strong> {Boolean}
+                                            <p>Set to false to stop JDB from loading all configured API from the server.</p>
                                         </li>
                                         <li>
                                             <strong>ignoreSync</strong> {Boolean|Array
                                             <Table_Names>}
-                                                <p>If set to true no record will be synced to server</p>
+                                                <p>Set to true to disable auto syncing or use array to list tables to disable.</p>
                                         </li>
                                         <li>
                                             <strong>ajax</strong>{Function}
@@ -225,11 +227,11 @@
                                         </li>
                                         <li>
                                             <strong>organisation</strong> {String} required
-                                            <p>Define your organisation name, this is used with jdb</p>
+                                            <p>Define your organisation name, this is used within jdb-frontendonly</p>
                                         </li>
                                         <li>
                                             <strong>conflictResolver</strong><code>{Function}</code>
-                                            <p>This function is only initialized when there is a conflict between server and client tables.</p>
+                                            <p>This function is only initialized when there is a conflict between server and client records.</p>
                                             <div><strong>Parameter:</strong> serverData, clientData</div>
                                             <p class="alert alert-warning">Only define a function if you don't want jdbSyncService to resolve the conflict.</p>
                                         </li>
@@ -277,6 +279,13 @@
                                 <code>returns the DB API key: {OBJECT}</code>
                             </p>
                             <p>This is available only when using JDB server (https://frontendonly.com).</p>
+                        </li>
+                        <li>
+                            <h5>DB.env.dataTypes()</h5>
+                            <p>
+                                <code>returns all supported dataTypes in JDB</code>
+                            </p>
+                            <p>You can also remove or add custom dataTypes, but i bet you won't be needing this.</p>
                         </li>
                     </ul>
                 </section>
@@ -453,6 +462,16 @@
                                     </div>
                                     <script src="https://gist.github.com/gojecks/8094333801b5aa3db0b31ac8c63e7667.js"></script>
                                 </li>
+                                <li>
+                                    <h4>#InsertTransactionSuccess Instance</h4>
+                                    <ul>
+                                        <li>
+                                            <p><code>lastInsertId()</code></p>
+                                            <p>Details:</p>
+                                            <p>Returns the last insert id of a table, usually this is determined if there's a column with AUTO_INCREMENT configuration.</p>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
 
@@ -584,6 +603,48 @@
                                         </li>
                                     </ul>
                                     <script src="https://gist.github.com/gojecks/ee9a68618800189bdc6530ee3d11f946.js"></script>
+                                </li>
+                                <li>
+                                    <h4>#SelectTransactionEvent Instance</h4>
+                                    <ul>
+                                        <li>
+                                            <p><code>jDBNumRows()</code></p>
+                                            <p>Details:</p>
+                                            <p>Returns number of row in result set</p>
+                                        </li>
+                                        <li>
+                                            <p><code>getRow(index)</code></p>
+                                            <p>Details:</p>
+                                            <p>Returns a row from result set by specifying the index of the row.</p>
+                                        </li>
+                                        <li>
+                                            <p><code>getResult()</code></p>
+                                            <p>Details:</p>
+                                            <p>Returns result set</p>
+                                        </li>
+                                        <li>
+                                            <p><code>first()</code></p>
+                                            <p>Details:</p>
+                                            <p>Returns first element in the result set.</p>
+                                        </li>
+                                        <li>
+                                            <p><code>openCursor(listener)</code></p>
+                                            <p>Details:</p>
+                                            <p>Iterate through the result set using cursor mode. Cursor event is passed as first parameter to the listener.</p>
+                                            <h5>CursorEvent Instance</h5>
+                                            <ul>
+                                                <li><code>result</code></li>
+                                                <li><code>continue()</code></li>
+                                                <li><code>prev()</code></li>
+                                                <li><code>index()</code></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <p><code>limit(start, end)</code></p>
+                                            <p>Details:</p>
+                                            <p>Returns sets of elements in the result set by specifying the start and end index.</p>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
