@@ -39,7 +39,7 @@
   <div class="container-fluid" style="margin-top:30px">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-        <p style="color:gray">V1.0.8-beta</p>
+        <p style="color:gray">V1.1.0</p>
         <ul class="nav nav-sidebar">
           <li>
             <a href="#createDB"><i class="icon-chevron-right"></i>Create DataBase</a>
@@ -48,6 +48,9 @@
               <li><a href="#requires_login"><i class="icon-chevron-right"></i> requiresLogin </a></li>
               <li><a href="#open"><i class="icon-chevron-right"></i> open </a></li>
             </ul>
+          </li>
+          <li>
+            <a href="#schemaManager"><i class="icon-chevron-right"></i>Schema Manager</a>
           </li>
         </ul>
         <p>DB Method/Instance</p>
@@ -205,7 +208,6 @@
                       <p><code>then(success, error)</code> JDB Promise instance</p>
                     </li>
                   </ul>
-                  <p class="alert alert-info">As of v1.1.0-beta, onUgrade() is triggered alone with onCreate()</p>
                 </li>
                 <li>
                   <p>Details</p>
@@ -220,6 +222,12 @@
                     <li><strong>location</strong>{String}</li>
                     <li><strong>key</strong>{String}</li>
                     <li><strong>folderPath</strong>{String}</li>
+                    <li><strong>schemaPath</strong> {String} (Available in V1.1.0)
+                      <p>Path to your schemaFolder.</p>
+                    </li>
+                    <li><strong>useFrontendOnlySchema</strong> {Boolean} (Available in V1.1.0)
+                      <p>Only set to true if you re using <a href="https://frontendonly.com">Frontendonly</a> storage service.</p>
+                    </li>
                     <li>
                       <p>
                         <strong>live:</strong><code>{boolean} (default:false)</code></p>
@@ -295,6 +303,23 @@
               </ul>
             </li>
           </ul>
+        </section>
+
+        <section id="schemaManager">
+          <h4># SchemaManager (Available in V1.1.0-beta)</h4>
+          <ul>
+            <li>
+              <p>This feature is introduced for managing database schemas and versioning.</p>
+              <p>Schema filename should be in this format <code>"version_VERSION NUMBER" e.g version_1.json</code></p>
+              <p>These are operations accepted in a schema file: <code>DROP | RENAME | ALTER | TRUNCATE | CREATE | CRUD(insert|update|delete|batch|insertreplace)</code></p>
+              <p>Below are examples of different operations that can be performed with schemaManager.</p>
+              <p>In CRUD Insert or Update operations, if filePath and data are defined filePath will be used instead of data, so choose which is best for your requirement.</p>
+            </li>
+            <p>Below are examples of different schema definition.</p>
+            <script src="https://gist.github.com/gojecks/1ec808c0e9c4e4ab28ba3835ab422d77.js"></script>
+          </ul>
+          <p class="alert alert-warning">CREATE and CRUD operation are standalone and cannot be included with other operations.</p>
+
         </section>
 
         <section id="env">
