@@ -1,0 +1,1259 @@
+<!doctype>
+<html>
+
+<head>
+    <!-- <script src="jQuery1.8b2.min.js" type="text/javascript"></script> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jEliJS is a javaScript library for front-end developers, it helps build interactive web and mobile applications">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development,jeli, jelijs, two-way binding, components, directives">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.min.css" />
+    <link rel="icon" href="../css/image/favicon.png">
+    <title>jEliJS | Api</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">JELIJS</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="btn btn-link" href="../guide/">Guide</a></li>
+                    <li class="active"><a class="btn btn-link" href="api/">Api</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:30px">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <p>jeli</p>
+                <ul>
+                    <li><a href="#jeli">jeli</a></li>
+                </ul>
+                <p>jeli Instance</p>
+                <ul>
+                    <li><a href="#jConfig">config</a></li>
+                    <li><a href="#jProvider">provider</a></li>
+                    <li><a href="#jService">service</a></li>
+                    <li><a href="#jFilter">filter</a></li>
+                    <li><a href="#jValue">value</a></li>
+                    <li><a href="#jElement">element</a></li>
+                    <li><a href="#jElement">directive</a></li>
+                    <li><a href="#jInit">init</a></li>
+
+                </ul>
+                <p>viewModel LifeCycle</p>
+                <ul>
+                    <li><a href="#modelOn">didInit</a></li>
+                    <li><a href="#modelPublish">willObserve</a></li>
+                    <li><a href="#modelPublish">viewDidDestroy</a></li>
+                </ul>
+                <p>jEli Directives</p>
+                <ul>
+                    <li><a href="#">jModule</a></li>
+                    <li><a href="#">jController</a></li>
+                    <li><a href="#">jInit</a></li>
+                    <li><a href="#">jIf</a></li>
+                    <li><a href="#">jHref</a></li>
+                    <li><a href="#">jSrc</a></li>
+                    <li><a href="#">jInclude</a></li>
+                    <li><a href="#">jFor</a></li>
+                    <li><a href="#">jDo</a></li>
+                    <li><a href="#">jHide</a></li>
+                    <li><a href="#">jShow</a></li>
+                    <li><a href="#">jClass</a></li>
+                    <li><a href="#">jStyle</a></li>
+                    <li><a href="#">jDisabled</a></li>
+                    <li><a href="#">jModel</a></li>
+                    <li><a href="#">jValue</a></li>
+                    <li><a href="#">jHtml</a></li>
+                    <li><a href="#">jChecked</a></li>
+                    <li><a href="#">jSelected</a></li>
+                    <li><a href="#">jSwitch</a></li>
+                    <li><a href="#">jSkip</a></li>
+                    <li><a href="#">jPattern</a></li>
+                    <li><a href="#">jMax</a></li>
+                    <li><a href="#">jMin</a></li>
+                    <li><a href="#">jNumber</a></li>
+                </ul>
+                <p>Events Names</p>
+                <ul>
+                    <li><a href="#">jClick</a></li>
+                    <li><a href="#">jDblclick</a></li>
+                    <li><a href="#">jSubmit</a></li>
+                    <li><a href="#">jMouseover</a></li>
+                    <li><a href="#">jMouseenter</a></li>
+                    <li><a href="#">jMousemove</a></li>
+                    <li><a href="#">jMousedown</a></li>
+                    <li><a href="#">jMouseup</a></li>
+                    <li><a href="#">jMouseleave</a></li>
+                    <li><a href="#">jKeyup</a></li>
+                    <li><a href="#">jKeydown</a></li>
+                    <li><a href="#">jKeypress</a></li>
+                    <li><a href="#">jChange</a></li>
+                    <li><a href="#">jBlur</a></li>
+                    <li><a href="#">jFocus</a></li>
+                </ul>
+                <p>Service</p>
+                <ul>
+                    <li><a href="#"><a href="#">$http</a></li>
+                    <li><a href="#">$defer</a></li>
+                    <li><a href="#">$q</a></li>
+                    <li><a href="#">$stacks</a></li>
+                    <li><a href="#">$cookie</a></li>
+                    <li><a href="#">$jCompiler</a></li>
+                    <li><a href="#">$rootModel</a></li>
+                    <li><a href="#">$document</a></li>
+                    <li><a href="#">$window </a></li>
+                    <li><a href="#">$timeout</a></li>
+                    <li><a href="#">$rootElement</a></li>
+                    <li><a href="#">$localStorage</a></li>
+                    <li><a href="#">$sessionStorage</a></li>
+                    <li><a href="#">$injector</a></li>
+                    <li><a href="#">$sce</a></li>
+                    <li><a href="#">Base64</a></li>
+                    <li><a href="#">$jEncrypt</a></li>
+                    <li><a href="#">$Observer</a></li>
+                    <li><a href="#">$deleteIndex</a></li>
+                    <li><a href="#">$jEvents</a></li>
+                </ul>
+                <p>Providers</p>
+                <ul>
+                    <li><a href="">$httpProvider</a></li>
+                    <li><a href="">$jEliWebProvider</a></li>
+                    <li><a href="">$jEliWebStateProvider</a></li>
+                    <li><a href="">$debugProvider</a></li>
+                </ul>
+                <p>Filters</p>
+                <ul>
+                    <li><a href="">Date</a></li>
+                    <li><a href="">Capitalize</a></li>
+                    <li><a href="">Uppercase</a></li>
+                    <li><a href="">LowerCase</a></li>
+                    <li><a href="">Json</a></li>
+                    <li><a href="">Currency</a></li>
+                    <li><a href="">Number</a></li>
+                    <li><a href="">Sortby</a></li>
+                    <li><a href="">Orderby</a></li>
+                    <li><a href="">Limitby</a></li>
+                    <li><a href="">Pluralize</a></li>
+                </ul>
+                <p>Helpers</p>
+                <ul class="">
+                    <li><a href="#delimiter">dom</a></li>
+                    <li><a href="#delimiter">noop</a></li>
+                    <li><a href="#delimiter">$extend</a></li>
+                    <li><a href="#delimiter">$isUndefined</a></li>
+                    <li><a href="#delimiter">$isDefined</a></li>
+                    <li><a href="#delimiter">$isObject</a></li>
+                    <li><a href="#delimiter">$isString</a></li>
+                    <li><a href="#delimiter">$isNumber</a></li>
+                    <li><a href="#delimiter">$isArray</a></li>
+                    <li><a href="#delimiter">$inArray</a></li>
+                    <li><a href="#delimiter">$isFunction</a></li>
+                    <li><a href="#delimiter">$create</a></li>
+                    <li><a href="#delimiter">$copy</a></li>
+                    <li><a href="#delimiter">$isEmpty</a></li>
+                    <li><a href="#delimiter">$isEqual</a></li>
+                    <li><a href="#delimiter">$initializer</a></li>
+                    <li><a href="#delimiter">$parseJSON</a></li>
+                    <li><a href="#delimiter">$parseXML</a></li>
+                    <li><a href="#delimiter">$serialize</a></li>
+                    <li><a href="#delimiter">$unSerialize</a></li>
+                    <li><a href="#delimiter">$externalLoader</a></li>
+                    <li><a href="#delimiter">$stringToObject</a></li>
+                    <li><a href="#delimiter">$isJsonString</a></li>
+                    <li><a href="#delimiter">$isNull</a></li>
+                    <li><a href="#delimiter">bind</a></li>
+                    <li><a href="#delimiter">forEach</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+                <section id="jeliapi">
+                    <h4 class="page-header">jeli Module</h4>
+                    <section id="jmodule">
+                        <h5># jeli(name, options)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments</p>
+                                <ul>
+                                    <li><code>{string} name (required)</code></li>
+                                    <li><code>{object} options</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Return</p>
+                                <p><code>{object} jeli instance</code></p>
+                            </li>
+                            <li>
+                                <p>Usage</p>
+                                <p>Create a new "jeli module Instance", options argument is required when creating a module for the first time. The options should contain the module configuration</p>
+                                <!--?prettify lang=js linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmodulescript">
+                                </pre>
+                                <p>Modules created can be used to bootstrap application, or used as required modules.</p>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jConfig">
+                        <h5># Module.config(configuration)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments</p>
+                                <ul>
+                                    <li><code>{Function} configuration</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Dependency Injection: Yes</p>
+                            </li>
+                            <li>
+                                <p>Usage</p>
+                                <p>Set configuration for a module using the jConfig api, table below shows the injectable dependencies for jConfig:</p>
+                                <table class="table">
+                                    <thead>
+                                        <th>Service</th>
+                                        <th>Providers</th>
+                                        <th>Value</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>No</td>
+                                            <td>yes</td>
+                                            <td>Yes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="jconfigscript">
+                        </pre>
+                        <p>Once application bootstrap, all configuration are first initialized.</p>
+                    </section>
+                </section>
+
+                <section id="jProvider">
+                    <h5># Module.provider(providerName, providerFn)</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} providerName</code></li>
+                                <li><code>{Function} providerFn</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: No</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>The provider is useful for setting and getting module configuration. <code>$get</code> api must be defined in the provider instance. Below table shows injectable dependencies for <code>$get</code> api</p>
+                            <table class="table">
+                                <thead>
+                                    <th>Factory</th>
+                                    <th>Service</th>
+                                    <th>Providers</th>
+                                    <th>Value</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Yes</td>
+                                        <td>Yes</td>
+                                        <td>Yes</td>
+                                        <td>Yes</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jproviderscript">
+                        </pre>
+                </section>
+
+
+                <section id="jService">
+                    <h5># Module.service(name, [definition])</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} name</code></li>
+                                <li><code>{Function} definition</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: Yes</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>As jEli apis are singleton, <code>service</code> api can be used to get new Instance of a Function.</p>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jservicescript">
+                        </pre>
+                </section>
+
+                <section id="jFilter">
+                    <h5># Module.filter(name, [definition])</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} name</code></li>
+                                <li><code>{function} definition</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: Yes</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>Register a global filter.</p>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jfilterscript">
+                        </pre>
+                </section>
+
+                <section id="jValue">
+                    <h5># Module.value(name, [definition])</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} name</code></li>
+                                <li><code>{Function | Object} definition</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: No</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>Register a global value.</p>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jvaluescript">
+                        </pre>
+                </section>
+
+                <section id="jComponent">
+                    <h5># Module.element([definition])</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{object} [definition]</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: Yes</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>Register a global component that can be used to extend html.</p>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jcomponentscript">
+                        </pre>
+                </section>
+
+                <section id="jElement">
+                    <h5># Module.directive(name, [definition])</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{string} name</code></li>
+                                <li><code>{function} definition</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: Yes</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>Register a global directive.</p>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jelementscript">
+                        </pre>
+                </section>
+
+                <section id="jInit">
+                    <h5># Module.jInit([definition])</h5>
+                    <ul>
+                        <li>
+                            <p>Arguments</p>
+                            <ul>
+                                <li><code>{function} definition</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Dependency Injection: Yes</p>
+                        </li>
+                        <li>
+                            <p>Usage</p>
+                            <p>Register a module initializer.</p>
+                        </li>
+                    </ul>
+                    <!--?prettify lang=js linenums=true?-->
+                    <pre class="prettyprint lang-html" id="jinitscript">
+                        </pre>
+                </section>
+                </section>
+
+                <section id="jelimodelapi">
+                    <h4 class="page-header">jEli ViewModel Api</h4>
+                    <section id="viewModelNew">
+                        <h5># model.$new(isolate)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments:</p>
+                                <ul>
+                                    <li><code>{boolean} isolate</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Return: <code>{object}</code> Model Instance</p>
+                            </li>
+                        </ul>
+                        </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelnewscript">
+                        </pre>
+                    </section>
+
+                    <section id="viewModelEvaluate">
+                        <h5># model.$evaluate(expr, context)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments:</p>
+                                <ul>
+                                    <li><code>{string} expr</code></li>
+                                    <li><code>{object} context (optional)</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Usage:</p>
+                                <p>Evaluate a valid binding expression on the current viewModel. </p>
+                            </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelevalscript">
+                        </pre>
+                    </section>
+                    <section id="viewModelApply">
+                        <h5># model.$apply(callback)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments:</p>
+                                <ul>
+                                    <li><code>{function} callback (optional)</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Type: <code>Function</code></p>
+                            </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelapplyscript">
+                        </pre>
+                    </section>
+
+                    <section id="viewModelWatch">
+                        <h5># model.$watch(expr, callback)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments:</p>
+                                <ul>
+                                    <li><code>{string | function} expr</code></li>
+                                    <li><code>{function} callback (optional)</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Return: <code>unwatch</code></p>
+                            </li>
+                            <li>
+                                <p>Usage:</p>
+                                <p>Watch an expression or a computed function on the viewModel for changes. The callback gets called with the new value and the old value. The expression can be a single keypath or any valid binding expressions</p>
+                            </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelwatchscript">
+                        </pre>
+                    </section>
+
+                    <section id="viewModelconsume">
+                        <h5># model.$consume()</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments: None</p>
+                            </li>
+                            <li>
+                                <p>Type: <code>{Function}</code></p>
+                            </li>
+                            <li>
+                                <p>Details:</p>
+                                <p>Triggers every watch listner on a viewModel</p>
+                            </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelconsumescript">
+                        </pre>
+                    </section>
+
+                    <section id="viewModeldestroy">
+                        <h5># model.$destroy()</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments: None</p>
+                            </li>
+                            <li>
+                                <p>Type: <code>{Function}</code></p>
+                            </li>
+                            <li>
+                                <p>Details:</p>
+                                <p>When called, all listeners and bindings to the viewModel are destroy and detached and also the model is destroyed and ready for GC.</p>
+                            </li>
+                        </ul>
+                        </pre>
+                    </section>
+                </section>
+                <section id="jelimodelevents">
+                    <h4 class="page-header">jEli ViewModel Events</h4>
+                    <section id="viewModelon">
+                        <h5># model.$on(eventName, callback)</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments:</p>
+                                <ul>
+                                    <li><code>{string} eventName</code></li>
+                                    <li><code>{function} callback</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Details:</p>
+                                <p>Listen for a custom event on the current vm. Events can be triggered by <code>vm.$emit, vm.$dispatch or vm.$broadcast</code>. The callback will receive all the additional arguments passed into these event-triggering methods.</p>
+                            </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelonscript">
+                        </pre>
+                    </section>
+                    <section id="viewModelon">
+                        <h5># model.$broadcast(eventName, [...args])</h5>
+                        <ul>
+                            <li>
+                                <p>Arguments:</p>
+                                <ul>
+                                    <li><code>{string} eventName</code></li>
+                                    <li><code>[...args]</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Usage:</p>
+                                <p>Broadcast an event that propagates downward to all descendants of the current vm. Since the descendants expand into multiple sub-trees, the event propagation will follow many different “paths”. The propagation for each
+                                    path will stop when a listener callback is fired along that path, unless the callback returns true.</p>
+                            </li>
+                        </ul>
+
+                        <!--?prettify lang=js linenums=true?-->
+                        <pre class="prettyprint lang-html" id="modelbroadcastscript">
+                        </pre>
+                    </section>
+                </section>
+
+                <section id="jelimodelevents">
+                    <h4 class="page-header">jEli Directives</h4>
+                    <p>Directive can used with the <code>j-</code> prefix or shorthand <code>:</code>prefix</p>
+                    <section id="jmoduledir">
+                        <h5># :module</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>This directive tells jEli what module to be used for bootstraping </p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmoduledirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jcontrollerdir">
+                        <h5># :controller</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jctrldirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jinitdir">
+                        <h5># :init</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jinitdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jifdir">
+                        <h5># :if</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jifdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jhrefdir">
+                        <h5># :href</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jhrefdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jsrcdir">
+                        <h5># :src</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jsrcdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jincludedir">
+                        <h5># :include</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jincludedirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jfordir">
+                        <h5># :for</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jfordirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jdodir">
+                        <h5># :do</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jdodirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jhidedir">
+                        <h5># :hide</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jhidedirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jshowdir">
+                        <h5># :show</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jshowdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jclassdir">
+                        <h5># :class</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jclassdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jstyledir">
+                        <h5># :style</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jstyledirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jdisabledir">
+                        <h5># :disabled</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jdisableddirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jmodeldir">
+                        <h5># :model</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmodeldirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jvaluedir">
+                        <h5># :value</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jvaluedirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jhtmldir">
+                        <h5># :html</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jhtmldirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jcheckeddir">
+                        <h5># :checked</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jcheckdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jselecteddir">
+                        <h5># :selected</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jselectdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jswitchdir">
+                        <h5># :switch</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jswitchdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jskipdir">
+                        <h5># :skip</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jskipdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jpatterndir">
+                        <h5># :pattern</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jpatterndirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jmaxdir">
+                        <h5># :max</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmaxdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jmindir">
+                        <h5># :min</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmindirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jnumberdir">
+                        <h5># :number</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p></p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jnumberdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section id="jEliEvents">
+                    <h4 class="page-header">jEli Event Directive</h4>
+                    <p>Attaches an event listener to the element. The event type is denoted by the argument. The expression can either be a method name or an inline statement</p>
+                    <section id="jclickdir">
+                        <h5># jClick</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on click event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @click</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jclickdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jdblclickdir">
+                        <h5># jDblclick</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on doubleClick event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @dblclick</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jdblclickdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jsubmitdir">
+                        <h5># jSubmit</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on submit event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @submit</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jsubmitdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jsubmitdir">
+                        <h5># jMouseover</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on mouseover event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @mouseover</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmouseoverdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jsubmitdir">
+                        <h5># jMouseenter</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on mouseenter event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @mouseenter</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmouseenterdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jMousemovedir">
+                        <h5># jMousemove</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on submit event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @mousemove</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmousemovedirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jMousedowndir">
+                        <h5># jMousedown</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on mousedown event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @mousedown</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmousedowndirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jmouseupdir">
+                        <h5># jMouseup</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on mouseup event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @mouseup</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jmouseupdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jkeyupdir">
+                        <h5># jKeyup</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on keyup event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @keyup</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jkeyupdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jkeydowndir">
+                        <h5># jKeydown</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on keydown event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @keydown</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jkeydowndirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jkeypressdir">
+                        <h5># jKeypress</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on keypress event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @keypress</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jkeypressdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jblurdir">
+                        <h5># jBlur</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on blur event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @blur</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jblurdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="jfocusdir">
+                        <h5># jFocus</h5>
+                        <ul>
+                            <li>
+                                <p>Details:</p>
+                                <p>Specify custom behaviour on foucs event.</p>
+                            </li>
+                            <li>
+                                <p>ShortHand: @focus</p>
+                            </li>
+                            <li>
+                                <p>example</p>
+                                <!--?prettify lang=html linenums=true?-->
+                                <pre class="prettyprint lang-html" id="jfocusdirscript">
+                                </pre>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <hr>
+                <!-- Footer -->
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Copyright &copy; jEliJS.com 2014 - 2017. Proudly Sponsored by <a href="bezynet.com/bezynet">Bezynet INC.</a> All rights reserved</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../scripts/prettify.js"></script>
+</body>
+
+</html>

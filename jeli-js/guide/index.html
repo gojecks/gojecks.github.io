@@ -1,0 +1,226 @@
+<!doctype>
+<html>
+
+<head>
+    <!-- <script src="jQuery1.8b2.min.js" type="text/javascript"></script> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jeliJS is a javaScript library for front-end developers, it helps build interactive web and mobile applications">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development,jeli, jelijs, two-way binding, components, directives">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.min.css" />
+    <link rel="icon" href="../css/image/favicon.png">
+    <title>jeli | Guide</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">jeli</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="btn btn-link">Guide</a></li>
+                    <li><a class="btn btn-link" href="../api">Api</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:30px">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li><a href="#installation">Installation</a></li>
+                    <li class="active"><a href="#introduction">Introduction <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#gettingStarted">Getting Started</a></li>
+                    <li><a href="#indexPage">jeli Declaration</a></li>
+                    <li><a href="#todoModule">Todo Module</a></li>
+                    <li><a href="#todoController">Todo Controller</a></li>
+                    <li><a href="#renderingTodoApp">Render Our App</a></li>
+                    <li><a href="#overview">Overview</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+                <section id="installation">
+                    <h4 class="page-header">
+                        Installation
+                    </h4>
+                    Using npm
+                    <div class="well">
+                        npm install jeli
+                    </div>
+                    or cdn
+                    <div class="well">
+                        https://unpkg.com/jeli@[version]
+                    </div>
+                </section>
+                <section id="introduction">
+                    <h2>
+                        Introduction
+                    </h2>
+
+                    <h4 class="page-header">
+                        What is jeliJS?
+                    </h4>
+                    <p>jeli (pronounced / J-ELI) is an <b>Amazing and Progressive Javascript Framework</b> for building User Interface without sacrificing power. As the name, jeli is just JavaScript written in modern and future approach. </p>
+                    <p>jeli is very easy to pick up and integrate with other libraries or existing projects. On the other hand, jeliJS is also perfectly capable of powering sophisticated Single-Page Applications (SPAs). However, jeli can be used both on
+                        client and server side.</p>
+                </section>
+
+                <section id="gettingStarted">
+                    <h4 class="page-header">
+                        Getting Started
+                    </h4>
+                    <div class="alert alert-info">
+                        <h4>Prerequisites</h4>
+                        This quick start guide will take you through creating a Todo app using jeli and briefly explain its main concepts. We assume you are familiar with JavaScript, HTML, and CSS. If you are new to frontend development, it might not be best idea to jump into
+                        a framework as your first-step. We strongly advice to grasp the basic of frontend-development then come back!
+                    </div>
+
+                    <p>
+                        In this tutorial, you will be introduced to the simplicity of jeli by creating a "Todo" application. As we get along in this tutorial, you will learn some of the basic concepts and capabilites of jeliJS.
+                    </p>
+                    <p>
+                        Before we start writing some code, you will need to setup your environment with a basic project structure. The <a href="#installation">installation</a> page provides options on installing jeliJS.
+                    </p>
+                </section>
+
+                <section id="indexPage">
+                    <h4 class="page-header">jeli declaration</h4>
+                    <p class="alert alert-warning">By continuing this tutorial, we assume that your environment have been setup.</p>
+                    <p>Let's start by taking a look at the index.html file.</p>
+                    <div class="panel">
+                        <div class="panel-heading">index.html</div>
+                        <script src="https://gist.github.com/gojecks/02ecd948430015caf33a0bd9d0380e16.js"></script>
+                    </div>
+
+                    <p>There re couple of things to notice here. First take a look at the body, it contains an element "todo". This element is where the application will be rendered. We'll look at creating that file a little bit later.
+                    </p>
+                    <p>Inside the "todo", we have a "template" holding the content of our "todo", we shall also be looking into this later, but quickly lets create our application module file.</p>
+                </section>
+
+                <section id="todoModule">
+                    <h4 class="page-header"> Todo Module</h4>
+                    <p>We're going to begin by creating a jeli module called "Todo". Since we're making a Todo App, we'll need to create the "todo" element for rendering and controlling our Todo App. In the src folder of your project, create the following
+                        file:
+                    </p>
+                    <div class="panel">
+                        <div class="panel-heading">app.js</div>
+                        <script src="https://gist.github.com/gojecks/ccb3d7c2a130a2f0dbdb40d0d5af4af2.js"></script>
+                    </div>
+                    <p>Looking at the javscript, it looks simple and straight forward. <code>jeli("Todo",..)</code> this method creates a "Todo" Instance enabling us to configure the Application, next we created a "todo" element for rendering our app, next
+                        we will look into Bootstrapping our app.</p>
+                </section>
+
+                <section id="todoBootStrap">
+                    <h4 class="page-header">Bootstrapping</h4>
+                    <p>On line 13 on the above code, we intialized the "jeli.app.bootstrapWith(moduleName, entryElement)". What we did here is tell jeli to bootstrap our application with the "Todo" module we created, next we tell jeli what our root element
+                        is, for us is "todo". When jeli starts it will bootstrap our application with the Todo module and then render our view in "todo" element.
+                    </p>
+
+                    <p class="alert alert-info">Something to note before we move on, if you omit to initialize the bootstrapWith, your application will load but the view will be empty. </p>
+                </section>
+
+                <section id="toDoController">
+                    <h4 class="page-header">Todo Element Controller</h4>
+                    <p>Our todo application must be able to do the following:</p>
+                    <ul>
+                        <li>Create a new todo.</li>
+                        <li>Edit a todo description.</li>
+                        <li>Mark a todo as done.</li>
+                        <li>Delete a todo.</li>
+                    </ul>
+                    <p>The todos are added by allowing the user to provide a todo title and tap enter to add the todo. Let's model these ideas. Here's the TodoElementController:</p>
+                    <div class="panel">
+                        <div class="panel-heading">app.js</div>
+                        <script src="https://gist.github.com/gojecks/515f78cddf08b675be5cacf996ef79c1.js"></script>
+                    </div>
+                    <p>Again its that simple. Let's review what we modeled: </p>
+                    <ul>
+                        <li>Our application has a heading of "My First Todo App".</li>
+                        <li>The todo list is modeled as an array of Todo instances represented by the todos property.</li>
+                        <li>Todo instances can be added with addTodo()</li>
+                        <li>When instances are added, they are given a description, provided by the user.</li>
+                        <li>After the Todo is added, the description is cleared to enable the next addition.</li>
+                    </ul>
+
+                    <p class="alert alert-info">To better understand how ElementController works read on "Elements" in jeli API section.</p>
+                    <!-- <p>Update your app.js file with the version below:</p>
+                    <div class="panel">
+                        <div class="panel-heading">app.js</div>
+                    </div> -->
+                </section>
+
+                <section id="renderingTodoApp">
+                    <h4 class="page-header">Rendering Our App</h4>
+                    <p>Let's back to our index.html file, did you notice the <code>${pageHeading}</code> syntax? Well, inside of a view, you have access to all properties and methods of the View-Model instance associated with the view and you can access
+                        them inside the content of of any element or attribute by using jeli template string syntax as shown above. The above syntax creates a one-way data-binding to the associated property. By "one-way" we mean that the dataflow is unidirectional.
+                        The view only updates when the property binded to it changes. There is no "reverse" flow from the view back to the view-model.</p>
+
+                    <p class="alert alert-info">
+                        We call a View's associated class its View-Model because it's a model for, or a model of the View. Most jeli development leverages the Model - View - View-Model pattern. However, jeli is flexible enough to enable also using patterns like Supervising Controller
+                        (as our todo App), Passive View and Model - View - Controller if desired.
+                    </p>
+
+                    <p>
+                        We colect information from the user, when they tap enter in the input text box. <strong>How is this done? </strong> In the input element appended <code>:model</code> attribute, by doing so, we tell jeli that we want to bind "todoDescription"
+                        property in our View-Model. You can bind "Model" property to any HTML Element by appending <code>:model </code>.
+                    </p>
+
+                    <p>Here, we have another convention that is important to point out. When we use :model jeli works on your behalf to pick the most sensible "binding mode" based on the element and attribute you are binding. For example, since this is an
+                        input and you are binding its value then :model will cause jeli to set up a two-way binding. This means that any time the view-model's todoDescription changes, it will be updated in the input's value property but also any time
+                        the input's value property changes, the view-model will have its todoDescription updated as well.</p>
+
+                    <p>There's something else of note in this markup though. We can not only bind properties, but you can attach to events. Take a look at the form element itself. In jeli, you can attach any DOM event to an ELEMENT by using the symbol "@"
+                        followed by the event name. This means that when that event fires, it will trigger the associated expression to be evaluated. In this case, the submit event causes the addTodo() method to be invoked. Because we've used the submit
+                        event, it means that the todo will be added either by pressing the submit button or by pressing enter while inside the input</p>
+                    <p class="alert alert-info">For more on event binding, please read on "Events" in jeli API section </p>
+
+                    <p>When you run the application, you should be able to see the above explaination in action, We can add todos, but can't see them! Uncomment the code in index.html:</p>
+
+                    <p>To generate HTML based on an Array, Map or Set, we use the ":for" directive syntax. This syntax is derived from the for loop. Here is what we have done so far in the updated html:
+                        <ul>
+                            <li>We generate one li for each item in our todos array, by appending the :for attribute on the li we want to be generated and we specify the todos collection and that we want the local loop variable to be named todo. With this
+                                we can bind to any property of the todo instance.</li>
+                            <li> We're binding the checked attribute to the todo's done property and its description property is being injected into the content of the span. </li>
+                            <li>Next is the span element, we show how you can bind css directly on any HTML elment. In this case, we want to add the text-decoration of line-through whenever the <code>todo.done</code> property is true, otherwise we want the
+                                none value.</li>
+                            <li>Finally, we're adding a click event on the button so that we can remove the todo, by passing in the index of the todo to be removed.</li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section id="overview">
+                    <h4 class="page-header">Overview</h4>
+                    <p>Thanks for taking your time to read through the guide. So far this guide has put us through on how to create a simple "Todo" application with jeli:
+                        <ul>
+                            <li>How to bootstrap our application</li>
+                            <li>How to create a controller and attach it to any HTML element</li>
+                            <li>How two-binding works with the :model directive</li>
+                            <li>How to attach event to any HTML element.</li>
+                            <li>How to generate view using the ":for" directive</li>
+                        </ul>
+                        There's so much to learn and do with jeli. The rest of this guide will cover the basic and advanced features with much details, so make sure to read it all!</p>
+                </section>
+
+
+
+
+                <hr>
+                <!-- Footer -->
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Copyright &copy; jeliJS.com 2014 - 2017. Proudly Sponsored by Love. All rights reserved</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
