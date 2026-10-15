@@ -1,4 +1,4 @@
-<!doctype>
+<!doctype html>
 <html j-module="jelijs.jDB">
 
 <head>
@@ -8,17 +8,20 @@
     <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications">
     <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
     <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/styles.min.css" />
+    <link rel="stylesheet" href="css/theme.css" />
     <link rel="icon" href="../css/image/favicon.png">
-    <title>JELI - JDB</title>
+    <title>jEliDB &mdash; an in-memory JavaScript database with a query language</title>
 </head>
 
 <body :controller="baseCtrl">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,69 +29,121 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">JELIDB</a>
+                <a class="navbar-brand" href="/"><span class="jdb-brand-mark"></span>jEliDB</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="btn btn-link" href="api/">Api</a></li>
+                    <li><a class="btn btn-link" href="api/">API</a></li>
+                    <li><a class="btn btn-link" href="api/jql/">jQL</a></li>
                     <li><a class="btn btn-link" href="playground/">Playground</a></li>
-                    <li><a class="btn btn-link" href="https://frontendonly.com">Frontendonly</a></li>
+                    <li><a class="btn btn-link" href="https://github.com/gojecks/jeli-db" target="_blank" rel="noopener">GitHub</a></li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
-    <div class="container" style="margin-top:30px">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h1 class="page-header">jEliDB</h1>
 
-                <p>JavaScript object literal look a lot like database table records, And wrapping a group of javascript objects up in an array gives you something that looks a lot like a database table. jDB is created out of Javascript Objects to produce
-                    result with a uniform and familiar SQL-like interface.</p>
-                <p>Using jDB in your application help reduces development time, improves performance, simplifies maintenance, and increases quality.</p>
-
-                <h2>Why use jDB</h2>
-                <ul>
-                    <li>Extremely fast</li>
-                    <li>Powerful JavaScript-centric data selection engine</li>
-                    <li>SQL inspired features such as insert, update, unique, count, and more</li>
-                    <li>Import and export data (JSON,csv and html) format</li>
-                    <li>Synchronize and replicate Data on the fly using jSync Algorithm</li>
-                    <li>cross browser support</li>
-                    <li>Easy to extend with your own functions</li>
-                    <li>Compatible with any DOM library</li>
-                    <li>Access your DB anywhere in the world</li>
-                    <li>Bundled with Private and Public APIS</li>
-                </ul>
-                <section id="installation">
-                    <h4 class="page-header">
-                        Installation
-                    </h4>
-                    Using npm
-                    <div class="well">
-                        npm install jelidb
-                    </div>
-                    or cdn
-                    <div class="well">
-                        https://unpkg.com/jelidb@[version]
-                    </div>
-                </section>
-            </div>
-
-        </div>
-
-        <hr>
-        <!-- Footer -->
-        <footer>
+    <!-- Hero -->
+    <section class="jdb-hero">
+        <div class="jdb-shell">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; jEliJS.com 2014 - 2017. Proudly Sponsored by <a href="bezynet.com/bezynet">Bezynet INC.</a> All rights reserved</p>
+                <div class="col-md-8">
+                    <div class="jdb-badges">
+                        <span class="jdb-pill"><span class="dot"></span>Query strings <em>or</em> plain objects</span>
+                        <span class="jdb-pill"><span class="dot"></span>Typed schema validation</span>
+                        <span class="jdb-pill"><span class="dot"></span>Browser &amp; server</span>
+                    </div>
+                    <h1>An in-memory JavaScript database, queried like a database.</h1>
+                    <p class="lead">jEliDB (jDB) turns arrays of plain objects into something you can query, join, sync
+                        and validate with a SQL-inspired syntax &mdash; jQL &mdash; without giving up the JavaScript
+                        objects you already have.</p>
+                    <div class="jdb-hero-actions">
+                        <a class="btn btn-jdb-primary" href="api/jql/">Learn jQL</a>
+                        <a class="btn btn-jdb-ghost" href="playground/">Try the playground</a>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
+
+    <div class="jdb-main">
+        <div class="jdb-shell">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <p class="jdb-section-label">Why jDB</p>
+                    <div class="jdb-feature-grid">
+                        <div class="jdb-feature">
+                            <h4>SQL-inspired transactions</h4>
+                            <p>insert, update, delete, select, batch and more &mdash; with join, where, limit,
+                                orderBy and groupBy clauses.</p>
+                        </div>
+                        <div class="jdb-feature">
+                            <h4>Two ways to query</h4>
+                            <p>Write jQL as a plain string (<code>-flag value</code> or the newer
+                                <code>--flag=value</code>), or hand jQl a plain JavaScript object directly &mdash;
+                                no parsing involved.</p>
+                        </div>
+                        <div class="jdb-feature">
+                            <h4>Schema-checked fields</h4>
+                            <p>Every jQL command declares the shape of its own fields, so a table name typed
+                                <code>"123"</code> stays a string instead of silently becoming a number.</p>
+                        </div>
+                        <div class="jdb-feature">
+                            <h4>Import &amp; export</h4>
+                            <p>Move data in and out as JSON, JQL, CSV or HTML, table-by-table or for the whole
+                                database.</p>
+                        </div>
+                        <div class="jdb-feature">
+                            <h4>Sync &amp; replicate</h4>
+                            <p>Push local changes to a backend and keep tables in sync on your schedule, not just
+                                on page load.</p>
+                        </div>
+                        <div class="jdb-feature">
+                            <h4>Extensible by design</h4>
+                            <p>jQL commands are plugins &mdash; register your own with a declared schema and they
+                                get validation, both syntaxes and object-form calls for free.</p>
+                        </div>
+                    </div>
+
+                    <p class="jdb-section-label">A quick taste of jQL</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="jdb-tag jdb-tag-v1">v1 syntax</span>
+                            <pre class="jdb-code">insert -{"name":"Ada","role":"admin"} -users -ignoreSync</pre>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="jdb-tag jdb-tag-v2">v2 syntax</span>
+                            <pre class="jdb-code">insert --data={"name":"Ada","role":"admin"} --table=users --ignoreSync</pre>
+                        </div>
+                    </div>
+                    <p style="color:var(--jdb-muted);font-size:13.6px;margin-top:6px">Both run through the same
+                        plugin and the same schema &mdash; jDB detects which syntax you used per call, so nothing
+                        you've already written needs to change. See the <a href="api/jql/">jQL reference</a> for the
+                        full syntax, including the field-type system.</p>
+
+                    <section id="installation" style="margin-top:52px">
+                        <p class="jdb-section-label">Installation</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="font-size:13px;font-weight:600;color:var(--jdb-muted);margin-bottom:6px">Using npm</div>
+                                <pre class="jdb-code"><span class="cmd">npm install jelidb</span></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="font-size:13px;font-weight:600;color:var(--jdb-muted);margin-bottom:6px">Using a CDN</div>
+                                <pre class="jdb-code">&lt;script src="https://unpkg.com/jelidb@[version]/dist/jdb.min.js"&gt;&lt;/script&gt;</pre>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="jdb-footer">
+        <div class="jdb-shell">
+            <p>Copyright &copy; jEliJS.com 2014&ndash;2026. Proudly sponsored by <a href="https://bezynet.com/bezynet" target="_blank" rel="noopener">Bezynet INC.</a> All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

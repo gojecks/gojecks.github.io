@@ -1,1259 +1,492 @@
-<!doctype>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <!-- <script src="jQuery1.8b2.min.js" type="text/javascript"></script> -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="jEliJS is a javaScript library for front-end developers, it helps build interactive web and mobile applications">
-    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development,jeli, jelijs, two-way binding, components, directives">
-    <meta name="author" content="Joseph Gojecks Kadiri">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.min.css" />
+    <meta name="description" content="jeli API reference: @jeli/core, @jeli/common, @jeli/form, @jeli/http, @jeli/router.">
+    <link rel="stylesheet" href="../css/docs.css">
     <link rel="icon" href="../css/image/favicon.png">
-    <title>jEliJS | Api</title>
+    <title>jeli | API</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">JELIJS</a>
+    <nav class="topnav">
+        <div class="topnav-inner">
+            <a class="brand" href="../"><img src="../css/image/j-eli.png" alt="">jeli</a>
+            <div class="topnav-links">
+                <a href="../guide/">Guide</a>
+                <a href="./" class="active">API</a>
+                <a class="github" href="https://github.com/gojecks/jeli-js" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="btn btn-link" href="../guide/">Guide</a></li>
-                    <li class="active"><a class="btn btn-link" href="api/">Api</a></li>
-                </ul>
-            </div>
+            <button class="menu-toggle" data-menu-toggle>Menu</button>
         </div>
     </nav>
-    <div class="container-fluid" style="margin-top:30px">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <p>jeli</p>
-                <ul>
-                    <li><a href="#jeli">jeli</a></li>
-                </ul>
-                <p>jeli Instance</p>
-                <ul>
-                    <li><a href="#jConfig">config</a></li>
-                    <li><a href="#jProvider">provider</a></li>
-                    <li><a href="#jService">service</a></li>
-                    <li><a href="#jFilter">filter</a></li>
-                    <li><a href="#jValue">value</a></li>
-                    <li><a href="#jElement">element</a></li>
-                    <li><a href="#jElement">directive</a></li>
-                    <li><a href="#jInit">init</a></li>
 
-                </ul>
-                <p>viewModel LifeCycle</p>
-                <ul>
-                    <li><a href="#modelOn">didInit</a></li>
-                    <li><a href="#modelPublish">willObserve</a></li>
-                    <li><a href="#modelPublish">viewDidDestroy</a></li>
-                </ul>
-                <p>jEli Directives</p>
-                <ul>
-                    <li><a href="#">jModule</a></li>
-                    <li><a href="#">jController</a></li>
-                    <li><a href="#">jInit</a></li>
-                    <li><a href="#">jIf</a></li>
-                    <li><a href="#">jHref</a></li>
-                    <li><a href="#">jSrc</a></li>
-                    <li><a href="#">jInclude</a></li>
-                    <li><a href="#">jFor</a></li>
-                    <li><a href="#">jDo</a></li>
-                    <li><a href="#">jHide</a></li>
-                    <li><a href="#">jShow</a></li>
-                    <li><a href="#">jClass</a></li>
-                    <li><a href="#">jStyle</a></li>
-                    <li><a href="#">jDisabled</a></li>
-                    <li><a href="#">jModel</a></li>
-                    <li><a href="#">jValue</a></li>
-                    <li><a href="#">jHtml</a></li>
-                    <li><a href="#">jChecked</a></li>
-                    <li><a href="#">jSelected</a></li>
-                    <li><a href="#">jSwitch</a></li>
-                    <li><a href="#">jSkip</a></li>
-                    <li><a href="#">jPattern</a></li>
-                    <li><a href="#">jMax</a></li>
-                    <li><a href="#">jMin</a></li>
-                    <li><a href="#">jNumber</a></li>
-                </ul>
-                <p>Events Names</p>
-                <ul>
-                    <li><a href="#">jClick</a></li>
-                    <li><a href="#">jDblclick</a></li>
-                    <li><a href="#">jSubmit</a></li>
-                    <li><a href="#">jMouseover</a></li>
-                    <li><a href="#">jMouseenter</a></li>
-                    <li><a href="#">jMousemove</a></li>
-                    <li><a href="#">jMousedown</a></li>
-                    <li><a href="#">jMouseup</a></li>
-                    <li><a href="#">jMouseleave</a></li>
-                    <li><a href="#">jKeyup</a></li>
-                    <li><a href="#">jKeydown</a></li>
-                    <li><a href="#">jKeypress</a></li>
-                    <li><a href="#">jChange</a></li>
-                    <li><a href="#">jBlur</a></li>
-                    <li><a href="#">jFocus</a></li>
-                </ul>
-                <p>Service</p>
-                <ul>
-                    <li><a href="#"><a href="#">$http</a></li>
-                    <li><a href="#">$defer</a></li>
-                    <li><a href="#">$q</a></li>
-                    <li><a href="#">$stacks</a></li>
-                    <li><a href="#">$cookie</a></li>
-                    <li><a href="#">$jCompiler</a></li>
-                    <li><a href="#">$rootModel</a></li>
-                    <li><a href="#">$document</a></li>
-                    <li><a href="#">$window </a></li>
-                    <li><a href="#">$timeout</a></li>
-                    <li><a href="#">$rootElement</a></li>
-                    <li><a href="#">$localStorage</a></li>
-                    <li><a href="#">$sessionStorage</a></li>
-                    <li><a href="#">$injector</a></li>
-                    <li><a href="#">$sce</a></li>
-                    <li><a href="#">Base64</a></li>
-                    <li><a href="#">$jEncrypt</a></li>
-                    <li><a href="#">$Observer</a></li>
-                    <li><a href="#">$deleteIndex</a></li>
-                    <li><a href="#">$jEvents</a></li>
-                </ul>
-                <p>Providers</p>
-                <ul>
-                    <li><a href="">$httpProvider</a></li>
-                    <li><a href="">$jEliWebProvider</a></li>
-                    <li><a href="">$jEliWebStateProvider</a></li>
-                    <li><a href="">$debugProvider</a></li>
-                </ul>
-                <p>Filters</p>
-                <ul>
-                    <li><a href="">Date</a></li>
-                    <li><a href="">Capitalize</a></li>
-                    <li><a href="">Uppercase</a></li>
-                    <li><a href="">LowerCase</a></li>
-                    <li><a href="">Json</a></li>
-                    <li><a href="">Currency</a></li>
-                    <li><a href="">Number</a></li>
-                    <li><a href="">Sortby</a></li>
-                    <li><a href="">Orderby</a></li>
-                    <li><a href="">Limitby</a></li>
-                    <li><a href="">Pluralize</a></li>
-                </ul>
-                <p>Helpers</p>
-                <ul class="">
-                    <li><a href="#delimiter">dom</a></li>
-                    <li><a href="#delimiter">noop</a></li>
-                    <li><a href="#delimiter">$extend</a></li>
-                    <li><a href="#delimiter">$isUndefined</a></li>
-                    <li><a href="#delimiter">$isDefined</a></li>
-                    <li><a href="#delimiter">$isObject</a></li>
-                    <li><a href="#delimiter">$isString</a></li>
-                    <li><a href="#delimiter">$isNumber</a></li>
-                    <li><a href="#delimiter">$isArray</a></li>
-                    <li><a href="#delimiter">$inArray</a></li>
-                    <li><a href="#delimiter">$isFunction</a></li>
-                    <li><a href="#delimiter">$create</a></li>
-                    <li><a href="#delimiter">$copy</a></li>
-                    <li><a href="#delimiter">$isEmpty</a></li>
-                    <li><a href="#delimiter">$isEqual</a></li>
-                    <li><a href="#delimiter">$initializer</a></li>
-                    <li><a href="#delimiter">$parseJSON</a></li>
-                    <li><a href="#delimiter">$parseXML</a></li>
-                    <li><a href="#delimiter">$serialize</a></li>
-                    <li><a href="#delimiter">$unSerialize</a></li>
-                    <li><a href="#delimiter">$externalLoader</a></li>
-                    <li><a href="#delimiter">$stringToObject</a></li>
-                    <li><a href="#delimiter">$isJsonString</a></li>
-                    <li><a href="#delimiter">$isNull</a></li>
-                    <li><a href="#delimiter">bind</a></li>
-                    <li><a href="#delimiter">forEach</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-                <section id="jeliapi">
-                    <h4 class="page-header">jeli Module</h4>
-                    <section id="jmodule">
-                        <h5># jeli(name, options)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments</p>
-                                <ul>
-                                    <li><code>{string} name (required)</code></li>
-                                    <li><code>{object} options</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Return</p>
-                                <p><code>{object} jeli instance</code></p>
-                            </li>
-                            <li>
-                                <p>Usage</p>
-                                <p>Create a new "jeli module Instance", options argument is required when creating a module for the first time. The options should contain the module configuration</p>
-                                <!--?prettify lang=js linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmodulescript">
-                                </pre>
-                                <p>Modules created can be used to bootstrap application, or used as required modules.</p>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jConfig">
-                        <h5># Module.config(configuration)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments</p>
-                                <ul>
-                                    <li><code>{Function} configuration</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Dependency Injection: Yes</p>
-                            </li>
-                            <li>
-                                <p>Usage</p>
-                                <p>Set configuration for a module using the jConfig api, table below shows the injectable dependencies for jConfig:</p>
-                                <table class="table">
-                                    <thead>
-                                        <th>Service</th>
-                                        <th>Providers</th>
-                                        <th>Value</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>No</td>
-                                            <td>yes</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                        </ul>
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="jconfigscript">
-                        </pre>
-                        <p>Once application bootstrap, all configuration are first initialized.</p>
-                    </section>
-                </section>
-
-                <section id="jProvider">
-                    <h5># Module.provider(providerName, providerFn)</h5>
+    <div class="container">
+        <div class="docs-layout">
+            <aside class="docs-sidebar">
+                <div class="sidebar-group">
+                    <p class="sidebar-group-title">@jeli/core</p>
                     <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{string} providerName</code></li>
-                                <li><code>{Function} providerFn</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: No</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>The provider is useful for setting and getting module configuration. <code>$get</code> api must be defined in the provider instance. Below table shows injectable dependencies for <code>$get</code> api</p>
-                            <table class="table">
-                                <thead>
-                                    <th>Factory</th>
-                                    <th>Service</th>
-                                    <th>Providers</th>
-                                    <th>Value</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Yes</td>
-                                        <td>Yes</td>
-                                        <td>Yes</td>
-                                        <td>Yes</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </li>
+                        <li><a href="#element">Decorators &amp; options</a></li>
+                        <li><a href="#di-api">Dependency injection</a></li>
+                        <li><a href="#bootstrap">Bootstrap &amp; change detection</a></li>
+                        <li><a href="#lifecycle-api">Lifecycle</a></li>
+                        <li><a href="#rx">Reactive primitives</a></li>
+                        <li><a href="#animation">Animation</a></li>
+                        <li><a href="#devtools">Devtools</a></li>
+                        <li><a href="#core-internals">Renderer &amp; internals</a></li>
+                        <li><a href="#utilities">Utilities</a></li>
                     </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jproviderscript">
-                        </pre>
-                </section>
-
-
-                <section id="jService">
-                    <h5># Module.service(name, [definition])</h5>
+                </div>
+                <div class="sidebar-group">
+                    <p class="sidebar-group-title">@jeli/common</p>
                     <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{string} name</code></li>
-                                <li><code>{Function} definition</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: Yes</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>As jEli apis are singleton, <code>service</code> api can be used to get new Instance of a Function.</p>
-                        </li>
+                        <li><a href="#common">Structural directives &amp; pipes</a></li>
                     </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jservicescript">
-                        </pre>
-                </section>
-
-                <section id="jFilter">
-                    <h5># Module.filter(name, [definition])</h5>
+                </div>
+                <div class="sidebar-group">
+                    <p class="sidebar-group-title">@jeli/form</p>
                     <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{string} name</code></li>
-                                <li><code>{function} definition</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: Yes</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>Register a global filter.</p>
-                        </li>
+                        <li><a href="#form">Controls, directives &amp; validators</a></li>
                     </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jfilterscript">
-                        </pre>
-                </section>
-
-                <section id="jValue">
-                    <h5># Module.value(name, [definition])</h5>
+                </div>
+                <div class="sidebar-group">
+                    <p class="sidebar-group-title">@jeli/http</p>
                     <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{string} name</code></li>
-                                <li><code>{Function | Object} definition</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: No</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>Register a global value.</p>
-                        </li>
+                        <li><a href="#http">HttpService &amp; transports</a></li>
                     </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jvaluescript">
-                        </pre>
-                </section>
-
-                <section id="jComponent">
-                    <h5># Module.element([definition])</h5>
+                </div>
+                <div class="sidebar-group">
+                    <p class="sidebar-group-title">@jeli/router</p>
                     <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{object} [definition]</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: Yes</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>Register a global component that can be used to extend html.</p>
-                        </li>
+                        <li><a href="#router">RouterModule &amp; routing</a></li>
                     </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jcomponentscript">
-                        </pre>
-                </section>
+                </div>
+            </aside>
 
-                <section id="jElement">
-                    <h5># Module.directive(name, [definition])</h5>
-                    <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{string} name</code></li>
-                                <li><code>{function} definition</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: Yes</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>Register a global directive.</p>
-                        </li>
-                    </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jelementscript">
-                        </pre>
-                </section>
+            <main class="docs-main">
+                <p class="eyebrow">API reference</p>
+                <h1>API</h1>
+                <p class="muted">Covers the real, current runtime API - grounded in each package's <code>index.d.ts</code>. Internal/advanced classes (renderer, DI plumbing) are listed for completeness but most application code won't touch them directly.</p>
 
-                <section id="jInit">
-                    <h5># Module.jInit([definition])</h5>
-                    <ul>
-                        <li>
-                            <p>Arguments</p>
-                            <ul>
-                                <li><code>{function} definition</code></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p>Dependency Injection: Yes</p>
-                        </li>
-                        <li>
-                            <p>Usage</p>
-                            <p>Register a module initializer.</p>
-                        </li>
-                    </ul>
-                    <!--?prettify lang=js linenums=true?-->
-                    <pre class="prettyprint lang-html" id="jinitscript">
-                        </pre>
-                </section>
-                </section>
+                <section id="element">
+                    <h2>@jeli/core - Decorators &amp; options</h2>
 
-                <section id="jelimodelapi">
-                    <h4 class="page-header">jEli ViewModel Api</h4>
-                    <section id="viewModelNew">
-                        <h5># model.$new(isolate)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments:</p>
-                                <ul>
-                                    <li><code>{boolean} isolate</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Return: <code>{object}</code> Model Instance</p>
-                            </li>
-                        </ul>
-                        </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelnewscript">
-                        </pre>
-                    </section>
-
-                    <section id="viewModelEvaluate">
-                        <h5># model.$evaluate(expr, context)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments:</p>
-                                <ul>
-                                    <li><code>{string} expr</code></li>
-                                    <li><code>{object} context (optional)</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Usage:</p>
-                                <p>Evaluate a valid binding expression on the current viewModel. </p>
-                            </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelevalscript">
-                        </pre>
-                    </section>
-                    <section id="viewModelApply">
-                        <h5># model.$apply(callback)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments:</p>
-                                <ul>
-                                    <li><code>{function} callback (optional)</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Type: <code>Function</code></p>
-                            </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelapplyscript">
-                        </pre>
-                    </section>
-
-                    <section id="viewModelWatch">
-                        <h5># model.$watch(expr, callback)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments:</p>
-                                <ul>
-                                    <li><code>{string | function} expr</code></li>
-                                    <li><code>{function} callback (optional)</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Return: <code>unwatch</code></p>
-                            </li>
-                            <li>
-                                <p>Usage:</p>
-                                <p>Watch an expression or a computed function on the viewModel for changes. The callback gets called with the new value and the old value. The expression can be a single keypath or any valid binding expressions</p>
-                            </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelwatchscript">
-                        </pre>
-                    </section>
-
-                    <section id="viewModelconsume">
-                        <h5># model.$consume()</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments: None</p>
-                            </li>
-                            <li>
-                                <p>Type: <code>{Function}</code></p>
-                            </li>
-                            <li>
-                                <p>Details:</p>
-                                <p>Triggers every watch listner on a viewModel</p>
-                            </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelconsumescript">
-                        </pre>
-                    </section>
-
-                    <section id="viewModeldestroy">
-                        <h5># model.$destroy()</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments: None</p>
-                            </li>
-                            <li>
-                                <p>Type: <code>{Function}</code></p>
-                            </li>
-                            <li>
-                                <p>Details:</p>
-                                <p>When called, all listeners and bindings to the viewModel are destroy and detached and also the model is destroyed and ready for GC.</p>
-                            </li>
-                        </ul>
-                        </pre>
-                    </section>
-                </section>
-                <section id="jelimodelevents">
-                    <h4 class="page-header">jEli ViewModel Events</h4>
-                    <section id="viewModelon">
-                        <h5># model.$on(eventName, callback)</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments:</p>
-                                <ul>
-                                    <li><code>{string} eventName</code></li>
-                                    <li><code>{function} callback</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Details:</p>
-                                <p>Listen for a custom event on the current vm. Events can be triggered by <code>vm.$emit, vm.$dispatch or vm.$broadcast</code>. The callback will receive all the additional arguments passed into these event-triggering methods.</p>
-                            </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelonscript">
-                        </pre>
-                    </section>
-                    <section id="viewModelon">
-                        <h5># model.$broadcast(eventName, [...args])</h5>
-                        <ul>
-                            <li>
-                                <p>Arguments:</p>
-                                <ul>
-                                    <li><code>{string} eventName</code></li>
-                                    <li><code>[...args]</code></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Usage:</p>
-                                <p>Broadcast an event that propagates downward to all descendants of the current vm. Since the descendants expand into multiple sub-trees, the event propagation will follow many different “paths”. The propagation for each
-                                    path will stop when a listener callback is fired along that path, unless the callback returns true.</p>
-                            </li>
-                        </ul>
-
-                        <!--?prettify lang=js linenums=true?-->
-                        <pre class="prettyprint lang-html" id="modelbroadcastscript">
-                        </pre>
-                    </section>
-                </section>
-
-                <section id="jelimodelevents">
-                    <h4 class="page-header">jEli Directives</h4>
-                    <p>Directive can used with the <code>j-</code> prefix or shorthand <code>:</code>prefix</p>
-                    <section id="jmoduledir">
-                        <h5># :module</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>This directive tells jEli what module to be used for bootstraping </p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmoduledirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jcontrollerdir">
-                        <h5># :controller</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jctrldirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jinitdir">
-                        <h5># :init</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jinitdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jifdir">
-                        <h5># :if</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jifdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jhrefdir">
-                        <h5># :href</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jhrefdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jsrcdir">
-                        <h5># :src</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jsrcdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jincludedir">
-                        <h5># :include</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jincludedirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jfordir">
-                        <h5># :for</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jfordirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jdodir">
-                        <h5># :do</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jdodirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jhidedir">
-                        <h5># :hide</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jhidedirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jshowdir">
-                        <h5># :show</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jshowdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jclassdir">
-                        <h5># :class</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jclassdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jstyledir">
-                        <h5># :style</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jstyledirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jdisabledir">
-                        <h5># :disabled</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jdisableddirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jmodeldir">
-                        <h5># :model</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmodeldirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jvaluedir">
-                        <h5># :value</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jvaluedirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jhtmldir">
-                        <h5># :html</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jhtmldirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jcheckeddir">
-                        <h5># :checked</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jcheckdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jselecteddir">
-                        <h5># :selected</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jselectdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jswitchdir">
-                        <h5># :switch</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jswitchdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jskipdir">
-                        <h5># :skip</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jskipdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jpatterndir">
-                        <h5># :pattern</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jpatterndirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jmaxdir">
-                        <h5># :max</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmaxdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jmindir">
-                        <h5># :min</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmindirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jnumberdir">
-                        <h5># :number</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p></p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jnumberdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-                </section>
-
-                <section id="jEliEvents">
-                    <h4 class="page-header">jEli Event Directive</h4>
-                    <p>Attaches an event listener to the element. The event type is denoted by the argument. The expression can either be a method name or an inline statement</p>
-                    <section id="jclickdir">
-                        <h5># jClick</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on click event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @click</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jclickdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jdblclickdir">
-                        <h5># jDblclick</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on doubleClick event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @dblclick</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jdblclickdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jsubmitdir">
-                        <h5># jSubmit</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on submit event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @submit</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jsubmitdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jsubmitdir">
-                        <h5># jMouseover</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on mouseover event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @mouseover</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmouseoverdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jsubmitdir">
-                        <h5># jMouseenter</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on mouseenter event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @mouseenter</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmouseenterdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jMousemovedir">
-                        <h5># jMousemove</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on submit event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @mousemove</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmousemovedirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jMousedowndir">
-                        <h5># jMousedown</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on mousedown event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @mousedown</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmousedowndirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jmouseupdir">
-                        <h5># jMouseup</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on mouseup event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @mouseup</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jmouseupdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jkeyupdir">
-                        <h5># jKeyup</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on keyup event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @keyup</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jkeyupdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jkeydowndir">
-                        <h5># jKeydown</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on keydown event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @keydown</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jkeydowndirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jkeypressdir">
-                        <h5># jKeypress</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on keypress event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @keypress</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jkeypressdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jblurdir">
-                        <h5># jBlur</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on blur event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @blur</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jblurdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section id="jfocusdir">
-                        <h5># jFocus</h5>
-                        <ul>
-                            <li>
-                                <p>Details:</p>
-                                <p>Specify custom behaviour on foucs event.</p>
-                            </li>
-                            <li>
-                                <p>ShortHand: @focus</p>
-                            </li>
-                            <li>
-                                <p>example</p>
-                                <!--?prettify lang=html linenums=true?-->
-                                <pre class="prettyprint lang-html" id="jfocusdirscript">
-                                </pre>
-                            </li>
-                        </ul>
-                    </section>
-                </section>
-
-                <hr>
-                <!-- Footer -->
-                <footer>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p>Copyright &copy; jEliJS.com 2014 - 2017. Proudly Sponsored by <a href="bezynet.com/bezynet">Bezynet INC.</a> All rights reserved</p>
-                        </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Element(options: ElementOptions)</h4><span class="api-kind">decorator</span></div>
+                        <p>Declares a component: selector, template, DI, and its input/output surface.</p>
+                        <pre><code>selector: string;              // must contain a hyphen
+template?: string;             // plain string, not a template literal
+templateUrl?: string;
+style?: string;
+styleUrl?: string;
+asNative?: boolean;            // compile to a real customElements.define()
+useShadowDom?: boolean;        // only meaningful with asNative
+props?: string[];              // "name" | "name:Type" | "name:Type=default"
+events?: string[];             // "eventName: handlerCall($event)"
+DI?: any[];
+resolve?: any[];
+viewChild?: string[];          // "field=#refId" | "field:Type=#refId"
+contentChild?: string[];       // same syntax - must resolve to QueryList
+contentChildren?: string[];</code></pre>
+                        <p class="muted"><code>Element</code> itself is not declared as a global TypeScript function - it collides with the DOM's own global <code>Element</code> interface. Type the options object directly instead.</p>
                     </div>
-                </footer>
-            </div>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Directive(options: DirectiveOptions)</h4><span class="api-kind">decorator</span></div>
+                        <p>Behavior attached to an existing element - no template of its own. Same option shape as <code>Element</code> minus template/style fields.</p>
+                    </div>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Service(options?: ServiceOptions)</h4><span class="api-kind">decorator</span></div>
+                        <p>An injectable, singleton-by-default class.</p>
+                        <pre><code>DI?: any[];
+resolve?: any[];
+registerAs?: any;</code></pre>
+                    </div>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Provider(options: ProviderOptions)</h4><span class="api-kind">decorator</span></div>
+                        <p>Registers an alternative implementation against an existing DI token. Extends <code>ServiceOptions</code>.</p>
+                        <pre><code>useExisting?: any;
+useClass?: Function;
+useValue?: any;
+useFactory?: Function;</code></pre>
+                    </div>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Pipe(options?: PipeOptions)</h4><span class="api-kind">decorator</span></div>
+                        <p>A <code>value | pipeName:arg</code> template transform. Extends <code>ServiceOptions</code>, plus <code>selector?: string</code>.</p>
+                    </div>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>jModule(options: JModuleOptions)</h4><span class="api-kind">decorator</span></div>
+                        <pre><code>services?: (Function | { name: any; useClass?; factory?; DI?; value? })[];
+requiredModules?: Function[];
+selectors?: (Function | { useExisting: Function; selector: string })[];
+exports?: any[];
+rootElement?: Function;   // only meaningful on the module passed to bootStrapApplication()</code></pre>
+                    </div>
+                </section>
+
+                <section id="di-api">
+                    <h2>Dependency injection</h2>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>class ProviderToken&lt;T&gt;</h4><span class="api-kind">class</span></div>
+                        <p>A DI token for non-class values (config, primitives). <code>new ProviderToken(tokenName, multiple?, provide?)</code>.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Inject&lt;T&gt;(dep, localInjector?): T</h4><span class="api-kind">function</span></div>
+                        <p>Resolves a single dependency descriptor - the same resolution logic constructor injection uses internally.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>AutoWire(constructorFN, localInjector?, callback?)</h4><span class="api-kind">function</span></div>
+                        <p>Constructs <code>constructorFN</code>, resolving its declared <code>ctors.DI</code> and injecting them positionally.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>staticInjectionToken</h4><span class="api-kind">const</span></div>
+                        <p>The set of runtime-only tokens injectable without a registered service: <code>ElementRef</code>, <code>TemplateRef</code>, <code>ContentData</code>, <code>changeDetector</code>, <code>ViewRef</code>, <code>ParentRef</code>, <code>VALIDATORS</code>, <code>QueryList</code>, <code>HostRef</code>, <code>HTMLElement</code>, <code>ContentHostRef</code>, <code>HostElement</code>. Request these with a trailing <code>?</code> in a <code>DI</code> array (see the <a href="../guide/#di">guide</a>).</p>
+                    </div>
+                </section>
+
+                <section id="bootstrap">
+                    <h2>Bootstrap &amp; change detection</h2>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>bootStrapApplication(moduleToBootStrap): Promise&lt;void&gt;</h4><span class="api-kind">function</span></div>
+                        <p>Compiles and mounts a <code>jModule</code>'s <code>rootElement</code> at its selector in the document.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>ChangeDetector(): void</h4><span class="api-kind">function</span></div>
+                        <p>Triggers a full, app-wide change-detection sweep from the bootstrapped root.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>changeDetector (per-component, injected)</h4><span class="api-kind">instance</span></div>
+                        <p>Injected via <code>DI: ['changeDetector?']</code>. Methods:</p>
+                        <table>
+                            <tbody>
+                                <tr><td><code>detectChanges()</code></td><td>Normal cascade trigger (no-op if this component is in manual mode).</td></tr>
+                                <tr><td><code>onlySelf()</code></td><td>Re-checks this component and its children, not its parent.</td></tr>
+                                <tr><td><code>manualCheck()</code></td><td>Bypasses the manual-mode gate entirely - for a manual-mode component's own explicit self-trigger.</td></tr>
+                                <tr><td><code>markAsManual()</code></td><td>Opts this component out of the automatic cascade permanently (until <code>manualCheck()</code> is called explicitly).</td></tr>
+                                <tr><td><code>markAsChecked()</code> / <code>markAsUnChecked()</code> / <code>markAsOnce()</code></td><td>Lower-level state control.</td></tr>
+                                <tr><td><code>status</code></td><td>Current detector state (getter).</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>enableHydrationMode() / disableHydrationMode()</h4><span class="api-kind">function</span></div>
+                        <p>Opt-in flag: when enabled immediately before <code>bootStrapApplication()</code>, the root and its structural-directive-free descendants adopt existing server-rendered DOM nodes instead of recreating them. Structural-directive-containing subtrees fall back to a full remount.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>INITIALIZERS / APP_BOOTSTRAP / APP_BASE_HREF / APP_ASSET_URL</h4><span class="api-kind">ProviderToken</span></div>
+                        <p><code>INITIALIZERS</code> resolve (as promises) before the root component mounts; <code>APP_BOOTSTRAP</code> callbacks fire right after it does.</p>
+                    </div>
+                </section>
+
+                <section id="lifecycle-api">
+                    <h2>Lifecycle</h2>
+                    <p>See the <a href="../guide/#lifecycle"><code>didInit</code>/<code>viewDidLoad</code>/<code>viewDidDestroy</code> hooks</a> in the guide. Internally these are driven by the <code>LifeCycle</code> class (<code>component/lifecycle.js</code>), which also exposes an opt-in promise-tracking mode (<code>enableLifecyclePromiseTracking()</code>/<code>drainLifecyclePromises()</code>) used by server-render tooling to await async <code>didInit()</code> work before serializing.</p>
+                </section>
+
+                <section id="rx">
+                    <h2>Reactive primitives</h2>
+                    <p>A small, hand-rolled reactive layer - not RxJS-compatible, but shaped similarly.</p>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>class Subject&lt;T&gt;</h4><span class="api-kind">class</span></div>
+                        <p><code>next(value)</code>, <code>subscribe(success, error?, completed?)</code> → unsubscribe function. <code>@jeli/http</code>'s <code>HttpService</code> returns one of these per request.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>rxWatch(source, changeDetector, onNext?): () =&gt; void</h4><span class="api-kind">function</span></div>
+                        <p>Subscribes to a <code>Subject</code>-shaped <code>source</code>; on every emission calls <code>onNext(value)</code> then <code>changeDetector.manualCheck()</code>. The standard pairing with <code>markAsManual()</code> - see the <a href="../guide/#change-detection">guide</a>.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>debounce(func, wait, immediate?)</h4><span class="api-kind">function</span></div>
+                        <p>Classic debounce helper; <code>rxDebounceTime(timeout, immediate?)</code> adapts it to the <code>(value, listener)</code> operator shape below.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>rxWhile / rxUntilChanged</h4><span class="api-kind">function</span></div>
+                        <p>Operator-shaped helpers: <code>(value, next) =&gt; next(passed)</code>. <code>rxUntilChanged()</code> gates on <code>isequal</code> against the previous value.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>rxEvents(target, eventNames): () =&gt; void</h4><span class="api-kind">function</span></div>
+                        <p>Registers one or more DOM event listeners on <code>target</code>; returns a cleanup function that removes them.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>class EventEmitter / class Observer / class Promise2</h4><span class="api-kind">class</span></div>
+                        <p>Lower-level primitives <code>Subject</code> and the rest of the rx layer are built from.</p>
+                    </div>
+                </section>
+
+                <section id="animation">
+                    <h2>Animation</h2>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>animate(element, styles, speed?, callback?, easing?)</h4><span class="api-kind">function</span></div>
+                        <p>Animates numeric style properties over <code>speed</code> milliseconds. <code>styles</code> is either a <code>{prop: targetValue}</code> map or a <code>(delta) =&gt; void</code> callback for full control. <code>easing</code> is one of <code>linear</code> / <code>quadratic</code> / <code>swing</code> (default) / <code>circ</code> / <code>back</code> / <code>bounce</code> / <code>elastic</code>.</p>
+                        <p>Shorthand helpers: <code>animate.hide</code>, <code>animate.show</code>, <code>animate.fadeIn</code>, <code>animate.fadeOut</code>, <code>animate.slideUp</code>, <code>animate.slideDown</code>, <code>animate.toggleSlide</code> - each <code>(element, speed?, callback?)</code>.</p>
+                    </div>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>createAnimation(config: AnimationConfig): AnimationController</h4><span class="api-kind">function</span></div>
+                        <p>A declarative, named-state config built on top of <code>animate()</code>. Scoped to unitless numeric CSS properties (opacity, zIndex, ...).</p>
+                        <pre><code>const fade = createAnimation({
+    states: { void: { opacity: 0 }, visible: { opacity: 1 } },
+    transitions: {
+        'void => visible': { duration: 200, easing: 'swing' }
+    },
+    defaults: { duration: 300, easing: 'swing' }
+});
+
+fade.trigger(element, 'visible');       // Promise&lt;void&gt;
+fade.currentState(element);             // 'visible' | 'void' | ...</code></pre>
+                        <table>
+                            <tbody>
+                                <tr><td><code>trigger(element, toName, fromName?)</code></td><td>Transitions to the named state; <code>fromName</code> defaults to whichever state was last reached (or <code>'void'</code>). Resolves once the transition completes.</td></tr>
+                                <tr><td><code>currentState(element)</code></td><td>The state name last reached via <code>trigger()</code>.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="devtools">
+                    <h2>Devtools</h2>
+                    <p><code>global.jeli.devtools</code> - attached automatically when <code>@jeli/core</code> loads, callable from any browser/Node console.</p>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>getComponentTree(elementRef?): DevtoolsComponentTreeNode | null</h4><span class="api-kind">function</span></div>
+                        <p>A plain snapshot of the live element tree from the bootstrapped root (or a given <code>elementRef</code>): <code>{ refId, tagName, isComponent, componentInstance?, children }</code> per node.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>inspectElement(nativeNode): ElementRef | TextNodeRef | null</h4><span class="api-kind">function</span></div>
+                        <p>Finds the live wrapper object behind a native DOM node.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>inspectComponent(target): DevtoolsComponentInfo | null</h4><span class="api-kind">function</span></div>
+                        <p><code>target</code> is a native DOM node or a component instance. Returns <code>{ selector, instance, refId, changeDetectorStatus, dependencies }</code> - each dependency described from its declared <code>ctors.DI</code> entry, with a resolved singleton instance where one exists.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>enableSingletonTracking() / disableSingletonTracking() / getSingletonInstances()</h4><span class="api-kind">function</span></div>
+                        <p>Opt-in (off, zero overhead by default) log of every singleton service/component instantiated via <code>Inject()</code> since tracking was enabled. <code>getSingletonInstances()</code> returns <code>null</code> when tracking isn't on, otherwise <code>{name, instance}[]</code> in creation order.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>global.jeli.debug(nativeNode)</h4><span class="api-kind">function</span></div>
+                        <p>Returns the component/template context bound to a native DOM node - the original, minimal debug hook, still available alongside <code>devtools</code>.</p>
+                    </div>
+                </section>
+
+                <section id="core-internals">
+                    <h2>Renderer &amp; internals</h2>
+                    <p class="muted">These back the compiled template output (<code>core.ViewParser.jit(...)</code> calls jeli-cli emits) - most application code interacts with them indirectly, through templates and lifecycle hooks, not directly.</p>
+                    <table>
+                        <thead><tr><th>Symbol</th><th>Role</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>ViewParser</code></td><td>Interprets a compiled template AST into real DOM (the JIT renderer).</td></tr>
+                            <tr><td><code>ElementRef</code> / <code>TextNodeRef</code></td><td>Wrapper objects around a native element/text node - hold binding subscriptions, DI, and the parent/child tree used by <code>devtools</code>.</td></tr>
+                            <tr><td><code>ComponentRef</code></td><td>Per-component registry entry: change detector, observables, parent/child refIds.</td></tr>
+                            <tr><td><code>TemplateRef</code> / <code>ViewRef</code></td><td>Named-template (<code>#refId</code>) resolution and light-DOM content projection.</td></tr>
+                            <tr><td><code>ElementCompiler</code></td><td>Drives a component's compile-then-mount sequence.</td></tr>
+                            <tr><td><code>EventHandler</code></td><td>DOM event delegation/dispatch for compiled <code>@event</code> bindings.</td></tr>
+                            <tr><td><code>AttributeAppender</code> / <code>ElementClassList</code> / <code>ElementStyle</code></td><td>Attribute/class/style binding appliers.</td></tr>
+                            <tr><td><code>QueryList&lt;T&gt;</code></td><td>An <code>Array</code> subclass backing <code>viewChild</code>/<code>contentChild</code> query results, with an <code>onChanges</code> subject.</td></tr>
+                            <tr><td><code>createCustomElement</code> / <code>CompileNativeElement</code></td><td>The Web Components bridge behind <code>asNative</code>.</td></tr>
+                            <tr><td><code>ComponentFactoryResolver</code></td><td>Programmatically instantiates and mounts a component factory.</td></tr>
+                            <tr><td><code>IterableProfiler</code></td><td><code>*for</code>'s diff engine - a doubly-linked-list-backed keyed diff (create/move/delete) between renders.</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="utilities">
+                    <h2>Utilities</h2>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>class LazyLoader</h4><span class="api-kind">class</span></div>
+                        <p>Dynamic script/CSS loading with caching and dedupe: <code>LazyLoader.js(obj, callback?)</code>, <code>.css(obj)</code> (both via <code>&lt;script&gt;</code>/<code>&lt;link&gt;</code> tag injection), and <code>LazyLoader.resolveModule(filePaths, callback?)</code> - a real dynamic-<code>import()</code>-based alternative sharing the same cache.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>errorBuilder(error, logLevel?, stack?)</h4><span class="api-kind">function</span></div>
+                        <p>The framework's internal error/warning logger - also usable from application code.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>MediaQueryEvent(breakPoints, callback): () =&gt; void</h4><span class="api-kind">function</span></div>
+                        <p>Subscribes to a set of pixel breakpoints via <code>matchMedia</code>; returns an unsubscribe function.</p>
+                    </div>
+                </section>
+
+                <section id="common">
+                    <h2>@jeli/common</h2>
+                    <p>Registered via <code>CommonModule</code> in a <code>jModule</code>'s <code>requiredModules</code>. Backs the structural-directive attribute syntax and the built-in pipes.</p>
+
+                    <table>
+                        <thead><tr><th>Directive</th><th>Selector / usage</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>ForDirective</code></td><td><code>*for="item of collection; idx=index"</code> / <code>@for (...) { }</code></td></tr>
+                            <tr><td><code>IfDirective</code></td><td><code>*if="cond; else as X"</code> / <code>@if (...) { } @else { }</code></td></tr>
+                            <tr><td><code>SwitchDirective</code> / <code>SwitchCaseDirective</code> / <code>SwitchDefaultDirective</code></td><td><code>{:switch}</code> / <code>*switchCase</code> / <code>*switchDefault</code>, or <code>@switch</code>/<code>@case</code>/<code>@switchDefault</code></td></tr>
+                            <tr><td><code>ClassDirective</code></td><td><code>{jClass}="{active: isActive}"</code> (or a plain string) - a conditional class-list add/remove directive</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="muted">The native <code>class</code> attribute can also be bound directly (<code>{class}="{active: isActive}"</code>) via the generic property-binding path (<a href="#element">core</a>, not this package) - either form works; <code>ClassDirective</code>/<code>jClass</code> specifically diffs against the previously-applied class instead of overwriting the attribute wholesale.</p>
+
+                    <table>
+                        <thead><tr><th>Pipe</th><th>Usage</th></tr></thead>
+                        <tbody>
+                            <tr><td>capitalize</td><td><code>${name | capitalize}</code></td></tr>
+                            <tr><td>currency</td><td><code>${amount | currency}</code></td></tr>
+                            <tr><td>json</td><td><code>${obj | json}</code></td></tr>
+                            <tr><td>lowercase / uppercase</td><td><code>${str | lowercase}</code></td></tr>
+                            <tr><td>number</td><td><code>${n | number}</code></td></tr>
+                            <tr><td>orderBy</td><td><code>${list | orderBy:'field'}</code></td></tr>
+                            <tr><td>filter</td><td><code>${list | filter:{field: value}}</code> - object-shaped predicate</td></tr>
+                            <tr><td>whereFilter</td><td><code>${list | whereFilter:"id === 'a'"}</code> - string query expression</td></tr>
+                            <tr><td>reverse</td><td><code>${list | reverse}</code></td></tr>
+                            <tr><td>sizeToUnit</td><td><code>${bytes | sizeToUnit}</code></td></tr>
+                        </tbody>
+                    </table>
+                    <p class="muted"><code>@jeli/common/datetime</code> additionally provides a <code>dateTime</code>/<code>timeAgo</code> pipe set and a <code>&lt;jx-calendar&gt;</code> element - import <code>DateTimeModule</code> separately.</p>
+                </section>
+
+                <section id="form">
+                    <h2>@jeli/form</h2>
+                    <p>Registered via <code>FormModule</code>. A <code>FormGroup</code>/<code>FormControl</code>-shaped model - naming is the reverse of what it sounds like coming from Angular: <code>FormControlService</code> is the <em>group</em>, <code>FormFieldControlService</code> is the <em>single field</em>. Both extend a shared <code>FormControlAbstract</code> (<code>value</code>, <code>valid</code>/<code>invalid</code>, <code>enabled</code>/<code>disabled</code>, <code>touched</code>/<code>untouched</code>, <code>error</code>, <code>valueChanges</code>/<code>statusChanged</code> event emitters, <code>setValue</code>/<code>patchValue</code>/<code>reset</code>/<code>enable</code>/<code>disable</code>/<code>setValidators</code>/<code>getError</code>/<code>hasError</code>).</p>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>FormFieldControlService</h4><span class="api-kind">service</span></div>
+                        <p>A single control's value/validity state - jeli's equivalent of Angular's <code>FormControl</code>. Bound directly via <code>{fieldControl}="control"</code>, or created internally by <code>model</code>/<code>formField</code>.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>FormControlService</h4><span class="api-kind">service</span></div>
+                        <p>A named group of <code>FormFieldControlService</code>/nested <code>FormControlService</code> instances - jeli's equivalent of Angular's <code>FormGroup</code>. <code>getField('a.b')</code> resolves nested groups by dot-path; <code>addField</code>/<code>removeField</code>/<code>patchValue</code>/<code>setValue</code>/<code>forEachField</code>/<code>allTouched()</code>/<code>getAllValues()</code>.</p>
+                        <pre><code>const form = new FormControlService({
+    name: { value: '', validators: { required: true, minlength: 2 } },
+    email: { value: '', validators: { required: true, emailvalidation: true } }
+});</code></pre>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>FormRepeaterService</h4><span class="api-kind">service</span></div>
+                        <p>An indexed array of controls - Angular's <code>FormArray</code> equivalent. Each entry is a <code>FormFieldControlService</code>, or a full <code>FormControlService</code> group when constructed with a field config.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Directives</h4><span class="api-kind">directive</span></div>
+                        <table>
+                            <tbody>
+                                <tr><td><code>model</code></td><td>Plain two-way binding via its own internal <code>FormFieldControlService</code> - <code>{:model}="prop"</code>.</td></tr>
+                                <tr><td><code>formControl</code></td><td>Binds a <code>FormControlService</code> (group) to a container - <code>{formControl}="form"</code>.</td></tr>
+                                <tr><td><code>formControlName</code></td><td>References a named field on the nearest ancestor <code>formControl</code> - <code>formControlName="email"</code>.</td></tr>
+                                <tr><td><code>formField</code></td><td>Declares <em>and</em> auto-registers a field on the nearest ancestor <code>formControl</code>, by name - <code>formField="email"</code>.</td></tr>
+                                <tr><td><code>fieldControl</code></td><td>Binds a standalone <code>FormFieldControlService</code> directly, no group - <code>{fieldControl}="emailControl"</code>.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Value accessors</h4><span class="api-kind">directive</span></div>
+                        <p>Bridge a native input type's own change-event shape to a uniform value: <code>DefaultEventBinder</code> (text/textarea), <code>CheckboxEventBinder</code>, <code>RadioEventBinder</code> (+ <code>RadioEventContainer</code>), <code>SelectEventBinder</code> (+ <code>OptionDirective</code>), <code>NumberEventBinder</code>, <code>RangeEventBinder</code> - matched automatically to the element/input type via the <code>VALUE_ACCESSOR</code> multi-token, nothing to configure.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>Validators</h4><span class="api-kind">function</span></div>
+                        <p>Two sources, combinable: native HTML5 attributes (<code>required</code>, <code>pattern</code>, <code>minlength</code>, <code>maxlength</code> on the element itself, picked up automatically), or an explicit config object passed at construction / via <code>setValidators({...})</code>, keys matched case-insensitively against the built-in stack: <code>required</code>, <code>requiredtrue</code>, <code>minlength</code>, <code>maxlength</code>, <code>pattern</code>, <code>emailvalidation</code>, <code>minnumber</code>, <code>maxnumber</code>, <code>domainvalidation</code>, <code>mediumpasswordstrength</code>, <code>strongpasswordstrength</code>, <code>isempty</code>, <code>boolean</code> - or a plain <code>(value) =&gt; boolean</code> function, or an <code>async</code> key for an async validator.</p>
+                        <p><code>FormValidatorService(callback, validators?, isDeep?)</code> runs a validator set directly; <code>customFormValidator(name, fn, override?)</code> registers a new named validator globally.</p>
+                    </div>
+                </section>
+
+                <section id="http">
+                    <h2>@jeli/http</h2>
+                    <p>Registered via <code>HttpModule</code> (optionally <code>HttpCSRFModule</code> for cookie-based CSRF headers).</p>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>HttpService</h4><span class="api-kind">service</span></div>
+                        <p><code>get</code>/<code>post</code>/<code>put</code>/<code>delete</code>/<code>patch</code>-style methods, each returning a <code>Subject</code> (not a Promise) that emits once with the parsed response, or errors via its error channel.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>useFetchTransport() / useXhrTransport()</h4><span class="api-kind">function</span></div>
+                        <p>Switches the underlying transport globally. XHR is the default; <code>useFetchTransport()</code> swaps in a <code>fetch()</code>-backed adapter (<code>FetchXHRAdapter</code>) with the same public surface - no upload-progress or unknown-length-download-progress support.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>setXhrFactory(factory)</h4><span class="api-kind">function</span></div>
+                        <p>Overrides how a raw <code>XMLHttpRequest</code>-shaped object gets constructed - the seam <code>useFetchTransport()</code> itself is built on; useful for tests.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>HTTP_INTERCEPTORS</h4><span class="api-kind">ProviderToken</span></div>
+                        <p>A multi-token - register a class here (via a module's <code>services</code>) to intercept every request/response.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>HttpRequestError / HttpResponse</h4><span class="api-kind">class</span></div>
+                        <p>Shapes delivered on the error/success channel respectively.</p>
+                    </div>
+                </section>
+
+                <section id="router">
+                    <h2>@jeli/router</h2>
+                    <p>Registered via <code>RouterModule</code> in <code>requiredModules</code>; routes are registered imperatively with <code>RouterModule.setRoutes(...)</code>, typically from the route module's own constructor.</p>
+
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>RouterModule</h4><span class="api-kind">module</span></div>
+                        <pre><code>class RouterModule {
+    static setRoutes(routes: RouteDefinition | RouteDefinition[]): void;
+    static lazyLoad(routes: RouteDefinition | RouteDefinition[]): void;
+}
+
+interface RouteDefinition {
+    name?: string;
+    url?: string;
+    parent?: string;
+    component?: any;
+    loadModule?: () =&gt; Promise&lt;any&gt;;   // lazy-loaded route module
+    children?: RouteDefinition[];
+    data?: Record&lt;string, any&gt;;
+    views?: Record&lt;string, any&gt;;        // named outlets, e.g. { '@content': SomeElement }
+    targetView?: string;
+    abstract?: boolean;
+    fallback?: boolean;                 // matched when nothing else does
+    isIntent?: boolean;
+    transition?: number;
+}</code></pre>
+                        <pre><code>jModule({ requiredModules: [RouterModule] })
+export class AppRouteModule {
+    constructor() {
+        RouterModule.setRoutes([
+            { name: 'home', url: '/', component: HomeElement, fallback: true },
+            { name: 'user', url: '/users/:id', component: UserElement }
+        ]);
+    }
+}</code></pre>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>ROUTE_LOCATION_STRATEGY</h4><span class="api-kind">ProviderToken</span></div>
+                        <p>Selects the navigation strategy - <code>HashStrategyService</code> (hash-based) or <code>PathStrategyService</code> (History API), both extending <code>AbstractStrategy</code>. Defaults to hash-based.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>LocationService</h4><span class="api-kind">service</span></div>
+                        <p>Reads the current path/search params. Accepts an injected per-request location context (rather than the ambient global <code>window.location</code>) - the seam server-side rendering uses to render a specific route per request.</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>ROUTE_INTERCEPTOR</h4><span class="api-kind">ProviderToken</span></div>
+                        <p>A multi-token for route guards - register a class shaped <code>{ resolve(routeInstance: RouteInterceptorInstance, next, reject) }</code>; call <code>next()</code> to let the navigation proceed, <code>routeInstance.redirect(routeName)</code> or <code>reject()</code> to stop it. jeli has no per-route <code>canActivate</code> - a registered guard runs on every navigation and decides per-route itself (see <code>routeInstance.name</code>/<code>.path</code>).</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>getRoute / getHref / getRequiredRoute / parseUrl</h4><span class="api-kind">function</span></div>
+                        <p>Route-table lookups and URL construction, usable outside of a template (e.g. programmatic navigation).</p>
+                    </div>
+                    <div class="api-entry">
+                        <div class="api-entry-head"><h4>GoFn</h4><span class="api-kind">directive</span></div>
+                        <p>Backs the <code>:go="routeName"</code> template directive for declarative navigation links.</p>
+                    </div>
+                </section>
+
+            </main>
         </div>
     </div>
 
-    <script type="text/javascript" src="../scripts/prettify.js"></script>
+    <footer class="site-footer">
+        <div class="container">jeli is free and open source, MIT licensed. © jeli.js, since 2014.</div>
+    </footer>
+
+    <script src="../scripts/docs.js"></script>
 </body>
 
 </html>

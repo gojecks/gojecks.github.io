@@ -1,97 +1,114 @@
-<!doctype>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <!-- <script src="jQuery1.8b2.min.js" type="text/javascript"></script> -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="jEliJS is a javaScript library for front-end developers, it helps build interactive web and mobile applications">
-    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development,jeli, jelijs, two-way binding, components, directives">
+    <meta name="description" content="jeli is a decorator-based JavaScript framework for building web UIs - components, dependency injection, a compiler-driven template language, routing, forms, HTTP, and first-class TypeScript types.">
+    <meta name="keywords" content="jeli, jelijs, javascript framework, frontend, web components, dependency injection, SPA, SSR, hydration, compiler">
     <meta name="author" content="Joseph Gojecks Kadiri">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.min.css" />
+    <link rel="stylesheet" href="css/docs.css">
     <link rel="icon" href="css/image/favicon.png">
-    <title>JELI</title>
+    <title>jeli - a JavaScript framework, compiled</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand">JELI</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="btn btn-link" href="guide/">Guide</a></li>
-                    <li><a class="btn btn-link" href="api/">Api</a></li>
-                </ul>
+    <nav class="topnav">
+        <div class="topnav-inner">
+            <a class="brand" href="./">
+                <img src="css/image/j-eli.png" alt="">
+                jeli
+            </a>
+            <div class="topnav-links">
+                <a href="guide/" class="active">Guide</a>
+                <a href="api/">API</a>
+                <a class="github" href="https://github.com/gojecks/jeli-js" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
         </div>
     </nav>
-    <div class="container-fluid" style="margin-top:100px">
 
-        <section>
-            <div class="row">
-                <div class="col-sm-5">
-                    <img src="css/image/j-eli.png" class="pull-right" height="200" />
-                </div>
-                <div class="col-sm-5">
-                    <h1 style="padding-top:20px">
-                        The Javascript Framework <br>That Speaks Your Language.
-                    </h1>
-                    <div style="margin-top:20px">
-                        <a class="btn btn-success btn-lg" href="guide/">GET STARTED</a>
-                    </div>
-                </div>
+    <main class="container">
+        <section class="hero">
+            <h1>The framework that <span class="tagline-accent">compiles</span> your templates,<br> not just your components.</h1>
+            <p class="lead">jeli is a decorator-based framework for building interactive web UIs - components, real dependency injection, a compiler-driven template language, and first-class TypeScript types, without a virtual DOM.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="guide/">Get started</a>
+                <a class="btn btn-secondary" href="api/">Browse the API</a>
             </div>
         </section>
 
-        <section class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="text-center"><i class="fa fa-fw fa-check"></i> jEliJS V1.0.0</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p class="text-center">jEliJS is a javaScript library for front-end developers, it helps build interactive web and mobile applications</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="text-center"><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p class="text-center">jEliJS is Free, Open Source, MIT licensed, and developed to help everyone. Use on any personal or commercial project. It will stay that way. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="text-center"><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p class="text-center">Already know HTML, CSS and JavaScript? Read the guide and start building your imagination in no time!</p>
-                        </div>
-                    </div>
-                </div>
+        <section class="code-sample">
+            <div class="code-sample-tabs"><span class="active">counter.element.js</span></div>
+            <pre><code>import { CounterService } from './counter.service';
+
+Element({
+    selector: 'app-counter',
+    // a plain string, not a JS template literal - jeli's own
+    // compiler interprets ${ } inside it, not the JS engine
+    template:
+        '&lt;button @click="decrement()"&gt;-&lt;/button&gt;' +
+        '&lt;span&gt;${count}&lt;/span&gt;' +
+        '&lt;button @click="increment()"&gt;+&lt;/button&gt;',
+    DI: [CounterService]
+})
+export class CounterElement {
+    constructor(counterService) {
+        this.counterService = counterService;
+        this.count = 0;
+    }
+    increment() { this.count = this.counterService.step(this.count, 1); }
+    decrement() { this.count = this.counterService.step(this.count, -1); }
+}</code></pre>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <span class="icon">🧩</span>
+                <h3>Decorator-based components</h3>
+                <p><code>Element</code>, <code>Directive</code>, <code>Service</code>, <code>Provider</code>, <code>Pipe</code> and <code>jModule</code> - a familiar, Angular-shaped mental model with constructor-injected dependencies.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">⚙️</span>
+                <h3>A real compiler</h3>
+                <p>Templates are parsed and compiled ahead of time by <code>jeli-cli</code> - including an Angular-17-style <code>@if</code>/<code>@for</code>/<code>@switch</code> block syntax alongside the classic <code>*if</code>/<code>*for</code> attribute directives.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🚀</span>
+                <h3>Compiled bindings</h3>
+                <p>Opt in to <code>buildOptions.compiledBindings</code> and expression bindings compile down to real JS functions at build time instead of being interpreted at runtime.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🔌</span>
+                <h3>Batteries included</h3>
+                <p>First-party packages for structural directives &amp; pipes (<code>@jeli/common</code>), reactive forms (<code>@jeli/form</code>), HTTP with interceptors (<code>@jeli/http</code>), and routing (<code>@jeli/router</code>).</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🖥️</span>
+                <h3>Server-side rendering</h3>
+                <p>Render a real component tree to a string on the server, then hydrate it on the client by adopting existing DOM nodes instead of re-creating them from scratch.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🛠️</span>
+                <h3>Typed &amp; inspectable</h3>
+                <p>Hand-authored <code>.d.ts</code> types ship with every package, and <code>global.jeli.devtools</code> gives you a component-tree walker and DI inspector from any console.</p>
             </div>
         </section>
 
-        <hr>
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; jelijs 2014 - 2019. Proudly Sponsored by Love.</a> All rights reserved</p>
-                </div>
+        <section style="text-align:center; margin: 72px 0 40px;">
+            <h2 style="border:none; margin-top:0;">Ready to build something?</h2>
+            <p class="lead-muted" style="max-width:520px; margin: 0 auto 28px;">The guide walks through installation, the component model, templates, and a full Todo app in the current syntax.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="guide/">Read the guide</a>
             </div>
-        </footer>
-    </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            jeli is free and open source, MIT licensed. © jeli.js, since 2014.
+        </div>
+    </footer>
 </body>
 
 </html>

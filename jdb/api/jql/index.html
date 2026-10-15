@@ -1,386 +1,456 @@
-<!doctype>
+<!doctype html>
 <html j-module="jelijs.jDB">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="jEliDb or jDB is an open source JavaScript library that provides powerful in-memory database capabilities to both browser and server applications">
-  <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
-  <meta name="author" content="Joseph Gojecks Kadiri">
-  <link rel="stylesheet" href="../../../css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../../../css/styles.min.css" />
-  <link rel="icon" href="../../../css/image/favicon.png">
-  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-  <title>JELIDB | API</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="jQL is jEliDB's query language: a string syntax and an object syntax, both validated against a schema per command.">
+    <meta name="keywords" content="HTML, JS, JavaScript, framework, noSQL, front-end, frontend, web development">
+    <meta name="author" content="Joseph Gojecks Kadiri">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../css/styles.min.css" />
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="icon" href="../../../css/image/favicon.png">
+    <title>jQL Reference &mdash; jEliDB</title>
 </head>
 
 <body j-controller="baseCtrl">
-  <!-- Navigation -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-        <a class="navbar-brand" href="../">JELIDB</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a class="btn btn-link" href="../">Api</a></li>
-          <li><a class="btn btn-link" href="../playground/">Playground</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="container-fluid" style="margin-top:30px">
-    <div class="row">
-      <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-          <li><a href="#overview"><i class="icon-chevron-right"></i>Overview</a></li>
-        </ul>
-        <p>Table</p>
-        <ul class="nav nav-sidebar">
-          <li><a href="#createTbl"><i class="icon-chevron-right"></i> Create</a></li>
-          <li><a href="#alt_Table"><i class="icon-chevron-right"></i> Alter</a></li>
-          <li><a href="#truncate"><i class="icon-chevron-right"></i>Truncate</a></li>
-          <li><a href="#drop_tbl"><i class="icon-chevron-right"></i>Drop</a></li>
-
-        </ul>
-        <p>Transactions</p>
-        <ul class="nav nav-sidebar">
-          <li><a href="#insert"><i class="icon-chevron-right"></i> Insert</a></li>
-          <li><a href="#update"><i class="icon-chevron-right"></i> Update</a></li>
-          <li><a href="#delete"><i class="icon-chevron-right"></i>Delete</a> </li>
-          <li><a href="#select"><i class="icon-chevron-right"></i>Select</a></li>
-          <li><a href="#insertreplace"><i class="icon-chevron-right"></i>InsertReplace</a></li>
-          <li><a href="#batch"><i class="icon-chevron-right"></i>Batch</a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="#imp"><i class="icon-chevron-right"></i> Import</a></li>
-          <li><a href="#exp"><i class="icon-chevron-right"></i> Export</a></li>
-          <li><a href="#sync"><i class="icon-chevron-right"></i> Synchronize</a></li>
-          <li><a href="#drop_db"><i class="icon-chevron-right"></i>Drop Database</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main">
-      <section id="overview">
-        <h4>#Overview</h4>
-        <p>Jeli Query Language or for short jQl is a part of jEliDb core written for the purpose of perform query using it's own query Syntax. JQL is easy to use, with or without SQL knowledge. Aside using JQL to perform query task, it can also be used for
-          other actions such as like calling REST APIS provided by JELIDB Applications.</p>
-        <h4>jQl accepts two paramaters</h4>
-        <ul>
-          <li>
-            <h4><code>{string} Command (required)</code></h4>
-            <div>Define the query you want to perform, using our query syntax</div>
-          </li>
-          <li>
-            <h4><code>{Object} Handlers (required)</code></h4>
-            <p>Define how to handle response from jQl method.</p>
-            <ul>
-              <li>
-                <h4>onSuccess</h4>
-              </li>
-              <li>
-                <h4>onError</h4>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <h4><code>{Object} params (Optional)</code></h4>
-            <div>Pass arguments to your query, using the placeholder pattern. <code>%argument%</code></div>
-          </li>
-        </ul>
-
-        <div class="code">
-          <pre>DB<br/>.jQl(QUERY_TO_PERFORM,{<br/>onSuccess : function(){},<br/>onError : function(){}<br/>},<br/>arguments<br/>);</pre>
-          <p><strong>Type -help to see command syntax</strong></p>
-          <p>jQl command plugins are extensible, which means you can write your own custom command to be executed.</p>
-          <div class="alert alert-info">The sandbox page uses jQl to perform all task</div>
+                <a class="navbar-brand" href="../../"><span class="jdb-brand-mark"></span>jEliDB</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="btn btn-link" href="../">API</a></li>
+                    <li class="active"><a class="btn btn-link" href="./">jQL</a></li>
+                    <li><a class="btn btn-link" href="../../playground/">Playground</a></li>
+                </ul>
+            </div>
         </div>
-      </section>
+    </nav>
 
-      <h3>Table Section</h3>
-      <section id="createTbl">
-        <h4>#Create</h4>
-        <ul>
-          <li>
-            <code>Syntax : create -TABLE_NAME -[COLUMNS]</code>
-          </li>
-          <li>
-            <p>Details</p>
-            <p>COLUMNS command is an ARRAY OF OBJECTS with list of columns with their configuration. A column must contain a type of input to accept. For empty column pass an empty ARRAY : [] </p>
-          </li>
-        </ul>
-        <code>create -TBL_NAME -[{ID:{type:"INTERGER",AUTO_INCREMENT:1},email:{type:"VARCHAR"}}]</code>
-      </section>
-
-      <section id="alt_Table">
-        <h4>#Alter</h4>
-        <ul>
-          <li>
-            <code>Syntax : alter -TABLE_NAME</code>
-          </li>
-          <li>
-            <h5>Add New column</h5>
-            <p><code>Syntax: -add -n -c -COLUMN_NAME -CONFIGURATION</code></p>
-            <p>Details:</p>
-            <p>Add a new column to an existing table. Configuration must be a javascript Object</p>
-            <code>Command: ALTER -members -add -new -column -fullName -{type:"VARCHAR",defaultValue:"Foo Bar"}</code>
-          </li>
-          <li>
-            <h5>Add Primary Key</h5>
-            <p><code>Syntax: -add -p -key -column_name</code></p>
-            <p>Details:</p>
-            <p>Alter by adding setting an existing column as primary key.</p>
-            <code>Command: ALTER -TBL_NAME -add -p -key -column_name</code>
-          </li>
-          <li>
-            <h5>Drop a column</h5>
-            <p><code>Syntax: -drop -column_name</code></p>
-            <p>Details:</p>
-            <p>Drop an existing column from a table, dropped column will be removed from table rows including data.</p>
-            <code>Command: ALTER -TBL_NAME -drop -column_name</code>
-          </li>
-        </ul>
-      </section>
-
-      <section id="truncate">
-        <h4>#Truncate</h4>
-        <ul>
-          <li><code>Syntax : -truncate -tableName -flag(yes or no)</code></li>
-          <li>
-            <p>Details:</p>
-            <p><code>truncate -members -yes</code></p>
-            <p>Truncating a table deletes every record in the table, flag must be set to yes before task is performed, else an error exception will be thrown.</p>
-          </li>
-        </ul>
-      </section>
-      <section id="drop_tbl">
-        <h4>#Drop</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : drop -t -TBL_NAME -flag(yes or no)</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Dropping a table removes the table from the Database, flag must be set to yes before task is performed, else an error exception will be thrown.</p>
-          </li>
-        </ul>
-      </section>
-
-      <h3>Transaction Section</h3>
-      <section id="insert">
-        <h4>#Insert</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : insert -data -table_name</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>-data parameter accepts ARRAY of OBJECTS or ARRAY of ARRAYS. Column name must be defined when using ARRAY of Objects, while for ARRAY of ARRAYS the data must follow according to their column position in the table.</p>
-            <p>In Array of Objects AUTO_INCREMENT field can be omitted, while for ARRAY of Arrays cannot.</p>
-            <p><code>insert -%data% -TBL_NAME</code> data = [{fullName:"Foo Bar",email:"foo@bar.com"},{fullName:"Bar Foo",email:"bar@foo.com"}]</p>
-            <p>Inserting Data with Array of Arrays into a Table</p>
-            <p><code>insert -%data% -TBL_NAME</code> data = [[1,"Foo Bar","foo@bar.com"],[2,"Bar Foo","bar@foo.com"]]</p>
-          </li>
-          <li>
-            <p>As said above, the ID field cannot be omitted even if having the auto_incremement configuration when inserting data with ARRAY of ARRAYS. Data in each array will be Mapped to the columns</p>
-          </li>
-        </ul>
-      </section>
-
-      <section id="update">
-        <h4>#Update</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : update -TBL_NAME -records  (optional)-jQlWHERECLAUSE</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>records parameter accepts only 2 type of data (OBJECT and params )</p>
-            <ul>
-              <li>OBJECT : {fullName:"Foo Boo",email:"foo@boo.com"}</li>
-              <li>PARAM : fullName="Foo Boo",email="foo@boo.com"</li>
-            </ul>
-          </li>
-          <li>
-            <p>If where clause is not defined, all rows in the table will be updated.</p>
-          </li>
-        </ul>
-      </section>
-
-      <section id="select">
-        <h4>#Select</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : select -[fields] -[TABLE_NAME] -Clause[ -join  -where( CLAUSE[Like|IN|NOTIN]]) -limit(start,end) -orderBy(ASC|DESC) -groupBy(COLUMN_NAME)</code></p>
-            <p>fields parameter accepts below values.</p>
-            <ul>
-              <li>* - To select all columns</li>
-              <li>-COLUMN_NAME: Select a particular column set from the table ( Seperate multiple columns with a comma)</li>
-              <li>-COLUMN_NAME as user-defined : select columns and return as user-defined Name (eg : -fullName as fName)</li>
-              <li>-JQLFIELDCLAUSE : use the Select Clause defined by JQL e.g COUNT() as total.</li>
-            </ul>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Using JQLSELECTCLAUSE in Select</p>
-            <ul>
-              <li><strong>WHERE() : </strong>
-                <p>List of WHERECLAUSE Functions</p>
-                <ul>
-                  <li>
-                    <h5>#IN()</h5>
-                    <p><code>IN(@select(t2.column) @table(t2) OR @value([values]) @field(t1.column))</code></p>
-                  </li>
-                  <li>
-                    <h5>#NOTIN()</h5>
-                    <p><code>NOTIN(@select(t2.column) @table(t2) OR @value([values]) @field(t1.column))</code></p>
-                  </li>
-                  <li>
-                    <h5>#LIKE()</h5>
-                    <p><code> Like(@value(needle) @field(COLUMN))</code></p>
-                  </li>
+    <div class="jdb-shell" style="margin-top:76px">
+        <div class="jdb-api-layout">
+            <div class="col-sm-3 sidebar jdb-sidebar">
+                <span class="jdb-version">jQL reference</span>
+                <div class="jdb-group-label">Guide</div>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#syntax">Two syntaxes</a></li>
+                    <li><a href="#fields">Field types</a></li>
+                    <li><a href="#response">Response shape</a></li>
                 </ul>
-                <h4>Operands and name used in JQL</h4>
-                <ul>
-                  <li><code>$is</code> Symbol <code>===</code></li>
-                  <li><code>$isEqual</code> Symbol <code>= or ==</code></li>
-                  <li><code>$gte</code> Symbol <code>>=</code></li>
-                  <li><code>$gt</code> Symbol <code>></code></li>
-                  <li><code>$lte</code> Symbol <code><=</code></li>
-                  <li><code>$lt</code> Symbol <code><</code></li>
-                  <li><code>$not</code> Symbol <code>!=</code></li>
-                  <li><code>$isNot</code> Symbol <code>!==</code></li>
-                  <li><code>$inArray</code> Symbol <code>[]</code></li>
-                  <li><code>$inClause</code> Symbol <code>[=]</code></li>
-                  <li><code>$noInArray</code> Symbol <code>![]</code></li>
-                  <li><code>$noInClause</code> Symbol <code>[!]</code></li>
-                  <li><code>$lk</code> Symbol <code>~</code></li>
-                  <li><code>$!</code> Symbol <code>! or !!</code></li>
+                <div class="jdb-group-label">Table</div>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#create">create</a></li>
+                    <li><a href="#alter">alter</a></li>
+                    <li><a href="#truncate">truncate</a></li>
+                    <li><a href="#drop">drop</a></li>
                 </ul>
-              </li>
-              <li>
-                <strong>Join Clause :</strong>
-                <p><code>Syntax: select -t1.Column, t2.Column -TBL as t1, TBL2 as t2 -join(@table(t2) @clause(INNER) @on(t1.column=t2.column))</code></p>
-                <strong>Join Clause to use</strong>
-                <ul>
-                  <li>INNER</li>
-                  <li>LEFT</li>
-                  <li>RIGHT</li>
-                  <li>OUTER</li>
+                <div class="jdb-group-label">Transactions</div>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#insert">insert</a></li>
+                    <li><a href="#update">update / updatemany</a></li>
+                    <li><a href="#delete">delete</a></li>
+                    <li><a href="#select">select</a></li>
+                    <li><a href="#batch">batch</a></li>
                 </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <p>When performing join clause all required tables must exists else error exception will be thrown.</p>
-          </li>
-        </ul>
-      </section>
-      <section id="delete">
-        <h4>#Delete</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : delete -TABLE_NAME -jQlWHERECLAUSE</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>If where clause is not defined, all rows in the table will be deleted.</p>
-          </li>
-        </ul>
-      </section>
-      <section id="insertreplace">
-        <h4>#InsertReplace</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : insert -%data% -TBL_NAME -replace -COLUMN_NAME</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Please refer to api section for more details.</p>
-          </li>
-        </ul>
-      </section>
+                <div class="jdb-group-label">Data</div>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#import">import</a></li>
+                    <li><a href="#export">export</a></li>
+                    <li><a href="#sync">sync</a></li>
+                </ul>
+                <div class="jdb-group-label">Environment</div>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#schema">schema</a></li>
+                    <li><a href="#env">env</a></li>
+                    <li><a href="#help">help</a></li>
+                    <li><a href="#api-cmd">api</a></li>
+                    <li><a href="#cls">cls</a></li>
+                </ul>
+            </div>
 
-      <section id="batch">
-        <h4>#Batch</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : batch -%data%</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Please refer to api section for more details.</p>
-          </li>
-        </ul>
-      </section>
+            <div class="col-sm-9 jdb-main-col">
+                <section id="overview">
+                    <h4>Overview</h4>
+                    <p>jQL (Jeli Query Language) is how jDB performs table operations, calls REST APIs registered
+                        with a database, and drives its own environment &mdash; all through a single method:
+                        <code>db.jQl(query, params)</code>.</p>
+                    <span class="jdb-signature"><span class="fn">db.jQl</span><span class="paren">(</span>query<span class="paren">,</span> params<span class="paren">)</span> &rarr; Promise</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Argument</th><th>Type</th><th>Required</th><th>Notes</th></tr>
+                        <tr><td><code>query</code></td><td><span class="jdb-type">string | object | array</span></td><td>Yes</td><td>A single command (string or object), or an array of them to run in sequence.</td></tr>
+                        <tr><td><code>params</code></td><td><span class="jdb-type jdb-type-object">object</span></td><td>No</td><td>Values substituted into <code>%key%</code> placeholders inside a string query.</td></tr>
+                    </table>
+                    <p>Every command &mdash; <code>insert</code>, <code>select</code>, <code>drop</code>, and so on
+                        &mdash; is a plugin registered with its own <strong>schema</strong>: a declared set of
+                        fields with names, optional types, defaults and flags. The schema is what makes both syntaxes
+                        below, and the object form, resolve to exactly the same thing.</p>
+                    <div class="alert alert-info">
+                        <strong>Deprecated:</strong> <code>db.jQl(query, handler, params)</code> (a second
+                        <code>{onSuccess, onError}</code> argument) still works but logs a deprecation warning.
+                        Use the returned <code>Promise</code> instead.
+                    </div>
+                </section>
 
-      <section id="imp">
-        <h4>#Import</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : import -TABLE_NAME -[fileType[json|jql|csv|html]] </code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Importing record opens a dialog box to select the file you want to import to the table, accepted files are (.csv,.html,.json, .jql) </p>
-            <p>if the table doesn't exist it will be created and data will be inserted into the table.</p>
-          </li>
-        </ul>
-      </section>
+                <section id="syntax">
+                    <h4>Two syntaxes, one schema</h4>
+                    <p>jDB detects which syntax a string query uses automatically &mdash; nothing to configure, and
+                        the two can be mixed freely across calls.</p>
 
-      <section id="exp">
-        <h4>#Export</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : export -TABLE_NAME --[fileType[json|jql|csv|html]] -task[download|print]  (optional) -fileName </code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Accepted types are (.csv,.html,.json, .jql), title is optional and can be left blank</p>
-          </li>
-        </ul>
-      </section>
+                    <h5><span class="jdb-tag jdb-tag-v1">v1</span> &nbsp;Positional flags</h5>
+                    <p>The original syntax: a command name followed by <code>-value</code> tokens. Non-flag fields
+                        are matched by <strong>position</strong>; boolean fields are matched by typing their
+                        <strong>name</strong> as a bare word anywhere in the query.</p>
+                    <pre class="jdb-code">insert -{"name":"Ada","role":"admin"} -users -ignoreSync -hard</pre>
 
-      <section id="sync">
-        <h4>#Sync</h4>
-        <ul>
-          <li><code>Syntax : sync -TBL_NAME -force</code></li>
-          <li>
-            <p>Details:</p>
-            <p>Without definig a tableName, all tables in the database will be synchronized. Table Name must be in ARRAY format</p>
-          </li>
-          <li>
-            <p>Read more on Sync API</p>
-          </li>
-        </ul>
-      </section>
+                    <h5><span class="jdb-tag jdb-tag-v2">v2</span> &nbsp;Named flags</h5>
+                    <p>A newer <code>--name=value</code> / bare <code>--name</code> syntax. Fields are matched by
+                        <strong>name</strong> instead of position, so flags can appear in any order. jDB only treats
+                        <code>--</code> as a flag boundary outside quotes/braces and immediately before a letter, so
+                        JSON data containing a dash (<code>{"score": -5}</code>) is never misread &mdash; that
+                        exact ambiguity is why v1 requires care with values containing <code>&nbsp;-</code>.</p>
+                    <pre class="jdb-code">insert --data={"name":"Ada","role":"admin"} --table=users --ignoreSync --hard</pre>
 
-      <section id="drop_db">
-        <h4>#Drop Database</h4>
-        <ul>
-          <li>
-            <p><code>Syntax : drop -d -DB_NAME -flag(yes or no)</code></p>
-          </li>
-          <li>
-            <p>Details:</p>
-            <p>Dropping a database removes every record and information about the database, flag must be set to yes before task is performed, else an error exception will be thrown.</p>
-          </li>
-        </ul>
-      </section>
+                    <h5>Object form</h5>
+                    <p>Skip string parsing entirely by handing <code>jQl</code> a plain object with a
+                        <code>command</code> key. This is the most robust option for code generating queries
+                        programmatically.</p>
+                    <pre class="jdb-code">db.jQl({
+    command: 'insert',
+    table: 'users',
+    data: { name: 'Ada', role: 'admin' },
+    ignoreSync: true
+});</pre>
+                </section>
 
+                <section id="fields">
+                    <h4>Field types</h4>
+                    <p>Each command's fields table below lists a type badge where the command validates that field.
+                        A field with no badge accepts anything it's given (its shape legitimately varies &mdash;
+                        e.g. <code>insert</code>'s <code>data</code> is an object for a single record or an array
+                        for a bulk insert).</p>
+                    <table class="jdb-field-table">
+                        <tr><th>Badge</th><th>Meaning</th></tr>
+                        <tr><td><span class="jdb-type jdb-type-string">string</span></td><td>Taken literally, never coerced &mdash; a table named <code>"123"</code> stays the string <code>"123"</code>, not the number <code>123</code>.</td></tr>
+                        <tr><td><span class="jdb-type jdb-type-boolean">boolean</span></td><td>Must resolve to <code>true</code>/<code>false</code>; anything else is rejected with a clear error.</td></tr>
+                        <tr><td><span class="jdb-type jdb-type-number">number</span></td><td>Must resolve to a number.</td></tr>
+                        <tr><td><span class="jdb-type jdb-type-object">object</span></td><td>Must resolve to a plain object.</td></tr>
+                        <tr><td><span class="jdb-type jdb-type-array">array</span></td><td>Must resolve to an array.</td></tr>
+                        <tr><td><span class="jdb-type jdb-type-flag">flag</span></td><td>A boolean toggle: typing its name (v1) or <code>--name</code> (v2) sets it <code>true</code>; leaving it out resolves to <code>false</code>. Never a mismatch error &mdash; there's no value to validate.</td></tr>
+                    </table>
+                    <div class="alert alert-warning">
+                        A type mismatch (e.g. passing <code>"nope"</code> where a command expects an object)
+                        rejects the query with a message naming the field and the expected type, before the
+                        command ever runs.
+                    </div>
+                </section>
+
+                <section id="response">
+                    <h4>Response shape</h4>
+                    <p>On success, most commands resolve with:</p>
+                    <pre>{ state: "insert", status: "success", result: { message: "..." }, code: 200 }</pre>
+                    <p>On failure, the promise rejects with:</p>
+                    <pre>{ message: "...", status: "error", code: 400 }</pre>
+                    <p><code>select</code> resolves with a result set object exposing <code>getResult()</code> and
+                        <code>jDBNumRows()</code> instead of a plain <code>message</code>.</p>
+                </section>
+
+                <h2>Table</h2>
+
+                <section id="create">
+                    <h4>create</h4>
+                    <span class="jdb-signature">create -table -columns</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td>Table name.</td></tr>
+                        <tr><td><code>columns</code></td><td>2</td><td><span class="jdb-type jdb-type-array">array</span></td><td>Optional &mdash; array of column definitions. Omitted defaults to <code>[]</code>.</td></tr>
+                    </table>
+                    <pre class="jdb-code">create -users -[{"id":{"type":"NUMBER","AUTO_INCREMENT":1},"email":{"type":"VARCHAR"}}]</pre>
+                </section>
+
+                <section id="alter">
+                    <h4>alter <span class="jdb-tag jdb-tag-limitation">v1 only</span></h4>
+                    <span class="jdb-signature">alter -table -action -...args</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>action</code></td><td>2</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>a</code> add, <code>d</code> drop, <code>r</code> rename, <code>u</code> update mode.</td></tr>
+                        <tr><td><code>...args</code></td><td>3+</td><td></td><td>Meaning depends on <code>action</code> &mdash; see below.</td></tr>
+                    </table>
+                    <p>When <code>action</code> is <code>a</code> (add), the next argument selects what's being
+                        added:</p>
+                    <table class="jdb-field-table">
+                        <tr><th>Sub-action</th><th>Adds</th><th>Remaining args</th></tr>
+                        <tr><td><code>c</code></td><td>column</td><td>column name, config object</td></tr>
+                        <tr><td><code>p</code></td><td>primary key</td><td>column name</td></tr>
+                        <tr><td><code>f</code></td><td>foreign key</td><td>column name, relative table</td></tr>
+                        <tr><td><code>i</code></td><td>index</td><td>config object</td></tr>
+                        <tr><td><code>m</code></td><td>read/write mode</td><td>mode</td></tr>
+                    </table>
+                    <pre class="jdb-code">alter -users -a -c -fullName -{"type":"VARCHAR","defaultValue":"Foo Bar"}
+alter -users -d -fullName
+alter -users -r -people</pre>
+                    <div class="alert alert-warning">
+                        <strong>v2 (<code>--name=value</code>) syntax isn't supported for <code>alter</code> yet.</strong>
+                        Its trailing arguments are positional by meaning (sub-action, then column, then config), and
+                        named syntax has no positional-order concept to map them from. Use v1 or the object form
+                        for <code>alter</code> until it gets its own named fields (e.g. <code>--subAction=c</code>).
+                    </div>
+                </section>
+
+                <section id="truncate">
+                    <h4>truncate</h4>
+                    <span class="jdb-signature">truncate -table -flag</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>flag</code></td><td>2</td><td></td><td><code>"yes"</code>/<code>"no"</code> or a boolean &mdash; must be truthy to actually run.</td></tr>
+                    </table>
+                    <pre class="jdb-code">truncate -users -yes</pre>
+
+                    <h4 style="margin-top:28px">truncate-db</h4>
+                    <span class="jdb-signature">truncate-db -dropFromServer</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>dropFromServer</code></td><td>1</td><td><span class="jdb-type jdb-type-boolean">boolean</span></td><td>Optional.</td></tr>
+                    </table>
+                    <p>Truncates every table in the current database.</p>
+                </section>
+
+                <section id="drop">
+                    <h4>drop</h4>
+                    <span class="jdb-signature">drop -type -name -flag -localOnly</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>type</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>t</code> table, <code>d</code> database.</td></tr>
+                        <tr><td><code>name</code></td><td>2</td><td><span class="jdb-type jdb-type-string">string</span></td><td>Table or database name.</td></tr>
+                        <tr><td><code>flag</code></td><td>3</td><td></td><td><code>"yes"</code>/<code>"no"</code> or a boolean &mdash; must be truthy to actually run.</td></tr>
+                        <tr><td><code>localOnly</code></td><td>4</td><td><span class="jdb-type jdb-type-boolean">boolean</span></td><td>Database drops only.</td></tr>
+                    </table>
+                    <pre class="jdb-code">drop -t -users -yes
+drop -d -myapp -yes -true</pre>
+                </section>
+
+                <h2>Transactions</h2>
+
+                <section id="insert">
+                    <h4>insert</h4>
+                    <span class="jdb-signature">insert -data -table</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>data</code></td><td>1</td><td></td><td>Object for a single record, or an array of objects for a bulk insert.</td></tr>
+                        <tr><td><code>table</code></td><td>2</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>replace</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td>Upsert by the table's primary key instead of a plain insert.</td></tr>
+                        <tr><td><code>hard</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td></td></tr>
+                        <tr><td><code>skip</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td>Skip data processing/validation.</td></tr>
+                        <tr><td><code>ignoreSync</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td></td></tr>
+                        <tr><td><code>rollbackOnError</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td></td></tr>
+                    </table>
+                    <pre class="jdb-code">insert -[{"name":"Foo Bar","email":"foo@bar.com"},{"name":"Bar Foo","email":"bar@foo.com"}] -users</pre>
+                </section>
+
+                <section id="update">
+                    <h4>update</h4>
+                    <span class="jdb-signature">update -table -data -cond</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>data</code></td><td>2</td><td><span class="jdb-type jdb-type-object">object</span></td><td>Fields to set.</td></tr>
+                        <tr><td><code>cond</code></td><td>3</td><td></td><td>Condition expression. Omit to update every row.</td></tr>
+                        <tr><td><code>ignoreSync</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td></td></tr>
+                        <tr><td><code>rollbackOnError</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td></td></tr>
+                    </table>
+                    <pre class="jdb-code">update -users -{"role":"admin"} -age>18</pre>
+
+                    <h4 style="margin-top:28px">updatemany</h4>
+                    <span class="jdb-signature">updatemany -table -data</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>data</code></td><td>2</td><td><span class="jdb-type jdb-type-array">array</span></td><td>Array of <code>[cond, data]</code> pairs, one update per pair.</td></tr>
+                    </table>
+                    <pre class="jdb-code">updatemany -users -[[{"age":18},{"role":"admin"}]]</pre>
+                </section>
+
+                <section id="delete">
+                    <h4>delete</h4>
+                    <span class="jdb-signature">delete -table -cond -ignoreSync</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>cond</code></td><td>2</td><td></td><td>Condition expression. Omit to delete every row.</td></tr>
+                        <tr><td><code>ignoreSync</code></td><td>3</td><td><span class="jdb-type jdb-type-boolean">boolean</span></td><td>Positional, not a bare flag, on this command.</td></tr>
+                        <tr><td><code>rollbackOnError</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td></td></tr>
+                    </table>
+                    <pre class="jdb-code">delete -users -age>18 -true -rollbackOnError</pre>
+                </section>
+
+                <section id="select">
+                    <h4>select</h4>
+                    <span class="jdb-signature">select -fields -table -...clauses</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>fields</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>*</code>, a comma-separated list, or <code>col as alias</code>.</td></tr>
+                        <tr><td><code>table</code></td><td>2</td><td><span class="jdb-type jdb-type-string">string</span></td><td>Comma-separated for multiple tables (e.g. joins).</td></tr>
+                        <tr><td><code>...clauses</code></td><td>3+</td><td></td><td><code>join(...)</code>, <code>where(...)</code>, <code>limit(...)</code>, <code>orderBy(...)</code>, <code>groupBy(...)</code> &mdash; any number, any order.</td></tr>
+                    </table>
+                    <p>Condition operators inside <code>where(...)</code>:</p>
+                    <table class="jdb-field-table">
+                        <tr><th>Operator</th><th>Meaning</th></tr>
+                        <tr><td><code>===</code></td><td>is</td></tr>
+                        <tr><td><code>== / =</code></td><td>equals</td></tr>
+                        <tr><td><code>&gt;= &gt; &lt;= &lt;</code></td><td>comparison</td></tr>
+                        <tr><td><code>!=</code></td><td>not equal</td></tr>
+                        <tr><td><code>!== </code></td><td>is not</td></tr>
+                        <tr><td><code>~</code></td><td>like</td></tr>
+                        <tr><td><code>[] / ![]</code></td><td>in array / not in array</td></tr>
+                        <tr><td><code>[=] / [!]</code></td><td>in clause / not in clause (subquery)</td></tr>
+                    </table>
+                    <span class="jdb-tag jdb-tag-v1">v1</span>
+                    <pre class="jdb-code">select -* -users -where(role~admin) -limit(10) -orderBy(name)</pre>
+                    <span class="jdb-tag jdb-tag-v2">v2</span>
+                    <pre class="jdb-code">select --fields=* --table=users --where=role~admin --limit=10</pre>
+                    <div class="alert alert-info">
+                        Unlike <code>alter</code>, <code>select</code>'s clauses <em>are</em> supported under v2:
+                        any <code>--name=value</code> not matching <code>fields</code>/<code>table</code> is
+                        collected as a clause of that name, so <code>--where=...</code> and
+                        <code>--limit=...</code> work exactly like their v1 <code>-where(...)</code> /
+                        <code>-limit(...)</code> equivalents.
+                    </div>
+                    <p>Join clause: <code>join(@table(t2) @clause(INNER) @on(t1.column=t2.column))</code>, with
+                        <code>INNER</code>, <code>LEFT</code>, <code>RIGHT</code> or <code>OUTER</code>. All
+                        referenced tables must already exist.</p>
+                </section>
+
+                <section id="batch">
+                    <h4>batch</h4>
+                    <span class="jdb-signature">batch -transactions</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>transactions</code></td><td>1</td><td><span class="jdb-type jdb-type-array">array</span></td><td>Array of <code>{type, table, data, query, hardInsert}</code> transaction descriptors.</td></tr>
+                        <tr><td><code>rollbackOnError</code></td><td>&mdash;</td><td><span class="jdb-type jdb-type-flag">flag</span></td><td>Roll back the whole batch if any transaction fails.</td></tr>
+                    </table>
+                    <pre class="jdb-code">batch -[{"type":"insert","table":"users","data":{"name":"Ada"}}] -rollbackOnError</pre>
+                </section>
+
+                <h2>Data</h2>
+
+                <section id="import">
+                    <h4>import</h4>
+                    <span class="jdb-signature">import -table -fileType -isSchema</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td></td></tr>
+                        <tr><td><code>fileType</code></td><td>2</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>json</code>, <code>jql</code>, <code>csv</code> or <code>html</code>.</td></tr>
+                        <tr><td><code>isSchema</code></td><td>3</td><td><span class="jdb-type jdb-type-boolean">boolean</span></td><td></td></tr>
+                    </table>
+                    <p>Opens a file picker. If the table doesn't exist yet, it's created before the data is
+                        inserted.</p>
+                </section>
+
+                <section id="export">
+                    <h4>export</h4>
+                    <span class="jdb-signature">export -table -type -action -fileName -title</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Default</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>all</code></td></tr>
+                        <tr><td><code>type</code></td><td>2</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>json</code> (also <code>csv</code>, <code>html</code>, <code>jql</code>)</td></tr>
+                        <tr><td><code>action</code></td><td>3</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>print</code> (<code>d</code> to download)</td></tr>
+                        <tr><td><code>fileName</code></td><td>4</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>""</code></td></tr>
+                        <tr><td><code>title</code></td><td>5</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>""</code></td></tr>
+                    </table>
+                    <pre class="jdb-code">export -users -csv -d -users-export</pre>
+                </section>
+
+                <section id="sync">
+                    <h4>sync</h4>
+                    <span class="jdb-signature">sync -table -force -syncData</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>table</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td>Omit to sync every table.</td></tr>
+                        <tr><td><code>force</code></td><td>2</td><td><span class="jdb-type jdb-type-boolean">boolean</span></td><td></td></tr>
+                        <tr><td><code>syncData</code></td><td>3</td><td></td><td></td></tr>
+                    </table>
+                    <pre class="jdb-code">sync -users -true</pre>
+                </section>
+
+                <h2>Environment</h2>
+
+                <section id="schema">
+                    <h4>schema</h4>
+                    <span class="jdb-signature">schema -action -arg</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>action</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>export</code> or <code>add</code>.</td></tr>
+                        <tr><td><code>arg</code></td><td>2</td><td></td><td>Server flag for <code>export</code>; schema data for <code>add</code>.</td></tr>
+                    </table>
+                    <pre class="jdb-code">schema -export -true
+schema -add -{"users":{"type":"create","definition":[{"id":{"type":"NUMBER"}}]}}</pre>
+                </section>
+
+                <section id="env">
+                    <h4>env</h4>
+                    <span class="jdb-signature">env -method -arg</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>method</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td><code>logger</code>, <code>resource</code> or <code>usage</code>.</td></tr>
+                        <tr><td><code>arg</code></td><td>2</td><td></td><td>Passed straight to the chosen method.</td></tr>
+                    </table>
+                    <pre class="jdb-code">env -usage</pre>
+                </section>
+
+                <section id="help">
+                    <h4>help</h4>
+                    <span class="jdb-signature">help -target</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>target</code></td><td>1</td><td><span class="jdb-type jdb-type-string">string</span></td><td>Optional &mdash; a command name to look up. Omit to list every command's help text.</td></tr>
+                    </table>
+                    <pre class="jdb-code">help
+help -insert</pre>
+                </section>
+
+                <section id="api-cmd">
+                    <h4>api</h4>
+                    <span class="jdb-signature">api -path -data</span>
+                    <table class="jdb-field-table">
+                        <tr><th>Field</th><th>Position</th><th>Type</th><th>Notes</th></tr>
+                        <tr><td><code>path</code></td><td>1</td><td></td><td>A route string, or a full request object (<code>{URL, METHOD, AUTH_TYPE, body}</code>).</td></tr>
+                        <tr><td><code>data</code></td><td>2</td><td></td><td>Optional request body.</td></tr>
+                    </table>
+                    <p>Calls a REST endpoint registered with the database through the same jQL pipeline as table
+                        commands.</p>
+                    <pre class="jdb-code">api -/set/access/token -{"token":"abc"}</pre>
+                </section>
+
+                <section id="cls">
+                    <h4>cls</h4>
+                    <span class="jdb-signature">cls</span>
+                    <p>No fields. Signals a command-line/REPL front end (like the playground) to clear its output.
+                        Doesn't touch the database.</p>
+                </section>
+            </div>
+        </div>
     </div>
-  </div>
-  </div>
 
+    <footer class="jdb-footer" style="margin-top:40px">
+        <div class="jdb-shell">
+            <p>Copyright &copy; jEliJS.com 2014&ndash;2026. Proudly sponsored by <a href="https://bezynet.com/bezynet" target="_blank" rel="noopener">Bezynet INC.</a> All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

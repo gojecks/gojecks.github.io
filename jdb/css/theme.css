@@ -1,0 +1,567 @@
+/*
+ * jEliDB docs theme
+ * Loaded after bootstrap.min.css + ../../css/styles.min.css on jdb/* pages
+ * only -- scoped to this folder so it never touches the sibling jeli-js
+ * docs section.
+ */
+
+:root {
+    --jdb-primary: #4f46e5;
+    --jdb-primary-dark: #3730a3;
+    --jdb-primary-light: #eef2ff;
+    --jdb-accent: #06b6d4;
+    --jdb-ink: #0f172a;
+    --jdb-body: #334155;
+    --jdb-muted: #64748b;
+    --jdb-bg: #f8fafc;
+    --jdb-surface: #ffffff;
+    --jdb-border: #e2e8f0;
+    --jdb-code-bg: #0f172a;
+    --jdb-code-text: #e2e8f0;
+    --jdb-code-accent: #7dd3fc;
+    --jdb-success: #16a34a;
+    --jdb-danger: #dc2626;
+    --jdb-warning: #b45309;
+    --jdb-radius: 10px;
+    --jdb-shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 8px 24px -12px rgba(15, 23, 42, .12);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--jdb-bg);
+    color: var(--jdb-body);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15.5px;
+    line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--jdb-ink);
+    font-weight: 700;
+    letter-spacing: -.01em;
+}
+
+a {
+    color: var(--jdb-primary);
+}
+
+a:hover, a:focus {
+    color: var(--jdb-primary-dark);
+    text-decoration: none;
+}
+
+code, pre, kbd, .code {
+    font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+/* inline code */
+code {
+    background: var(--jdb-primary-light);
+    color: var(--jdb-primary-dark);
+    border: 1px solid #e0e0fb;
+    border-radius: 4px;
+    padding: .12em .42em;
+    font-size: .88em;
+}
+
+/* ---------- navbar ---------- */
+.navbar.navbar-inverse {
+    background: var(--jdb-ink);
+    border: 0;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .06);
+    margin-bottom: 0;
+}
+
+.navbar.navbar-inverse .navbar-brand {
+    font-weight: 800;
+    letter-spacing: .01em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar.navbar-inverse .navbar-brand .jdb-brand-mark {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, var(--jdb-accent), var(--jdb-primary));
+}
+
+.navbar.navbar-inverse .navbar-nav > li > a {
+    color: #cbd5e1;
+    font-weight: 500;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.navbar.navbar-inverse .navbar-nav > li > a:hover,
+.navbar.navbar-inverse .navbar-nav > li.active > a {
+    color: #fff;
+    background: transparent;
+}
+
+.navbar.navbar-inverse .navbar-nav > li.active > a {
+    box-shadow: inset 0 -2px 0 var(--jdb-accent);
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+/* ---------- layout helpers ---------- */
+.jdb-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.jdb-section-label {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--jdb-muted);
+    margin: 0 0 24px;
+}
+
+/* ---------- hero ---------- */
+.jdb-hero {
+    background:
+        radial-gradient(900px 420px at 15% -10%, rgba(79, 70, 229, .35), transparent 60%),
+        radial-gradient(700px 380px at 100% 0%, rgba(6, 182, 212, .30), transparent 55%),
+        var(--jdb-ink);
+    color: #e2e8f0;
+    padding: 88px 0 72px;
+}
+
+.jdb-hero h1 {
+    color: #fff;
+    font-size: 46px;
+    margin: 0 0 18px;
+}
+
+.jdb-hero p.lead {
+    color: #cbd5e1;
+    font-size: 18px;
+    max-width: 640px;
+    line-height: 1.7;
+}
+
+.jdb-hero .jdb-badges {
+    margin: 22px 0 30px;
+}
+
+.jdb-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .16);
+    color: #e2e8f0;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin: 0 8px 8px 0;
+}
+
+.jdb-pill .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--jdb-accent);
+}
+
+.jdb-hero-actions .btn {
+    margin-right: 10px;
+}
+
+.jdb-hero-actions .btn-jdb-primary {
+    background: linear-gradient(135deg, var(--jdb-primary), #6366f1);
+    border: 0;
+    color: #fff;
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px -8px rgba(79, 70, 229, .7);
+}
+
+.jdb-hero-actions .btn-jdb-primary:hover {
+    background: linear-gradient(135deg, #5850ec, #4f46e5);
+    color: #fff;
+}
+
+.jdb-hero-actions .btn-jdb-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .28);
+    color: #fff;
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: 8px;
+}
+
+.jdb-hero-actions .btn-jdb-ghost:hover {
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+}
+
+/* ---------- main content ---------- */
+.jdb-main {
+    padding: 56px 0;
+}
+
+/* ---------- feature grid ---------- */
+.jdb-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin: 8px 0 40px;
+}
+
+.jdb-feature {
+    background: var(--jdb-surface);
+    border: 1px solid var(--jdb-border);
+    border-radius: var(--jdb-radius);
+    padding: 20px 20px 18px;
+    box-shadow: var(--jdb-shadow);
+}
+
+.jdb-feature h4 {
+    font-size: 15px;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.jdb-feature h4:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: linear-gradient(135deg, var(--jdb-accent), var(--jdb-primary));
+    flex: 0 0 auto;
+}
+
+.jdb-feature p {
+    margin: 0;
+    color: var(--jdb-muted);
+    font-size: 13.6px;
+    line-height: 1.6;
+}
+
+/* ---------- cards / panels ---------- */
+.panel, .jdb-card {
+    border: 1px solid var(--jdb-border);
+    border-radius: var(--jdb-radius);
+    box-shadow: var(--jdb-shadow);
+}
+
+.panel-default > .panel-heading {
+    background: var(--jdb-surface);
+    border-bottom: 1px solid var(--jdb-border);
+    border-radius: var(--jdb-radius) var(--jdb-radius) 0 0;
+    font-weight: 700;
+    color: var(--jdb-ink);
+}
+
+.panel-primary {
+    border-color: var(--jdb-border);
+}
+
+.panel-primary > .panel-heading {
+    background: var(--jdb-ink);
+    border-color: var(--jdb-ink);
+    font-weight: 700;
+}
+
+/* ---------- install / code blocks ---------- */
+.jdb-code, pre.jdb-code, .well.jdb-code {
+    background: var(--jdb-code-bg);
+    color: var(--jdb-code-text);
+    border: 1px solid #1e293b;
+    border-radius: var(--jdb-radius);
+    padding: 16px 18px;
+    font-size: 13.6px;
+    line-height: 1.7;
+    box-shadow: none;
+    position: relative;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.jdb-code .cmd:before {
+    content: '$ ';
+    color: var(--jdb-code-accent);
+}
+
+.jdb-code-copy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, .08);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 4px 9px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.jdb-code-copy:hover {
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+}
+
+.jdb-code-copy.copied {
+    color: #86efac;
+    border-color: #86efac;
+}
+
+section pre, .panel-body pre {
+    background: var(--jdb-code-bg);
+    color: var(--jdb-code-text);
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13.2px;
+    line-height: 1.65;
+    overflow-x: auto;
+}
+
+/* ---------- syntax badges (v1/v2/type) ---------- */
+.jdb-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    padding: 2px 8px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.jdb-tag-v1 { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+.jdb-tag-v2 { background: #eef2ff; color: var(--jdb-primary-dark); border: 1px solid #e0e0fb; }
+.jdb-tag-new { background: #ecfdf5; color: #047857; border: 1px solid #bbf7d0; }
+.jdb-tag-limitation { background: #fffbeb; color: var(--jdb-warning); border: 1px solid #fde68a; }
+
+.jdb-type {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 5px;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid var(--jdb-border);
+}
+
+.jdb-type-string { color: #0369a1; background: #f0f9ff; border-color: #bae6fd; }
+.jdb-type-boolean { color: #7e22ce; background: #faf5ff; border-color: #e9d5ff; }
+.jdb-type-number { color: #0f766e; background: #f0fdfa; border-color: #99f6e4; }
+.jdb-type-object { color: #b45309; background: #fffbeb; border-color: #fde68a; }
+.jdb-type-array { color: #be123c; background: #fff1f2; border-color: #fecdd3; }
+.jdb-type-flag { color: #4338ca; background: #eef2ff; border-color: #e0e0fb; }
+
+/* ---------- callouts (restyled bootstrap alerts) ---------- */
+.alert {
+    border: 1px solid var(--jdb-border);
+    border-left-width: 4px;
+    border-radius: 8px;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+.alert-info { background: #f0f9ff; border-left-color: #38bdf8; color: #075985; }
+.alert-warning { background: #fffbeb; border-left-color: #f59e0b; color: #92400e; }
+.alert-danger { background: #fef2f2; border-left-color: #ef4444; color: #991b1b; }
+.alert-success { background: #f0fdf4; border-left-color: #22c55e; color: #166534; }
+
+/* ---------- api reference layout ---------- */
+.jdb-api-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.sidebar.jdb-sidebar {
+    flex: 0 0 260px;
+    position: sticky;
+    top: 76px;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+    padding-bottom: 40px;
+}
+
+.jdb-sidebar .jdb-version {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--jdb-primary-dark);
+    background: var(--jdb-primary-light);
+    border: 1px solid #e0e0fb;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+}
+
+.jdb-sidebar .jdb-group-label {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    color: var(--jdb-muted);
+    margin: 22px 0 8px;
+}
+
+.nav.nav-sidebar > li > a {
+    color: var(--jdb-body);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13.6px;
+    border-left: 2px solid transparent;
+}
+
+.nav.nav-sidebar > li > a:hover {
+    background: var(--jdb-primary-light);
+    color: var(--jdb-primary-dark);
+}
+
+.nav.nav-sidebar ul {
+    list-style: none;
+    padding-left: 14px;
+    margin: 2px 0 4px;
+}
+
+.nav.nav-sidebar ul > li > a {
+    font-size: 12.6px;
+    color: var(--jdb-muted);
+    padding: 4px 10px;
+}
+
+.jdb-main-col {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 780px;
+}
+
+.jdb-main-col section {
+    scroll-margin-top: 84px;
+    padding-bottom: 34px;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--jdb-border);
+}
+
+.jdb-main-col section:last-child {
+    border-bottom: 0;
+}
+
+.jdb-main-col h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--jdb-muted);
+    margin: 44px 0 18px;
+}
+
+.jdb-main-col h4 {
+    font-size: 20px;
+    margin: 0 0 10px;
+}
+
+.jdb-signature {
+    display: block;
+    background: var(--jdb-ink);
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.2px;
+    margin: 10px 0 16px;
+}
+
+.jdb-signature .fn { color: #93c5fd; }
+.jdb-signature .paren { color: #94a3b8; }
+
+.jdb-field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px;
+    font-size: 13.4px;
+}
+
+.jdb-field-table th, .jdb-field-table td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--jdb-border);
+    vertical-align: top;
+}
+
+.jdb-field-table th {
+    color: var(--jdb-muted);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 700;
+}
+
+.jdb-field-table code {
+    white-space: nowrap;
+}
+
+/* ---------- footer ---------- */
+footer.jdb-footer {
+    border-top: 1px solid var(--jdb-border);
+    padding: 28px 0;
+    color: var(--jdb-muted);
+    font-size: 13px;
+}
+
+footer.jdb-footer a {
+    color: var(--jdb-muted);
+}
+
+footer.jdb-footer a:hover {
+    color: var(--jdb-primary);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 991px) {
+    .jdb-api-layout {
+        flex-direction: column;
+    }
+
+    .sidebar.jdb-sidebar {
+        position: static;
+        max-height: none;
+        width: 100%;
+        flex-basis: auto;
+    }
+
+    .jdb-main-col {
+        max-width: none;
+    }
+
+    .jdb-hero h1 {
+        font-size: 34px;
+    }
+}
+
+@media (max-width: 600px) {
+    .jdb-hero {
+        padding: 56px 0 44px;
+    }
+
+    .jdb-shell {
+        padding: 0 16px;
+    }
+}
